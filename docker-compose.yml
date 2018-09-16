@@ -1,0 +1,42 @@
+version: '2.1'
+
+services:
+
+  rental-management-app:
+    image: rms-app:latest
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:80
+    
+  # rental-management-api:
+  #   image: rms-doc:latest
+  #   build: .
+  #   environment:
+  #     NODE_ENV: production
+  #   ports:
+  #     - 3001:80
+
+  rental-management-doc:
+    image: rms-doc:latest
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3002:80
+
+  # rental-management-swarm-visualizer:
+  #   image: dockersamples/visualizer:stable
+  #   build: .
+  #   environment:
+  #       NODE_ENV: production
+  #   ports:
+  #     - 3003:80
+  #   volumes:
+  #   - "/var/run/docker.sock:/var/run/docker.sock"
+  #   deploy:
+  #     placement:
+  #       constraints: [node.role == manager]
+  #   networks:
+  #   - webnet

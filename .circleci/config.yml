@@ -2,13 +2,16 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
+# NOTES : angular 6 CI/CD
+# https://github.com/angular/angular-cli/blob/master/docs/documentation/stories/continuous-integration.md
+
 version: 2
 jobs:
   build:
     docker:
       # specify the version you desire here
-      - image: circleci/node:8.11.1-browsers
-      
+      - image: circleci/node:8.11.2-browsers
+
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
       # documented at https://circleci.com/docs/2.0/circleci-images/
@@ -17,10 +20,10 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      # checkout code from master branch at git repo
+      # checkout the code from github
       - checkout
 
-      # remote docker instance for automation
+      # Remote Docker Instance for automation
       - setup_remote_docker
 
       # Download and cache dependencies
@@ -30,14 +33,45 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
+      # Install all dependency packages.
       - run: yarn install
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      
+
       # run tests!
-      - run: yarn test
+      - run: yarn ng build --prod
 
+      # running test cases for one single
+      - run: yarn ng test --watch=false --progress=false 
 
+      # Running on an headless chrome browser
+      # - run: yarn ng e2e --protractor-config=./e2e/protractor-ci.conf.js
+
+      # ======================= Docker Registry Login ====================================
+
+      # Login Azure Container Registry
+      - run: docker login --username $DOCKER_USER_NAME --password $DOCKER_PASSWORD rent365.azurecr.io
+
+      # ======================= PRODUCTION-BUILD =========================================
+
+      # Upon success build the docker file
+      - run: docker build -t rent365.azurecr.io/rms-app:latest .
+
+      # Pushing Azure container to the registry
+      - run: docker push rent365.azurecr.io/rms-app:latest
+
+      # ======================= DOCUMENTATION-BUILD =======================================
+
+      # Upon successful production build --> generate documentation
+
+      # Upon success build the docker file
+      - run: yarn run compodoc
+
+      # Upon success build the docker file
+      - run: docker build -f Docu-Dockerfile -t rent365-doc.azurecr.io/rms-doc:latest .
+
+      # Pushing Azure container to the registry
+      - run: docker push rent365-doc.azurecr.io/rms-doc:latest

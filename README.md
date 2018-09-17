@@ -8,6 +8,37 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Documentation:
 # https://rent365-doc.azurewebsites.net/
 
+# Build Sequence (TODO: ADD TEST AUTOMATION???)
+
+## 1. Build artifacts for application, documentation, API
+
+### 1.1 Build application
+    > ng build --prod
+
+### 1.2 Generate Documentation
+    > npm run compodoc
+
+### 1.3 Build API App
+    > ???
+
+### 1.4 Run All commands
+    > npm run prep-build
+
+
+# Docker Sequence
+
+## 2. Build Images
+
+### 2.1 Build App Image
+    > docker build -f App.Dockerfile -t ren365/rms-app:latest .
+
+### 2.2 Documentation Image
+    > docker build -f Docu.Dockerfile -t ren365/rms-doc:latest .
+
+### 2.3 API Image
+    > docker build -f API.Dockerfile -t ren365/rms-api:latest .
+
+
 # (Todo: configure below)
 
 ## Development server

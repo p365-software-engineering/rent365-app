@@ -58,7 +58,7 @@ jobs:
       # ======================= PRODUCTION-BUILD =========================================
 
       # Upon success build the docker file
-      - run: docker build -t rent365.azurecr.io/rms-app:latest .
+      - run: docker build -f App.Dockerfile -t rent365.azurecr.io/rms-app:latest .
 
       # Pushing Azure container to the registry
       - run: docker push rent365.azurecr.io/rms-app:latest
@@ -71,7 +71,7 @@ jobs:
       - run: yarn run compodoc
 
       # Upon success build the docker file
-      - run: docker build -f Docu-Dockerfile -t rent365-doc.azurecr.io/rms-doc:latest .
+      - run: docker build -f Docu.Dockerfile -t rent365-doc.azurecr.io/rms-doc:latest .
 
       # Pushing Azure container to the registry
       - run: docker push rent365-doc.azurecr.io/rms-doc:latest

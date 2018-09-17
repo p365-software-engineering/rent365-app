@@ -45,7 +45,7 @@ jobs:
       - run: yarn ng build --prod
 
       # running test cases for one single
-      - run: yarn ng test --watch=false --progress=false 
+      - run: yarn ng test --watch=false --progress=false --browsers=ChromeHeadless
 
       # Running on an headless chrome browser
       # - run: yarn ng e2e --protractor-config=./e2e/protractor-ci.conf.js

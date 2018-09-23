@@ -9,8 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compodoc": "compodoc -p src/tsconfig.app.json",
-    "compodoc-serve": "compodoc -s --port=8088",
-    "prepare": "npm lint && npm build && npm run compodoc && npm test"
+    "compodoc-serve": "compodoc -s --port=8088"
   },
   "private": true,
   "dependencies": {

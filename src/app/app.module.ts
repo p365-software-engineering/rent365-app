@@ -4,10 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule }  from '@angular/common/http'
 import { RouterModule } from '@angular/router';
-import { LoginXComponent } from './login/login-x/login-x.component';
 import { appRoutes } from "./routes";
 import { PublicComponent } from './public/public.component';
 import { HeaderComponent, FooterComponent } from './shared/shared-export';
+import { RegisterXComponent } from './public/register-x/register-x.component';
+import { LoginXComponent } from './public/login-x/login-x.component';
+import { AuthXService} from "./services/service-export"
+
 
 @NgModule({
   declarations: [
@@ -15,7 +18,8 @@ import { HeaderComponent, FooterComponent } from './shared/shared-export';
     LoginXComponent,
     PublicComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    RegisterXComponent
   ],
   imports: [
     BrowserModule,
@@ -23,7 +27,7 @@ import { HeaderComponent, FooterComponent } from './shared/shared-export';
     HttpClientModule,
     RouterModule.forRoot(appRoutes, { enableTracing: true })
   ],
-  providers: [],
+  providers: [AuthXService],
   bootstrap: [AppComponent]
 })
 

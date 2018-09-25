@@ -10,8 +10,10 @@ import { HttpClient } from '@angular/common/http'
 // Request - emailID, password
 export class AuthXService {
 
-  currentUser : IUser;
-  reDirectURL :  String;
+  private currentUser : IUser;
+  private currentRegister : IRegister;
+
+  redirectURL :  String;
 
   constructor(private http:HttpClient) { }
 
@@ -23,22 +25,28 @@ export class AuthXService {
     // Return user type
   }
 
-  public register(r_user: IRegister) : boolean {
+  public register(r_user: IRegister) :  any {
     // Send an HttpRequest to the Rest-API
     // Upon successfull registration return true else false.
     // Already Registered - Warn the user and suggest him to login or try Forgot password.
-    return true;
+    this.currentRegister = r_user;
+    console.log(r_user.guid)
+    console.log(r_user.email_id)
+    console.log(r_user.last_name)
+    console.log(r_user.first_name)
+    console.log(r_user.middle_name)
+    console.log(r_user.password)
+   
+    // return true;
   }
 
   //login functionality 
   public login(user: IUser) : boolean{
-    if(!user.email_id || !user.password){
-      // Warn the user to input username and password. 
-    }
-
-    // Store the token in localstorage of the browser.
-    // Navigate user to the corresponding page.
-    return true;
+    this.currentUser = user;
+    console.log(user['email_id']);
+    console.log(user['password']);
+    
+     return true;
   }
   
   public logout() : boolean{

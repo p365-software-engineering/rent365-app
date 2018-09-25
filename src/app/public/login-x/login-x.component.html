@@ -1,0 +1,41 @@
+<div class="login-wrapper">
+  <div class="card">
+    <div class="card-header text-center">
+      <br>
+      <i class="material-icons md-48">lock</i>
+      <br>
+      <h4>Sign In</h4>
+
+    </div>
+    <div class="card-body">
+      <div class="card-body">
+        <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" ngModel name="email" class="form-control" id="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" ngModel name="password" class="form-control" id="password" required>
+          </div>
+
+          <!--<div class="form-check">
+                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                      <label class="form-check-label" for="exampleCheck1">Remember Me</label>
+                    </div> -->
+          <br>
+
+          <button type="submit" class="btn btn-secondary btn-lg btn-block ">Log In</button>
+        </form>
+        <hr>
+        <p class="text-center">Or login with</p>
+      </div>
+
+      <div class="card-footer">
+        <p class=text-center>Not a member?<a [routerLink]="['../register']"> Sign up </a>now</p>
+      </div>
+
+    </div>
+  </div>
+</div>

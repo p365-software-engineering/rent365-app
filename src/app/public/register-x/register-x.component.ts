@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Guid } from "guid-typescript";
 import { AuthXService} from "../../services/service-export";
-import { IRegister } from '../../models/user_model';
+import { IUserData } from '../../models/user_model';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
-
 
 @Component({
   selector: 'app-register-x',
@@ -13,32 +12,38 @@ import { NgForm } from '@angular/forms';
 })
 export class RegisterXComponent implements OnInit {
   
-  currentRegister: IRegister;
-  constructor(private router: Router,private authX : AuthXService ) { }
+  currentRegister: IUserData;
+  constructor(private router: Router,public authX : AuthXService ) { }
+
+  public successMessage : boolean = false;
 
   ngOnInit() {
   }
 
-  onSubmit(formData :NgForm){
-    console.log(formData.value);    
+  onSubmit(formData :NgForm){ 
     if (formData && formData.valid) {
       if(formData.value['password'] == formData.value['confirmPassword']){
-        
+        // console.log(formData.value);  
         this.currentRegister = {
-          guid: Guid.create().toString(),
+          uid: Guid.create().toString(),
           first_name: formData.value['firstName'],
           middle_name:"na",
           last_name:formData.value['lastName'],
-          email_id: formData.value['email'],
-          password: formData.value['password']
+          email: formData.value['email'],
+          password: formData.value['password'],
+          role: "client"
         }
-
-        this.authX.register(this.currentRegister);
+        
+        this.authX.register(this.currentRegister).then(data => 
+          { 
+            if(data == "success"){
+              this.successMessage = true;
+              setTimeout(() => {
+                this.router.navigate(['/login']);                
+              }, 1000);
+            }
+          });
+       }
       }
     }
-    else{
-      console.log("invalid")
-    }
   }
-
-}

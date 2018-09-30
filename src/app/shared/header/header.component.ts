@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthXService} from "../../services/service-export";
+
+
 
 @Component({
   selector: 'app-header',
@@ -7,9 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public authX : AuthXService) { 
+    // this.authX.getUserInfo();
+  }
 
   ngOnInit() {
   }
-
 }

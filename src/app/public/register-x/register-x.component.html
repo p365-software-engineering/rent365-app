@@ -6,6 +6,9 @@
     </div>
     <div class="card-body">
       <div class="card-body">
+          <div class="alert alert-success text-center text-bold" *ngIf="false" role="alert">
+              Welcome to Super Rental Family ! <br> Verify your email id before you login.
+          </div>
         <form #register="ngForm" (ngSubmit)="onSubmit(register)" autocomplete="off">
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -29,7 +32,7 @@
             <label for="confirmPassword">Confirm Password</label>
             <input type="password" ngModel name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm password ">
           </div>
-          <button type="submit" class="btn btn-primary">Register</button>
+          <button type="submit" [disabled]="successMessage" class="btn btn-primary">Register</button>
         </form>
       </div>
       <div class="card-footer">

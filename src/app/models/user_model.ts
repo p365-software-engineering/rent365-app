@@ -1,15 +1,27 @@
 // Any Login module has to implement the IUser interface to implement the login interface.
 export interface IUser {
-     email_id: String;
-     password: String;
+     email: string;
+     password: string;
 }
 
 // Any Registration module has to implement the IRegister interface.
+export interface IUserData{
+    uid: String;    
+    first_name: string;
+    middle_name: string;
+    last_name: string;
+    email: String;
+    password?: String;
+    role?: string;
+}
+
 export interface IRegister{
-    guid: String;    
-    first_name: String;
-    middle_name: String;
-    last_name: String;
-    email_id: String;
-    password: String;
+    guid: string;    
+    first_name: string;
+    middle_name: string;
+    last_name: string;
+    email_id: string;
+    password: string;
+    role?: string;
+    uid: string;
 }

@@ -1,3 +1,9 @@
 nav {
     z-index:100;
 }
+
+.user-name{
+    position: relative;
+    top: 0.30rem;
+    margin-right: 1rem;
+}

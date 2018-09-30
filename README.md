@@ -3,10 +3,10 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2.
 
 ## Website:
-# https://rent365.azurewebsites.net/
+# https://runionow1.azurewebsites.net
 
 ## Documentation:
-# https://rent365-doc.azurewebsites.net/
+# https://runionow1-doc.azurewebsites.net
 
 # Build Sequence (TODO: ADD TEST AUTOMATION???)
 

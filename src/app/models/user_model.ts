@@ -5,8 +5,8 @@ export interface IUser {
 }
 
 // Any Registration module has to implement the IRegister interface.
-export interface IUserData{
-    uid: String;    
+export interface IUserData {
+    uid: String;
     first_name: string;
     middle_name: string;
     last_name: string;
@@ -15,8 +15,8 @@ export interface IUserData{
     role?: string;
 }
 
-export interface IRegister{
-    guid: string;    
+export interface IRegister {
+    guid: string;
     first_name: string;
     middle_name: string;
     last_name: string;

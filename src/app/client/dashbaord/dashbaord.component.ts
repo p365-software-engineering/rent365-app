@@ -6,13 +6,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashbaord.component.css']
 })
 export class DashbaordComponent implements OnInit {
-
-  constructor() { }
-
+  
+  private showNav: boolean;
+  constructor() { 
+    this.showNav = true;
+  }
+  
   ngOnInit() {
   }
-  public navToggle(){
-
+  public display(){
+    
+    if(this.showNav){
+      console.log(false);
+      this.showNav = false;
+    }
+    else{
+      console.log(true);
+      this.showNav = true;
+    }
+    
   }
+  
 
 }

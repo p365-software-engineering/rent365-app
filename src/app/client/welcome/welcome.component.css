@@ -1,0 +1,24 @@
+.row , .jumbotron{
+    margin-bottom: 0.65rem;
+}
+
+.info-card {
+    margin-bottom: 0.35rem;
+}
+.currency {
+    font-size: 2rem;
+    color: #000;
+}
+.info {
+    font-size: 1rem;
+}
+
+.info .currency {
+    font-size: 1rem;
+}
+
+
+
+.nav-button {
+    margin-left: 250px;
+}

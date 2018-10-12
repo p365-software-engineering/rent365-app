@@ -1,87 +1,12 @@
-<app-sidenav *ngIf = "showNav"></app-sidenav>
-   
+<app-sidenav *ngIf="showNav"></app-sidenav>
+
 <!-- Page Content  -->
-<div id="content" [ngClass] = "{'active': !showNav }">
-     <div class="container-fluid">
-            <div class="row">
-                            <span class="navbar-toggler-icon" (click)="display()"></span>
-
-            </div>
+<div id="content" [ngClass]="{'active': !showNav }">
+  <div class="container-fluid">
+    <div class="row">
+      <span class="navbar-toggler-icon" (click)="display()"></span>
     </div>
-    <br>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12">
-                    <div class="jumbotron">
-                            <h1 class="display-2">Welcome to Super Rentals Resident Portal !</h1>
-                            <p class="lead"> Pay your rent online, enter a maintenance service request or browse our calendar for upcoming activities.
-
-                                    Super Rentals Management is dedicated to exceeding our resident’s expectations. In our communities across the Midwest, we strive to provide the most desirable, well-maintained apartment homes by providing exceptional customer service.
-                                    
-                                    Please contact your local community office should the need arise.e</p>
-                            <hr class="my-2">
-                    </div>
-            </div>
-        </div>
-    </div>
-    
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="info-card col-lg-3 col-md-6 col-sm-12">
-                    <div class="card h-100" >
-                        <div class="card-body">
-                              <h5 class="card-title">My Statement</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">Current Balance</h6>
-                              <p class="currency">{{2000 | currency}}</p>
-                              <button type="button" name="quickpay" id="quickpay" class="btn btn-info btn-sm">QUICK PAY</button>
-                        </div>
-                    </div>
-            </div>
-
-            <div class="info-card col-lg-3 col-md-6 col-sm-12">
-                    <div class="card h-100" >
-                        <div class="card-body">
-                              <h5 class="card-title">My Lease</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">Basic Info</h6>
-                              <div class="info">
-                                    <p class="currency">Expiration Date : {{ "12/31/2018" |  date }}</p>
-                              </div>
-                              <button type="button" name="quickpay" id="quickpay" class="btn btn-info btn-sm">MORE INFO</button>
-                        </div>
-                    </div>
-            </div>
-
-            <div class="info-card col-lg-3 col-md-6 col-sm-12">
-                    <div class="card h-100" >
-                        <div class="card-body">
-                              <h5 class="card-title">Service Requests</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">Basic Info</h6>
-                              <div class="info">
-                                    <p class="currency">Expiration Date : {{ "12/31/2018" |  date }}</p>
-                              </div>
-                              <button type="button" name="quickpay" id="quickpay" class="btn btn-info btn-sm">MORE INFO</button>
-                        </div>
-                    </div>
-            </div>
-
-            <div class="info-card col-lg-3 col-md-6 col-sm-12">
-                    <div class="card h-100" >
-                        <div class="card-body">
-                              <h5 class="card-title">Upcoming Events</h5>
-                              <h6 class="card-subtitle mb-2 text-muted">Basic Info</h6>
-                              <div class="info">
-                                    <p class="currency">Expiration Date : {{ "12/31/2018" |  date }}</p>
-                              </div>
-                              <button type="button" name="quickpay" id="quickpay" class="btn btn-info btn-sm">MORE INFO</button>
-                        </div>
-                    </div>
-            </div>
-            
-        </div>
-    </div>
-
-
+  </div>
+  <br>
+  <router-outlet></router-outlet>
 </div>
-
-

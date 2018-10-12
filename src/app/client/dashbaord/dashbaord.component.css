@@ -120,28 +120,12 @@ a.article:hover {
     CUSTOM
 ----------------------------------------------------- */
 
-.row , .jumbotron{
-    margin-bottom: 0.65rem;
-}
-
-.info-card {
-    margin-bottom: 0.35rem;
-}
-.currency {
-    font-size: 2rem;
-    color: #000;
-}
-.info {
-    font-size: 1rem;
-}
-
-.info .currency {
-    font-size: 1rem;
-}
-
 span.navbar-toggler-icon {
     margin-left: 18px;
     padding: 10px 15px 10px 15px;
     background: black;
     color: white;
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.14), 0 3px 4px 0 rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }

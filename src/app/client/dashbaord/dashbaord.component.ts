@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashbaordComponent implements OnInit {
   
-  private showNav: boolean;
+  public showNav: boolean;
   constructor() { 
     this.showNav = true;
   }
@@ -17,11 +17,11 @@ export class DashbaordComponent implements OnInit {
   public display(){
     
     if(this.showNav){
-      console.log(false);
+      // console.log(false);
       this.showNav = false;
     }
     else{
-      console.log(true);
+      // console.log(true);
       this.showNav = true;
     }
     

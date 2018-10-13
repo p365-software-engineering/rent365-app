@@ -33,8 +33,19 @@ export class AuthXGuardClientService implements CanActivate, CanActivateChild, C
     );
   }
 
-  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    throw new Error('Method not implemented.');
+  canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.firebaseAuth.authState.pipe(
+      map(auth => {
+        if ((auth)) {
+          console.log('allowed');
+          console.log(auth);
+          // this.router.navigate(['/']);
+          return true;
+        } else {
+          return false;
+        }
+      })
+    );
   }
   canLoad(route: Route): boolean {
     throw new Error('Method not implemented.');

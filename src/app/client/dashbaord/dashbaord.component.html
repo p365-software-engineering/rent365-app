@@ -2,11 +2,12 @@
 
 <!-- Page Content  -->
 <div id="content" [ngClass]="{'active': !showNav }">
-  <div class="container-fluid">
-    <div class="row">
-      <span class="navbar-toggler-icon" (click)="display()"></span>
-    </div>
-  </div>
-  <br>
-  <router-outlet></router-outlet>
+    <nav class="navbar  navbar-light bg-dark justify-content-between">
+        <span class="navbar-toggler-icon" (click)="display()"></span>
+        <!-- <form class="form-inline">
+            <span class=" chip text-bold text-center"><i class="chip-icon">A</i><span class=" d-none d-md-block">Arun Nekkalapudi</span></span>
+        </form> -->
+      </nav>
+
+  <router-outlet ></router-outlet>
 </div>

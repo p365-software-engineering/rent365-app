@@ -23,6 +23,7 @@ export const appRoutes: Routes = [
     },
     {
         path: 'client',
-        loadChildren: './client/client.module#ClientModule'
+        loadChildren: './client/client.module#ClientModule',
+        canActivateChild: [AuthXGuardClientService]
     }
 ];

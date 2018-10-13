@@ -6,6 +6,9 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { DashbaordComponent } from './dashbaord/dashbaord.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CommunityComponent } from './community/community.component';
+import { StatementComponent } from './statement/statement.component';
+import { PaymentComponent } from './payment/payment.component';
+import { ServiceComponent } from './service/service.component';
 
 @NgModule({
   imports: [
@@ -22,14 +25,26 @@ import { CommunityComponent } from './community/community.component';
           {
             path:'community',
             component: CommunityComponent
+          },
+          {
+            path:'pay',
+            component: PaymentComponent
+          },
+          {
+            path:'statement',
+            component: StatementComponent
+          },
+          {
+            path:'request',
+            component: ServiceComponent
           }
         ]
       }
       
     ])
   ],
-  declarations: [SidenavComponent, DashbaordComponent, WelcomeComponent, CommunityComponent],
-  exports: [SidenavComponent,DashbaordComponent]
+  declarations: [SidenavComponent, DashbaordComponent, WelcomeComponent, CommunityComponent, StatementComponent, PaymentComponent, ServiceComponent],
+  exports: []
   
 })
 export class ClientModule { }

@@ -93,7 +93,7 @@ a.article:hover {
 
 #content {
     width: calc(100% - 250px);
-    padding: 20px;
+    padding: 15px 10px 10px 10px;
     min-height: 100vh;
     transition: all 0.3s;
     position: absolute;
@@ -114,6 +114,14 @@ a.article:hover {
     #content {
         width: calc(100% - 250px);
     }
+
+    .container-fluid {
+        margin-right: auto;
+        margin-left: auto;
+        padding-right: 5px;
+        padding-left: 5px;
+        width: 100%;
+    }
 }
 
 /* ---------------------------------------------------
@@ -121,11 +129,17 @@ a.article:hover {
 ----------------------------------------------------- */
 
 span.navbar-toggler-icon {
-    margin-left: 18px;
     padding: 10px 15px 10px 15px;
     background: black;
     color: white;
     border-radius: 2px;
     cursor: pointer;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.14), 0 3px 4px 0 rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar{
+    /* position: fixed; */
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.14), 0 3px 4px 0 rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }

@@ -4,6 +4,7 @@
 */
 
 
+
 p {
     font-size: 1.1em;
     font-weight: 300;
@@ -86,6 +87,21 @@ a.article:hover {
     background: #6d7fcc !important;
     color: #fff !important;
 }
+
+#card-content-main{
+    position: relative;
+    top: 6rem;
+    z-index:10 ;
+}
+
+.fade-active{
+    top: 0rem;
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+    z-index:95 ;
+}
+
+
 
 /* ---------------------------------------------------
     CONTENT STYLE

@@ -9,6 +9,7 @@ import { CommunityComponent } from './community/community.component';
 import { StatementComponent } from './statement/statement.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ServiceComponent } from './service/service.component';
+import { ServiceHistoryComponent } from './service-history/service-history.component';
 
 @NgModule({
   imports: [
@@ -37,14 +38,17 @@ import { ServiceComponent } from './service/service.component';
           {
             path:'request',
             component: ServiceComponent
+          },
+          {
+            path:'history',
+            component: ServiceHistoryComponent
           }
         ]
       }
       
     ])
   ],
-  declarations: [SidenavComponent, DashbaordComponent, WelcomeComponent, CommunityComponent, StatementComponent, PaymentComponent, ServiceComponent],
+  declarations: [SidenavComponent, DashbaordComponent, WelcomeComponent, CommunityComponent, StatementComponent, PaymentComponent, ServiceComponent, ServiceHistoryComponent],
   exports: []
-  
 })
 export class ClientModule { }

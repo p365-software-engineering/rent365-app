@@ -22,8 +22,8 @@ export class AuthXGuardClientService implements CanActivate, CanActivateChild, C
     return this.firebaseAuth.authState.pipe(
       map(auth => {
         if ((auth)) {
-          console.log('Not allowed');
-          console.log(auth);
+          // console.log('Not allowed');
+          // console.log(auth);
           this.router.navigate(['/']);
           return false;
         } else {
@@ -37,8 +37,8 @@ export class AuthXGuardClientService implements CanActivate, CanActivateChild, C
     return this.firebaseAuth.authState.pipe(
       map(auth => {
         if ((auth)) {
-          console.log('allowed');
-          console.log(auth);
+          // console.log('allowed');
+          // console.log(auth);
           // this.router.navigate(['/']);
           return true;
         } else {

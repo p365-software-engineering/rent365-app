@@ -28,9 +28,10 @@ export class AuthXService {
       });
    }
 
-   get authenticated(): boolean {
+  get authenticated(): boolean {
     return this._currentUser !== null;
   }
+
   get currentUserObservable(): any {
     return this.firebaseAuth.authState.pipe(first());
   }
@@ -87,7 +88,7 @@ export class AuthXService {
   public loginGoogle() {
     this.firebaseAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((credential) => {
       this.updateUserData(credential.user);
-      this.router.navigate(['/']);
+      this.router.navigate(['/client']);
     }).catch((error) => {
       console.log(error);
     });
@@ -96,7 +97,7 @@ export class AuthXService {
   public loginFacebook() {
     this.firebaseAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then((credential) => {
       this.updateUserData(credential.user);
-      this.router.navigate(['/']);
+      this.router.navigate(['/client']);
     }).catch((error) => {
       console.log(error);
     });
@@ -110,7 +111,7 @@ export class AuthXService {
         console.log('Verify your email');
         return 'verify';
       } else {
-        this.router.navigate(['/']);
+        this.router.navigate(['/client']);
         return 'success';
       }
     }).catch((error) => {

@@ -14,7 +14,8 @@ import { PublicComponent } from './public/public.component';
 import { HeaderComponent, FooterComponent } from './shared/shared-export';
 import { RegisterXComponent } from './public/register-x/register-x.component';
 import { LoginXComponent } from './public/login-x/login-x.component';
-import { AuthXService,AuthXGuardClientService} from "./services/service-export"
+import { AuthXService,AuthXGuardClientService} from "./services/service-export";
+import { EnquiryComponent } from './public/enquiry/enquiry.component'
 
 
 
@@ -25,7 +26,8 @@ import { AuthXService,AuthXGuardClientService} from "./services/service-export"
     PublicComponent,
     HeaderComponent,
     FooterComponent,
-    RegisterXComponent
+    RegisterXComponent,
+    EnquiryComponent
   ],
   imports: [
     BrowserModule,

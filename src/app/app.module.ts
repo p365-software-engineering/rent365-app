@@ -2,14 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { HttpClientModule }  from '@angular/common/http'
+import { HttpClientModule }  from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
-import { appRoutes } from "./routes";
+import { appRoutes } from './routes';
 import { PublicComponent } from './public/public.component';
 import { HeaderComponent, FooterComponent } from './shared/shared-export';
 import { RegisterXComponent } from './public/register-x/register-x.component';
@@ -39,7 +39,7 @@ import { EnquiryComponent } from './public/enquiry/enquiry.component'
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AuthXService,AuthXGuardClientService],
+  providers: [AuthXService, AuthXGuardClientService],
   bootstrap: [AppComponent]
 })
 

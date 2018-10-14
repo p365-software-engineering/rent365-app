@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthXService} from "../../services/service-export";
+import { AuthXService} from '../../services/service-export';
+import { Router } from '@angular/router';
 
 
 
@@ -10,7 +11,7 @@ import { AuthXService} from "../../services/service-export";
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public authX : AuthXService) { 
+  constructor(public authX: AuthXService,public router:Router) {
     // this.authX.getUserInfo();
   }
 

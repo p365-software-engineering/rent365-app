@@ -4,19 +4,26 @@ import { RegisterXComponent } from "./public/register-x/register-x.component";
 import { PublicComponent } from "./public/public.component";
 import { AuthXGuardClientService} from "./services/service-export";
 import { EnquiryComponent } from './public/enquiry/enquiry.component';
+import { DashbaordComponent } from './client/dashbaord/dashbaord.component'
 
 
-export const appRoutes:Routes = [
+
+export const appRoutes: Routes = [
+    {
+        path : '',
+        component : PublicComponent
+    },
     {
         path : 'login',
         component : LoginXComponent,
-        canActivate:[AuthXGuardClientService]
+        canActivate: [AuthXGuardClientService]
     },
     {
         path : 'register',
         component : RegisterXComponent
     },
     {
+<<<<<<< HEAD
         path : '',
         component : PublicComponent
     },
@@ -26,3 +33,10 @@ export const appRoutes:Routes = [
     }
 
 ]
+=======
+        path: 'client',
+        loadChildren: './client/client.module#ClientModule',
+        canActivateChild: [AuthXGuardClientService]
+    }
+];
+>>>>>>> 5446894740e17647a37387dc1023876982dc6d6b

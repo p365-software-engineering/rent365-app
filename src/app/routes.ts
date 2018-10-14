@@ -23,20 +23,16 @@ export const appRoutes: Routes = [
         component : RegisterXComponent
     },
     {
-<<<<<<< HEAD
         path : '',
         component : PublicComponent
     },
     {
         path : 'enquiry',
         component: EnquiryComponent
-    }
-
-]
-=======
+    },
+    {
         path: 'client',
         loadChildren: './client/client.module#ClientModule',
         canActivateChild: [AuthXGuardClientService]
     }
 ];
->>>>>>> 5446894740e17647a37387dc1023876982dc6d6b

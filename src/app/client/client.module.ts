@@ -10,6 +10,7 @@ import { StatementComponent } from './statement/statement.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ServiceComponent } from './service/service.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   imports: [
@@ -42,13 +43,17 @@ import { ServiceHistoryComponent } from './service-history/service-history.compo
           {
             path:'history',
             component: ServiceHistoryComponent
+          },
+          {
+            path:'profile',
+            component: ProfileComponent
           }
         ]
       }
       
     ])
   ],
-  declarations: [SidenavComponent, DashbaordComponent, WelcomeComponent, CommunityComponent, StatementComponent, PaymentComponent, ServiceComponent, ServiceHistoryComponent],
+  declarations: [SidenavComponent, DashbaordComponent, WelcomeComponent, CommunityComponent, StatementComponent, PaymentComponent, ServiceComponent, ServiceHistoryComponent, ProfileComponent],
   exports: []
 })
 export class ClientModule { }

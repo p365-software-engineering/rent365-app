@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashbaord.component.css']
 })
 export class DashbaordComponent implements OnInit {
-  
+  /**
+   * Dashboard is a bootstrap component for the client Module which inherits the default router
+   * 
+   */
   public showNav: boolean;
   constructor() { 
     this.showNav = true;

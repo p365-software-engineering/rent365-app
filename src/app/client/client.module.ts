@@ -11,6 +11,25 @@ import { PaymentComponent } from './payment/payment.component';
 import { ServiceComponent } from './service/service.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
 
+
+/**
+ * Client Module Comprises of the following Features
+ * 
+ *  Bootstrap Component : Dashboard Component
+ * 
+ *  Welcome : WelcomeComponent
+ * 
+ *  Statement : StatementComponent
+ * 
+ *  Request Service : Service Component
+ * 
+ *  Payment : Payment Component
+ * 
+ *  View Statement : StatementComponent
+ * 
+ *  View Service History : ServiceHistoryComponent
+ * 
+ */
 @NgModule({
   imports: [
     CommonModule,

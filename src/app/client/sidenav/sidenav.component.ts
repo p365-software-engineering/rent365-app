@@ -9,7 +9,7 @@ import { AuthXService } from 'app/services/login/auth-x.service';
 export class SidenavComponent implements OnInit {
 
   constructor(public authX: AuthXService) { }
-  @Input() showNav: boolean; 
+  @Input() showNav: boolean;
 
   ngOnInit() {
   }

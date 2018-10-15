@@ -3,8 +3,6 @@ import { LoginXComponent } from './public/login-x/login-x.component';
 import { RegisterXComponent } from './public/register-x/register-x.component';
 import { PublicComponent } from './public/public.component';
 import { AuthXGuardClientService} from './services/service-export';
-import { DashbaordComponent } from './client/dashbaord/dashbaord.component'
-
 
 
 export const appRoutes: Routes = [
@@ -22,8 +20,17 @@ export const appRoutes: Routes = [
         component : RegisterXComponent
     },
     {
+        // Client Dashboard Controls
         path: 'client',
         loadChildren: './client/client.module#ClientModule',
         canActivateChild: [AuthXGuardClientService]
     }
+    ,
+    {
+        // Admin Dashboard Controls
+        path: 'admin',
+        loadChildren: './admin/admin.module#AdminModule',
+        canActivateChild: []
+    }
+
 ];

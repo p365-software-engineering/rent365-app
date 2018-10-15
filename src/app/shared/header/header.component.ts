@@ -11,10 +11,22 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public authX: AuthXService,public router:Router) {
+  constructor(public authX: AuthXService, public router: Router) {
     // this.authX.getUserInfo();
   }
 
+
   ngOnInit() {
+  }
+
+  public show(): boolean {
+
+    if ((this.router.url).indexOf('client') >= 0) {
+      return false;
+    } else if ((this.router.url).indexOf('admin') >= 0) {
+      return false;
+    }
+    return true;
+
   }
 }

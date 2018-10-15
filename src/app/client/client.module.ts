@@ -14,60 +14,67 @@ import { ServiceHistoryComponent } from './service-history/service-history.compo
 
 /**
  * Client Module Comprises of the following Features
- * 
+ *
  *  Bootstrap Component : Dashboard Component
- * 
+ *
  *  Welcome : WelcomeComponent
- * 
+ *
  *  Statement : StatementComponent
- * 
+ *
  *  Request Service : Service Component
- * 
+ *
  *  Payment : Payment Component
- * 
+ *
  *  View Statement : StatementComponent
- * 
+ *
  *  View Service History : ServiceHistoryComponent
- * 
+ *
  */
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild([
       {
-        path:'',
+        path: '',
         component: DashbaordComponent,
         children: [
           {
-            path:'',
+            path: '',
             component: WelcomeComponent
           },
           {
-            path:'community',
+            path: 'community',
             component: CommunityComponent
           },
           {
-            path:'pay',
+            path: 'pay',
             component: PaymentComponent
           },
           {
-            path:'statement',
+            path: 'statement',
             component: StatementComponent
           },
           {
-            path:'request',
+            path: 'request',
             component: ServiceComponent
           },
           {
-            path:'history',
+            path: 'history',
             component: ServiceHistoryComponent
           }
         ]
       }
-      
+
     ])
   ],
-  declarations: [SidenavComponent, DashbaordComponent, WelcomeComponent, CommunityComponent, StatementComponent, PaymentComponent, ServiceComponent, ServiceHistoryComponent],
+  declarations: [SidenavComponent,
+    DashbaordComponent,
+    WelcomeComponent,
+    CommunityComponent,
+    StatementComponent,
+    PaymentComponent,
+    ServiceComponent,
+    ServiceHistoryComponent],
   exports: []
 })
 export class ClientModule { }

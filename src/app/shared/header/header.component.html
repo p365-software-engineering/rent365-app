@@ -1,30 +1,34 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf ="(router.url).indexOf('client')<=0 ">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" routerLink="">Super Rental</a>
-    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="show()">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" routerLink="">Super Rental</a>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li>
+    </ul>
+    <div class=" my-2 my-lg-0">
       <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+        <li class="nav-item" *ngIf="!this.authX.isLoggedIn()">
+          <a class="btn btn-secondary my-1" routerLink="/login">LogIn</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
+        <li class="nav-item user-name" *ngIf="this.authX.isLoggedIn()">
+          <span class=" chip text-bold"><i class="chip-icon">{{ (this.authX._currentUser.displayName == undefined) ?
+              this.authX._currentUser.email.charAt(0) : this.authX._currentUser.displayName.charAt(0) }}</i>{{
+            (this.authX._currentUser.displayName == undefined) ? this.authX._currentUser.email :
+            this.authX._currentUser.displayName}}</span>
+        </li>
+        <li class="nav-item" *ngIf="this.authX.isLoggedIn()">
+
+          <button class="btn btn-primary my-1" (click)="this.authX.logout()">Exit </button>
         </li>
       </ul>
-      <div class=" my-2 my-lg-0">
-          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-              <li class="nav-item" *ngIf="!this.authX.isLoggedIn()">
-                <a class="btn btn-secondary my-1"  routerLink="/login">LogIn</a>
-              </li>
-              <li class="nav-item user-name" *ngIf="this.authX.isLoggedIn()">
-                  <span class=" chip text-bold"><i class="chip-icon">{{ (this.authX._currentUser.displayName == undefined) ? this.authX._currentUser.email.charAt(0) : this.authX._currentUser.displayName.charAt(0) }}</i>{{ (this.authX._currentUser.displayName == undefined) ? this.authX._currentUser.email : this.authX._currentUser.displayName}}</span>
-              </li>
-              <li class="nav-item" *ngIf="this.authX.isLoggedIn()">
-    
-              <button class="btn btn-primary my-1" (click)="this.authX.logout()">Exit </button>
-              </li>
-            </ul>
-      </div>
     </div>
-  </nav>
+  </div>
+</nav>

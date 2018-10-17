@@ -10,6 +10,7 @@ import { StatementComponent } from './statement/statement.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ServiceComponent } from './service/service.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
+import { ChatThreadComponent } from 'app/public/chat/chat-thread/chat-thread.component';
 
 
 /**

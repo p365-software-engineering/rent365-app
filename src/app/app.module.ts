@@ -15,6 +15,8 @@ import { HeaderComponent, FooterComponent } from './shared/shared-export';
 import { RegisterXComponent } from './public/register-x/register-x.component';
 import { LoginXComponent } from './public/login-x/login-x.component';
 import { AuthXService, AuthXGuardClientService} from './services/service-export';
+import { ChatThreadComponent } from './public/chat/chat-thread/chat-thread.component';
+import { ChatMessageComponent } from './public/chat/chat-message/chat-message.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { AuthXService, AuthXGuardClientService} from './services/service-export'
     PublicComponent,
     HeaderComponent,
     FooterComponent,
-    RegisterXComponent
+    RegisterXComponent,
+    ChatThreadComponent,
+    ChatMessageComponent
   ],
   imports: [
     BrowserModule,

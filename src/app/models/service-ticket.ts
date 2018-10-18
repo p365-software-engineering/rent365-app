@@ -1,6 +1,6 @@
 export class ServiceTicket {
 
-    ticketID: string;
+    serviceTicketID: string;
     userID: string;
     apartmentID: string;
     ticketDescription: string;
@@ -9,11 +9,10 @@ export class ServiceTicket {
     ticketStatus: ServiceTicketStatus;
     
     constructor(obj?: any) {
-        this.ticketID           = obj.ticketID;
+        this.serviceTicketID    = obj.serviceTicketID;
         this.userID             = obj.userID;
         this.apartmentID        = obj.apartmentID;
         this.ticketDescription  = obj.ticketDescription;
-        this.ticketID           = obj.ticketID;
         this.dateCreated        = obj.dateCreated;
         this.dateResolved       = obj.dateResolved;
         this.ticketStatus       = obj.ticketStatus;

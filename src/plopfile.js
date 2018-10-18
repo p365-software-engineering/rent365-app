@@ -1,10 +1,6 @@
 module.exports = ( plop ) => {
 
-    // Here we'll define our generators
-  
-    // We declare a new generator called "module"
     plop.setGenerator( "crud-fire-service", {
-        // Succintly describes what generator does.
         description: "Create a new service",
         prompts: [
             {
@@ -28,6 +24,29 @@ module.exports = ( plop ) => {
                 type: "append",
                 path: "app/services/service-export.ts",
                 template: "export * from './{{dashCase name}}/{{dashCase name}}.service';"
+            },
+        ]
+    });
+
+    plop.setGenerator( "model", {
+        description: "Create a new model",
+        prompts: [
+            {
+              type: "input",
+              name: "name",
+              message: "What is your model name?"
+            }
+        ],
+        actions: [
+            {
+              type: "add",
+              path: "app/models/{{dashCase name}}.ts",
+              templateFile: "plop-templates/model.ts"
+            },
+            {
+                type: "append",
+                path: "app/models/model-export.ts",
+                template: "export * from './{{dashCase name}}';"
             },
         ]
     });

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ChatMessage } from 'app/models/chat';
+import { ChatMessage, ChatThread } from 'app/models/chat';
 import { Observable } from 'rxjs';
 import { ChatService, AuthXService } from 'app/services/service-export';
+import { log } from 'util';
 
 @Component({
   selector: 'chat-window',
@@ -13,6 +14,10 @@ export class ChatWindowComponent implements OnInit {
   private anonUser: boolean;
   private ipAddress: string;
   private _messages: Observable<ChatMessage[]>;
+  private isAdminTyping: boolean;
+  private isUserTyping: boolean;
+  private activeThread: Observable<ChatThread>;
+  private textValue = '';
 
   constructor(private authXService: AuthXService, 
               private _chatService: ChatService) { }
@@ -21,20 +26,41 @@ export class ChatWindowComponent implements OnInit {
     this.anonUser = !(this.authXService.authenticated);
     this._chatService.getIpAddress().subscribe((ipAddress: any) => {
         this.ipAddress = ipAddress.ip;
+        console.log(ipAddress.ip);
         this._messages = this._chatService.getMessagesForChat(ipAddress.ip);
+        this._chatService.getChatThread(ipAddress.ip)
+          .subscribe(activeThread => {
+              this.activeThread = activeThread;
+              this.isAdminTyping = activeThread.adminTyping;
+              this.isUserTyping = activeThread.userTyping;
+          });
     });
   }
 
   sendMessage(messageText: string) {
+    console.log(this.activeThread);
     const sender = (this.anonUser) ? "anonymous" : "admin";
     const messageObj = {
       messageText: messageText,
       chatThreadID: this.ipAddress,
       sender: sender
     };
+    // TODO: SEND UPDATE TO SAY NO LONGER TYPING FOR WHICH USER???
     this._chatService.sendMessage(messageObj)
-      // .then(res => console.log(res))
+      // .then(() => this.switchTyping())
       .catch(err => console.log(err));
+  }
+
+  switchTyping = () => {
+    if (this.anonUser) {
+        this.isUserTyping = !this.isUserTyping;
+    } else { 
+      this.isAdminTyping = !this.isAdminTyping;
+    }
+  }
+
+  listenForText = () => { 
+    
   }
 
 }

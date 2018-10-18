@@ -45,8 +45,20 @@ export class ChatService {
     });
   }
 
+  getChatThread(activeThreadID: string): Observable<any> {
+    return this.chatThreadsCollection
+      .doc(activeThreadID)
+      .valueChanges();
+  }
+
+  updateChatThread(activeThreadID: string, data: {}) {
+    return this.chatThreadsCollection
+      .doc(activeThreadID)
+      .update(data);
+      // .valueChanges();
+  }
+
   getMessagesForChat(activeThreadID: string): Observable<ChatMessage[]> {
-    console.log(activeThreadID);
     return this.chatThreadsCollection
       .doc(activeThreadID)
       .collection<ChatMessage>('messages')

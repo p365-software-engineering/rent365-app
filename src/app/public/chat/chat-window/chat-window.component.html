@@ -1,13 +1,17 @@
 <div class="card" style="width: 18rem;">
     <div class="card-body">
         <h5 class="card-title">Chat Box</h5>
-        <div style="display: flex; flex-direction: row; width: 100%" *ngFor="let message of _messages | async">
-            <p [style.float]="right" style="float: right; width: 50%;">
-                {{ message.sender }}: {{ message.messageText }}
-            </p>
+        <div class="clearfix" style="display: flex; flex-direction: row; width: 100%" *ngFor="let message of _messages | async">
+            <chat-message class="float-right" style="float:right !important" [message]="message"></chat-message>
         </div>
+        <div style="clear:both">
+            <p [hidden]="!isAdminTyping"><em> admin is typing...</em> </p>
+            <p [hidden]="!isUserTyping && anonUser"><em> user is typing...</em> </p>
+        </div>
+        <p> {{ textValue }} </p>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="message" name="messageBox" id="messageBox" #messageBox>
+            <input type="text" class="form-control" placeholder="message" name="messageBox" id="messageBox" 
+                    #messageBox [(ngModel)]="textValue">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button" 
                         (click)="sendMessage(messageBox.value); messageBox.value = ''">

@@ -17,6 +17,7 @@ import { LoginXComponent } from './public/login-x/login-x.component';
 import { AuthXService, AuthXGuardClientService} from './services/service-export';
 import { ChatThreadComponent } from './public/chat/chat-thread/chat-thread.component';
 import { ChatMessageComponent } from './public/chat/chat-message/chat-message.component';
+import { ChatWindowComponent } from './public/chat/chat-window/chat-window.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ChatMessageComponent } from './public/chat/chat-message/chat-message.co
     FooterComponent,
     RegisterXComponent,
     ChatThreadComponent,
-    ChatMessageComponent
+    ChatMessageComponent,
+    ChatWindowComponent
   ],
   imports: [
     BrowserModule,

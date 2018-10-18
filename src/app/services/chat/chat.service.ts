@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { ChatThread, ChatMessage } from 'app/models/chat';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -44,24 +45,28 @@ export class ChatService {
     });
   }
 
-  getMessagesForChat(activeThreadID: string) {
+  getMessagesForChat(activeThreadID: string): Observable<ChatMessage[]> {
+    console.log(activeThreadID);
     return this.chatThreadsCollection
       .doc(activeThreadID)
-      .collection('Messages');
+      .collection<ChatMessage>('messages')
+      .valueChanges();
   }
 
-  sendMessage(chatThreadID: string, messageText: string) {
+  sendMessage(messageObj: any) {
     const messageID = this.afs.createId();
+    const { messageText, chatThreadID, sender } = messageObj;
     const chatThreadObj = <ChatMessage> {
       messageID: messageID,
       isRead: false,
       sentAt: Date.now(),
       messageText: messageText,
       chatThreadID: chatThreadID,
+      sender: sender
     };
     return this.chatThreadsCollection
       .doc(chatThreadID)
-      .collection('Messages')
+      .collection('messages')
       .doc(messageID)
       .set(chatThreadObj);
   }
@@ -69,7 +74,7 @@ export class ChatService {
   markMessageAsRead(chatThreadID: string, messageID: string) {
     return this.chatThreadsCollection
       .doc(chatThreadID)
-      .collection('Messages')
+      .collection('messages')
       .doc(messageID)
       .update({
         read: true
@@ -83,7 +88,7 @@ export class ChatService {
       .doc(chatThreadID)
       .get()
       .forEach(message => batch.delete(message.ref));
-    batch.delete(this.afs.collection('ChatThreads').doc(chatThreadID).ref);
+    batch.delete(this.chatThreadsCollection.doc(chatThreadID).ref);
     return batch.commit();
   }
 

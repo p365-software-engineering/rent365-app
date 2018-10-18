@@ -1,0 +1,19 @@
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title">Chat Box</h5>
+        <div style="display: flex; flex-direction: row; width: 100%" *ngFor="let message of _messages | async">
+            <p [style.float]="right" style="float: right; width: 50%;">
+                {{ message.sender }}: {{ message.messageText }}
+            </p>
+        </div>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="message" name="messageBox" id="messageBox" #messageBox>
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="button" 
+                        (click)="sendMessage(messageBox.value); messageBox.value = ''">
+                    Send
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

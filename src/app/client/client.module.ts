@@ -12,9 +12,7 @@ import { ServiceComponent } from './service/service.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-
-
-
+import { ChatThreadComponent } from 'app/public/chat/chat-thread/chat-thread.component';
 
 
 /**

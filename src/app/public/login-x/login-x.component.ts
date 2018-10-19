@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthXService } from '../../services/service-export';
-import { IUser } from '../../models/user_model';
+import { IUser } from '../../models/user-model';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

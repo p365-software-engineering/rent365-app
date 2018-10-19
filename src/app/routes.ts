@@ -24,8 +24,7 @@ export const appRoutes: Routes = [
         path: 'client',
         loadChildren: './client/client.module#ClientModule',
         canActivateChild: [AuthXGuardClientService]
-    }
-    ,
+    },
     {
         // Admin Dashboard Controls
         path: 'admin',

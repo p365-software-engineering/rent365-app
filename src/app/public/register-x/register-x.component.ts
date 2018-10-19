@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { AuthXService} from '../../services/service-export';
-import { IUserData } from '../../models/user_model';
+import { IUserData } from '../../models/user-model';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 

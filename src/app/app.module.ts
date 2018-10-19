@@ -20,6 +20,8 @@ import {
   ToastrModule,
 } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ChatThreadComponent } from './public/chat/chat-thread/chat-thread.component';
+import { ChatMessageComponent } from './public/chat/chat-message/chat-message.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HeaderComponent,
     FooterComponent,
     RegisterXComponent,
+    ChatThreadComponent,
+    ChatMessageComponent
   ],
   imports: [
     BrowserModule,

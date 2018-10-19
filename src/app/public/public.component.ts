@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ChatService } from 'app/services/service-export';
 
 @Component({
   selector: 'app-public',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PublicComponent implements OnInit {
 
-  constructor() { }
+  // TODO: remove chat ... ?
+  constructor(private _chatService: ChatService) {}
 
   ngOnInit() {
+
   }
 
 }

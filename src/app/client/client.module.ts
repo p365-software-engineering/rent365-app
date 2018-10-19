@@ -10,6 +10,11 @@ import { StatementComponent } from './statement/statement.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ServiceComponent } from './service/service.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+
+
+
 
 
 /**
@@ -33,6 +38,8 @@ import { ServiceHistoryComponent } from './service-history/service-history.compo
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
+    ToastrModule.forRoot(),
     RouterModule.forChild([
       {
         path: '',

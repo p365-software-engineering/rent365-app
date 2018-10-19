@@ -8,6 +8,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+
 import { environment } from '../environments/environment';
 import { appRoutes } from './routes';
 import { PublicComponent } from './public/public.component';
@@ -15,6 +16,10 @@ import { HeaderComponent, FooterComponent } from './shared/shared-export';
 import { RegisterXComponent } from './public/register-x/register-x.component';
 import { LoginXComponent } from './public/login-x/login-x.component';
 import { AuthXService, AuthXGuardClientService} from './services/service-export';
+import {
+  ToastrModule,
+} from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,17 +28,19 @@ import { AuthXService, AuthXGuardClientService} from './services/service-export'
     PublicComponent,
     HeaderComponent,
     FooterComponent,
-    RegisterXComponent
+    RegisterXComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    ToastrModule.forRoot()
   ],
   providers: [AuthXService, AuthXGuardClientService],
   bootstrap: [AppComponent]

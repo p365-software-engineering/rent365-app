@@ -3,9 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthXService } from '../../services/service-export';
 import { IUser } from '../../models/user_model';
-
-
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login-x',
@@ -17,7 +15,7 @@ export class LoginXComponent implements OnInit {
   private currentUser: IUser;
   public auth_message: String;
 
-  constructor(private router: Router, public authX: AuthXService) {
+  constructor(private toastr: ToastrService, private router: Router, public authX: AuthXService) {
     this.auth_message = null;
   }
 

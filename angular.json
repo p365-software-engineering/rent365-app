@@ -97,8 +97,7 @@
               "src/tsconfig.spec.json"
             ],
             "exclude": [
-              "**/node_modules/**",
-              "./src/plop-templates/**"
+              "**/node_modules/**"
             ]
           }
         }

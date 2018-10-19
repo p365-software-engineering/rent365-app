@@ -1,9 +1,4 @@
 {
-  "linterOptions": {
-        "exclude": [
-            "./src/plop-templates/**"
-        ]
-  },
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],

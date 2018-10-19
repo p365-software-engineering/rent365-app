@@ -22,6 +22,7 @@ import {
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatThreadComponent } from './public/chat/chat-thread/chat-thread.component';
 import { ChatMessageComponent } from './public/chat/chat-message/chat-message.component';
+import { LeaseComponent } from './public/lease/lease.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ChatMessageComponent } from './public/chat/chat-message/chat-message.co
     FooterComponent,
     RegisterXComponent,
     ChatThreadComponent,
-    ChatMessageComponent
+    ChatMessageComponent,
+    LeaseComponent
   ],
   imports: [
     BrowserModule,

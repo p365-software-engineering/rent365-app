@@ -5,7 +5,7 @@ export class Amenity {
     amenityDescription: string;
 
     constructor(obj?: any) {
-        this.amenityID              = obj.amenityID;
+        this.amenityID              = obj.amenityID || null;
         this.amenityName            = obj.amenityName;
         this.amenityDescription     = obj.amenityDescription;
     }

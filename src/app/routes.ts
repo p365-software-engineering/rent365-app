@@ -3,6 +3,7 @@ import { LoginXComponent } from './public/login-x/login-x.component';
 import { RegisterXComponent } from './public/register-x/register-x.component';
 import { PublicComponent } from './public/public.component';
 import { AuthXGuardClientService} from './services/service-export';
+import { LeaseComponent } from './public/lease/lease.component';
 
 
 export const appRoutes: Routes = [
@@ -18,6 +19,10 @@ export const appRoutes: Routes = [
     {
         path : 'register',
         component : RegisterXComponent
+    },
+    {
+        path: 'lease',
+        component: LeaseComponent
     },
     {
         // Client Dashboard Controls

@@ -18,12 +18,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ### 1.2 Generate Documentation
     > npm run compodoc
 
-### 1.3 Build API App
-    > ???
-
 ### 1.4 Run All commands
     > npm run prep-build
-
 
 # Docker Sequence
 

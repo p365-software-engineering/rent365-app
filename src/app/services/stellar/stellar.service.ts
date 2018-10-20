@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as StellarSdk from 'stellar-sdk/dist/stellar-sdk.min.js';
 
-// declare const StellarSdk: any;
+declare const StellarSdk: any;
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,9 @@ import * as StellarSdk from 'stellar-sdk/dist/stellar-sdk.min.js';
 export class StellarService {
 
     private server: any;
-
+    // GBT7DUXFTBW6CLYHB4UKLLIX3IENABCXLXAZASJF4I6J73NAV4TR4ZTQ
+    // SAV6VEIM2477EYBVOM2SXY3JG6JFKL734KKQRICCAQVMV57PC2KUMYH7
+    
     constructor() {
         // this.server = new StellarSdk.Server('https://horizon.stellar.org');
         // StellarSdk.Network.usePublicNetwork();

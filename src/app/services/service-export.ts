@@ -6,3 +6,4 @@ export * from './service-ticket/service-ticket.service';
 export * from './stellar/stellar.service';
 export * from './payment/payment.service';
 export * from './review/review.service';
+export * from './stellar/stellar.service';

@@ -21,28 +21,20 @@ export class ChatService {
     return;
   }
 
-  // Might need to be observed
-  getIpAddress() {
+  getIpAddress(): Observable<any> {
     const url = 'http://ipv4.myexternalip.com/json';
-    // return new Promise((res, rej) => {
-    //   this._httpclient.get(url).toPromise().then((result: any) => {
-    //       res(result.ip);
-    //   });
-    // });
     return this._httpclient.get(url);
   }
 
-  // TODO: senderID: string ???
-  createNewChatThread() {
-    return this.getIpAddress().toPromise().then((result: any) => {
-      const chatThreadID = result.ip || this.afs.createId();
-      const chatThreadObj = <ChatThread> {
-          chatThreadID: chatThreadID
-      };
-      return this.chatThreadsCollection
-        .doc(chatThreadID)
-        .set(chatThreadObj);
+  async createNewChatThread() {
+    const result_1 = await this.getIpAddress().toPromise();
+    const chatThreadID = result_1.ip || this.afs.createId();
+    const chatThreadObj = (<ChatThread>{
+      chatThreadID: chatThreadID
     });
+    return this.chatThreadsCollection
+      .doc(chatThreadID)
+      .set(chatThreadObj);
   }
 
   getChatThread(activeThreadID: string): Observable<any> {

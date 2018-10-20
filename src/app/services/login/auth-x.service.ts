@@ -1,25 +1,26 @@
 import { Injectable } from '@angular/core';
 import { IUser, IUserData } from '../../models/user-model';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
-import { first, switchMap} from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { StellarService } from '../stellar/stellar.service';
+
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthXService {
 
   public currentUserState: Observable<firebase.User>;
   public _currentUser: firebase.User;
   public userRegister: Observable<String>;
 
-  constructor(private http: HttpClient, private firebaseAuth: AngularFireAuth,
-    private router: Router,
-    private afs: AngularFirestore) {
+  constructor(private firebaseAuth: AngularFireAuth,
+              private stellarService: StellarService,
+              private router: Router,
+              private afs: AngularFirestore) {
       this._currentUser = null;
       this.currentUserState = firebaseAuth.authState;
       this.currentUserState.subscribe((user: firebase.User) => {
@@ -125,6 +126,7 @@ export class AuthXService {
   }
 
   public logout(): void {
+    this.stellarService.clearKeyCache();
     this.firebaseAuth.auth.signOut().then(() => {
       this.router.navigate(['/login']);
     }).catch(function(error) {

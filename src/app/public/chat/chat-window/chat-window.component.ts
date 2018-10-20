@@ -2,9 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ChatMessage, ChatThread } from 'app/models/chat';
 import { Observable } from 'rxjs';
 import { ChatService, AuthXService } from 'app/services/service-export';
-import { log } from 'util';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'chat-window',
   templateUrl: './chat-window.component.html',
   styleUrls: ['./chat-window.component.css']
@@ -20,10 +20,10 @@ export class ChatWindowComponent implements OnInit {
   private textValue = '';
   private accordionOpened: boolean;
 
-  constructor(private authXService: AuthXService, 
+  constructor(private authXService: AuthXService,
               private _chatService: ChatService) { }
 
-  ngOnInit() {    
+  ngOnInit() {
     this.accordionOpened = false;
     this.anonUser = !(this.authXService.authenticated);
     this._chatService.getIpAddress().subscribe((ipAddress: any) => {
@@ -32,16 +32,18 @@ export class ChatWindowComponent implements OnInit {
         this._messages = this._chatService.getMessagesForChat(ipAddress.ip);
         this._chatService.getChatThread(ipAddress.ip)
           .subscribe(activeThread => {
+            if (activeThread) {
               this.activeThread = activeThread;
               this.isAdminTyping = activeThread.adminTyping;
               this.isUserTyping = activeThread.userTyping;
+            }
           });
     });
   }
 
   sendMessage(messageText: string) {
     console.log(this.activeThread);
-    const sender = (this.anonUser) ? "anonymous" : "admin";
+    const sender = (this.anonUser) ? 'anonymous' : 'admin';
     const messageObj = {
       messageText: messageText,
       chatThreadID: this.ipAddress,
@@ -56,15 +58,15 @@ export class ChatWindowComponent implements OnInit {
   switchTyping = () => {
     if (this.anonUser) {
         this.isUserTyping = !this.isUserTyping;
-    } else { 
+    } else {
       this.isAdminTyping = !this.isAdminTyping;
     }
   }
 
-  listenForText = () => { 
-    
+  listenForText = () => {
+
   }
-  
+
   toggleAccordion = () => {
     this.accordionOpened = !this.accordionOpened;
   }

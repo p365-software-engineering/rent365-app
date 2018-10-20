@@ -47,8 +47,8 @@ export class ChatWindowComponent implements OnInit {
       chatThreadID: this.ipAddress,
       sender: sender
     };
-    // TODO: SEND UPDATE TO SAY NO LONGER TYPING FOR WHICH USER???
     this._chatService.sendMessage(messageObj)
+    // TODO: SEND UPDATE TO SAY NO LONGER TYPING FOR WHICH USER???
       .then(() => this.switchTyping())
       .catch(err => console.log(err));
   }

@@ -3,14 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { DashbaordComponent } from './dashbaord/dashbaord.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CommunityComponent } from './community/community.component';
 import { StatementComponent } from './statement/statement.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ServiceComponent } from './service/service.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
-import { ChatThreadComponent } from 'app/public/chat/chat-thread/chat-thread.component';
+import { DashboardComponent } from '../admin/dashboard/dashboard.component';
 
 
 /**
@@ -37,7 +36,7 @@ import { ChatThreadComponent } from 'app/public/chat/chat-thread/chat-thread.com
     RouterModule.forChild([
       {
         path: '',
-        component: DashbaordComponent,
+        component: DashboardComponent,
         children: [
           {
             path: '',
@@ -69,7 +68,7 @@ import { ChatThreadComponent } from 'app/public/chat/chat-thread/chat-thread.com
     ])
   ],
   declarations: [SidenavComponent,
-    DashbaordComponent,
+    DashboardComponent,
     WelcomeComponent,
     CommunityComponent,
     StatementComponent,

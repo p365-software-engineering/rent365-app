@@ -2,17 +2,19 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { DashbaordComponent } from './dashbaord/dashbaord.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { SharedModule } from '../shared/shared.module';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    SharedModule,
     RouterModule.forChild([
       {
         path: '',
-        component: DashbaordComponent,
+        component: DashboardComponent,
         children: [
           {
             path: '',
@@ -22,6 +24,6 @@ import { SidenavComponent } from './sidenav/sidenav.component';
       }
     ])
   ],
-  declarations: [DashbaordComponent, WelcomeComponent, SidenavComponent]
+  declarations: [DashboardComponent, WelcomeComponent, SidenavComponent]
 })
 export class AdminModule { }

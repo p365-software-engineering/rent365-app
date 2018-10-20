@@ -26,6 +26,7 @@ export class ChatWindowComponent implements OnInit {
   ngOnInit() {
     this.accordionOpened = false;
     this.anonUser = !(this.authXService.authenticated);
+    console.log(this.authXService._currentUser);
     this._chatService.getIpAddress().subscribe((ipAddress: any) => {
         this.ipAddress = ipAddress.ip;
         console.log(ipAddress.ip);
@@ -57,15 +58,14 @@ export class ChatWindowComponent implements OnInit {
 
   switchTyping = () => {
     if (this.anonUser) {
-        this.isUserTyping = !this.isUserTyping;
+      this.isUserTyping = !this.isUserTyping;
     } else {
       this.isAdminTyping = !this.isAdminTyping;
     }
   }
 
-  listenForText = () => {
-
-  }
+  // listenForText = () => {
+  // }
 
   toggleAccordion = () => {
     this.accordionOpened = !this.accordionOpened;

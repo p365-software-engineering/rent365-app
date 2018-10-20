@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LeaseService } from 'app/services/lease/lease.service';
 
 @Component({
   selector: 'app-apartment',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ApartmentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ls: LeaseService) { }
 
   ngOnInit() {
   }

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { IUser, IUserData } from '../../models/user-model';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
-import { first, switchMap} from 'rxjs/operators';
+import { first } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 @Injectable({
   providedIn: 'root'

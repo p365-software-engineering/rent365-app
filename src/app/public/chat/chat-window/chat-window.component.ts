@@ -18,11 +18,13 @@ export class ChatWindowComponent implements OnInit {
   private isUserTyping: boolean;
   private activeThread: Observable<ChatThread>;
   private textValue = '';
+  private accordionOpened: boolean;
 
   constructor(private authXService: AuthXService, 
               private _chatService: ChatService) { }
 
   ngOnInit() {    
+    this.accordionOpened = false;
     this.anonUser = !(this.authXService.authenticated);
     this._chatService.getIpAddress().subscribe((ipAddress: any) => {
         this.ipAddress = ipAddress.ip;
@@ -47,7 +49,7 @@ export class ChatWindowComponent implements OnInit {
     };
     // TODO: SEND UPDATE TO SAY NO LONGER TYPING FOR WHICH USER???
     this._chatService.sendMessage(messageObj)
-      // .then(() => this.switchTyping())
+      .then(() => this.switchTyping())
       .catch(err => console.log(err));
   }
 
@@ -62,5 +64,8 @@ export class ChatWindowComponent implements OnInit {
   listenForText = () => { 
     
   }
-
+  
+  toggleAccordion = () => {
+    this.accordionOpened = !this.accordionOpened;
+  }
 }

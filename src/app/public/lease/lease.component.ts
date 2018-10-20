@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery/dist/jquery.min.js';
+
 
 @Component({
   selector: 'app-lease',
@@ -10,6 +12,9 @@ export class LeaseComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
+  onLeaseSubmit(): void {
+    // Formdata goes here
+  }
 }

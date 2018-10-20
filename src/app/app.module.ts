@@ -23,6 +23,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ChatThreadComponent } from './public/chat/chat-thread/chat-thread.component';
 import { ChatMessageComponent } from './public/chat/chat-message/chat-message.component';
 import { LeaseComponent } from './public/lease/lease.component';
+import { ApartmentComponent } from './public/lease/apartment/apartment.component';
+import { AmenitiesComponent } from './public/lease/amenities/amenities.component';
+import { LeaseInfoComponent } from './public/lease/lease-info/lease-info.component';
+import { SubmitComponent } from './public/lease/submit/submit.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +38,11 @@ import { LeaseComponent } from './public/lease/lease.component';
     RegisterXComponent,
     ChatThreadComponent,
     ChatMessageComponent,
-    LeaseComponent
+    LeaseComponent,
+    ApartmentComponent,
+    AmenitiesComponent,
+    LeaseInfoComponent,
+    SubmitComponent
   ],
   imports: [
     BrowserModule,

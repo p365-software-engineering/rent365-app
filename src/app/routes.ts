@@ -4,6 +4,10 @@ import { RegisterXComponent } from './public/register-x/register-x.component';
 import { PublicComponent } from './public/public.component';
 import { AuthXGuardClientService} from './services/service-export';
 import { LeaseComponent } from './public/lease/lease.component';
+import { ApartmentComponent } from './public/lease/apartment/apartment.component';
+import { AmenitiesComponent } from './public/lease/amenities/amenities.component';
+import { LeaseInfoComponent } from './public/lease/lease-info/lease-info.component';
+import { SubmitComponent } from './public/lease/submit/submit.component';
 
 
 export const appRoutes: Routes = [
@@ -22,7 +26,25 @@ export const appRoutes: Routes = [
     },
     {
         path: 'lease',
-        component: LeaseComponent
+        component: LeaseComponent,
+        children: [
+            {
+                path: '',
+                component: ApartmentComponent
+            },
+            {
+                path: 'amenities',
+                component: AmenitiesComponent
+            },
+            {
+                path: 'userinfo',
+                component: LeaseInfoComponent
+            },
+            {
+                path: 'submit',
+                component: SubmitComponent
+            }
+        ]
     },
     {
         // Client Dashboard Controls

@@ -20,6 +20,9 @@ export class ChatMessage {
 export class ChatThread {
 
     chatThreadID: string;
+    isActive: boolean;
+    adminTyping: boolean;
+    userTyping: boolean;
 
     constructor(obj?: any) {
         this.chatThreadID         = obj.chatThreadID;

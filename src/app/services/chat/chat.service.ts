@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { ChatThread, ChatMessage } from 'app/models/chat';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ChatService {
   private chatThreadsCollection: AngularFirestoreCollection<ChatThread>;
 
   constructor(private afs: AngularFirestore,
-              private _httpclient: HttpClient) { 
+              private _httpclient: HttpClient) {
     this.chatThreadsCollection = afs.collection<ChatThread>('chat-threads');
   }
 
@@ -43,11 +44,18 @@ export class ChatService {
       .valueChanges();
   }
 
-  updateChatThread(activeThreadID: string, data: {}) {
+  getActiveChatThreads(): Observable<ChatThread[]> {
+    return this.chatThreadsCollection
+      .valueChanges()
+      .pipe(
+        map(chatThreads => chatThreads.filter(chatThread => chatThread.isActive === true))
+      );
+  }
+
+  updateChatThread(activeThreadID: string, data: {}): Promise<void> {
     return this.chatThreadsCollection
       .doc(activeThreadID)
       .update(data);
-      // .valueChanges();
   }
 
   getMessagesForChat(activeThreadID: string): Observable<ChatMessage[]> {
@@ -57,7 +65,7 @@ export class ChatService {
       .valueChanges();
   }
 
-  sendMessage(messageObj: any) {
+  sendMessage(messageObj: any): Promise<void> {
     const messageID = this.afs.createId();
     const { messageText, chatThreadID, sender } = messageObj;
     const chatThreadObj = <ChatMessage> {
@@ -75,7 +83,7 @@ export class ChatService {
       .set(chatThreadObj);
   }
 
-  markMessageAsRead(chatThreadID: string, messageID: string) {
+  markMessageAsRead(chatThreadID: string, messageID: string): Promise<void> {
     return this.chatThreadsCollection
       .doc(chatThreadID)
       .collection('messages')
@@ -86,7 +94,7 @@ export class ChatService {
   }
 
   // TODO: Concurrency / overlapping request issue predictions
-  closeThread(chatThreadID: string) {
+  closeThread(chatThreadID: string): Promise<void> {
     const batch = this.afs.firestore.batch();
     this.chatThreadsCollection
       .doc(chatThreadID)
@@ -94,6 +102,14 @@ export class ChatService {
       .forEach(message => batch.delete(message.ref));
     batch.delete(this.chatThreadsCollection.doc(chatThreadID).ref);
     return batch.commit();
+  }
+
+  markThreadInactive(chatThreadID: string): Promise<void> {
+    return this.chatThreadsCollection
+      .doc(chatThreadID)
+      .update({
+        isActive: false
+      });
   }
 
 }

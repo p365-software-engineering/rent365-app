@@ -10,6 +10,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { ServiceComponent } from './service/service.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
 import { DashboardComponent } from '../admin/dashboard/dashboard.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 /**
@@ -30,42 +31,44 @@ import { DashboardComponent } from '../admin/dashboard/dashboard.component';
  *  View Service History : ServiceHistoryComponent
  *
  */
+const routes = [
+  {
+    path: '',
+    component: DashboardComponent,
+    children: [
+      {
+        path: '',
+        component: WelcomeComponent
+      },
+      {
+        path: 'community',
+        component: CommunityComponent
+      },
+      {
+        path: 'pay',
+        component: PaymentComponent
+      },
+      {
+        path: 'statement',
+        component: StatementComponent
+      },
+      {
+        path: 'request',
+        component: ServiceComponent
+      },
+      {
+        path: 'history',
+        component: ServiceHistoryComponent
+      }
+    ]
+  }
+];
+
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: DashboardComponent,
-        children: [
-          {
-            path: '',
-            component: WelcomeComponent
-          },
-          {
-            path: 'community',
-            component: CommunityComponent
-          },
-          {
-            path: 'pay',
-            component: PaymentComponent
-          },
-          {
-            path: 'statement',
-            component: StatementComponent
-          },
-          {
-            path: 'request',
-            component: ServiceComponent
-          },
-          {
-            path: 'history',
-            component: ServiceHistoryComponent
-          }
-        ]
-      }
-
-    ])
+    SharedModule,
+    RouterModule.forChild(routes)
   ],
   declarations: [SidenavComponent,
     DashboardComponent,

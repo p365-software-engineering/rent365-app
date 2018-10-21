@@ -14,6 +14,7 @@ export class ChatWindowComponent implements OnInit {
   private anonUser: boolean;
   private ipAddress: string;
   private _messages: Observable<ChatMessage[]>;
+  private _chatThreads: Observable<ChatThread[]>;
   private isAdminTyping: boolean;
   private isUserTyping: boolean;
   private activeThread: Observable<ChatThread>;
@@ -26,8 +27,8 @@ export class ChatWindowComponent implements OnInit {
   ngOnInit() {
     this.accordionOpened = false;
     this.anonUser = !(this.authXService.authenticated);
-    console.log(this.authXService._currentUser);
-    this._chatService.getIpAddress().subscribe((ipAddress: any) => {
+    if (this.anonUser) {
+      this._chatService.getIpAddress().subscribe((ipAddress: any) => {
         this.ipAddress = ipAddress.ip;
         console.log(ipAddress.ip);
         this._messages = this._chatService.getMessagesForChat(ipAddress.ip);
@@ -39,7 +40,10 @@ export class ChatWindowComponent implements OnInit {
               this.isUserTyping = activeThread.userTyping;
             }
           });
-    });
+        });
+    } else {
+      this._chatThreads = this._chatService.getActiveChatThreads();
+    }
   }
 
   sendMessage(messageText: string) {

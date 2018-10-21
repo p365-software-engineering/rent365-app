@@ -12,10 +12,10 @@ export class PublicComponent implements OnInit {
 
   ngOnInit() {
     this.stellarService.cacheKeys('SAV6VEIM2477EYBVOM2SXY3JG6JFKL734KKQRICCAQVMV57PC2KUMYH7');
-    this.stellarService.loadBalances('GBT7DUXFTBW6CLYHB4UKLLIX3IENABCXLXAZASJF4I6J73NAV4TR4ZTQ')
-      .then(res => console.log(res));
-    this.stellarService.loadBalances('GCAT3TTEHLU7VSM42AYV34FGNUFI4XEGSZNVHLFLHSUV4RG2GCML7SLE')
-      .then(res => console.log(res));
+    // this.stellarService.loadBalances('GBT7DUXFTBW6CLYHB4UKLLIX3IENABCXLXAZASJF4I6J73NAV4TR4ZTQ')
+    //   .then(res => console.log(res));
+    // this.stellarService.loadBalances('GCAT3TTEHLU7VSM42AYV34FGNUFI4XEGSZNVHLFLHSUV4RG2GCML7SLE')
+    //   .then(res => console.log(res));
   }
 
   sendPayment() {

@@ -13,21 +13,26 @@ export class PaymentService {
   private paymentCollection: AngularFirestoreCollection<Payment>;
 
   constructor(private afs: AngularFirestore) {
-    this.paymentCollection = afs.collection('payment');
+    this.paymentCollection = afs.collection('payments');
   }
 
-  createNewPayment(): Promise<void> {
+  createNewPayment(paymentData: any): Promise<void> {
       const paymentID = this.afs.createId();
-      const paymentObj = <Payment> {
-          paymentID: paymentID
-      };
+      paymentData.paymentID = paymentID;
+      paymentData = <Payment> paymentData;
       return this.paymentCollection
         .doc(paymentID)
-        .set(paymentObj);
+        .set(paymentData);
   }
 
   getAllPayments(): Observable<Payment[]> {
     return this.paymentCollection
+      .valueChanges();
+  }
+
+  getUserPaymentHistory(userID: string): Observable<Payment[]> {
+    return this.afs.collection<Payment>('payments', ref =>
+      ref.where('userId', '==', userID))
       .valueChanges();
   }
 

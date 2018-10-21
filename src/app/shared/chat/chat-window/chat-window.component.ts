@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChatMessage, ChatThread } from 'app/models/chat';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { ChatService, AuthXService } from 'app/services/service-export';
+import { map } from 'rxjs/operators';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -13,37 +14,30 @@ export class ChatWindowComponent implements OnInit {
 
   private anonUser: boolean;
   private ipAddress: string;
-  private _messages: Observable<ChatMessage[]>;
-  private _chatThreads: Observable<ChatThread[]>;
   private isAdminTyping: boolean;
   private isUserTyping: boolean;
   private activeThread: Observable<ChatThread>;
   private textValue = '';
-  private accordionOpened: boolean;
+  private accordionOpened: boolean;  
+  // private _chatThreadIDs2: string[];
+  // private _chatThreadIDs: Observable<string[]>;
+  @Input() private _chatThreads = new BehaviorSubject<ChatThread[]>([]);
+  @Input() private _messages: Observable<ChatMessage[]>;
 
   constructor(private authXService: AuthXService,
               private _chatService: ChatService) { }
 
   ngOnInit() {
+    // this._chatThreadIDs = [];
     this.accordionOpened = false;
     this.anonUser = !(this.authXService.authenticated);
-    if (this.anonUser) {
-      this._chatService.getIpAddress().subscribe((ipAddress: any) => {
-        this.ipAddress = ipAddress.ip;
-        console.log(ipAddress.ip);
-        this._messages = this._chatService.getMessagesForChat(ipAddress.ip);
-        this._chatService.getChatThread(ipAddress.ip)
-          .subscribe(activeThread => {
-            if (activeThread) {
-              this.activeThread = activeThread;
-              this.isAdminTyping = activeThread.adminTyping;
-              this.isUserTyping = activeThread.userTyping;
-            }
-          });
-        });
-    } else {
-      this._chatThreads = this._chatService.getActiveChatThreads();
-    }
+    // this._chatThreadIDs = this._chatService.getActiveChatThreads().pipe(
+    //   map(chatThreads => {
+    //     console.log(chatThreads);
+    //     const _chatThreadIDS = chatThreads.map(chatThread => chatThread.chatThreadID);
+    //     this._chatThreadIDs2 = chatThreads.map(chatThread => chatThread.chatThreadID);
+    //     return _chatThreadIDS;
+    //   }));
   }
 
   sendMessage(messageText: string) {

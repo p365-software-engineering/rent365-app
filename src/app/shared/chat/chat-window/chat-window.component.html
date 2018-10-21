@@ -18,15 +18,14 @@
 
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
-                                <h5 *ngIf="(anonUser)" class="card-title">Chat Box</h5>
-                                <div *ngIf="(!anonUser)"  class="dropdown show">
+                                <!-- <h5 *ngIf="(anonUser)" class="card-title">Chat Box</h5> -->
+                                <div class="dropdown show">
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Dropdown link
+                                        Select Chat Thread
                                     </a>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="#">Action</a>
-                                        <a class="dropdown-item" href="#">Another action</a>
-                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    <!-- TODO: Set chat thread for selected one ... -->
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" *ngFor="let thread of _chatThreads | async">
+                                        <button class="dropdown-item"> {{ thread.chatThreadID }} </button>
                                     </div>
                                     </div>
                                 <div class="clearfix" style="display: flex; flex-direction: row; width: 100%" *ngFor="let message of _messages | async">

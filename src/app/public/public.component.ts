@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { StellarService } from '../services/service-export';
+import { StellarService, ChatService } from '../services/service-export';
 import { environment } from '../../environments/environment.prod';
+import { Observable } from 'rxjs';
+import { ChatMessage, ChatThread } from 'app/models/chat';
 
 @Component({
   selector: 'app-public',
@@ -10,8 +12,13 @@ import { environment } from '../../environments/environment.prod';
 export class PublicComponent implements OnInit {
 
   private _adminPubKey: string;
+  private _messages: Observable<ChatMessage[]>
+  private ipAddress: string;
+  private isAdminTyping: boolean;
+  private activeThread: Observable<ChatThread>;
 
-  constructor(private stellarService: StellarService) {}
+  constructor(private stellarService: StellarService,
+              private _chatService: ChatService) {}
 
   ngOnInit() {
     this._adminPubKey = environment.ADMIN_PUBLIC_KEY;
@@ -20,6 +27,20 @@ export class PublicComponent implements OnInit {
     //   .then(res => console.log(res));
     // this.stellarService.loadBalances('GCAT3TTEHLU7VSM42AYV34FGNUFI4XEGSZNVHLFLHSUV4RG2GCML7SLE')
     //   .then(res => console.log(res));
+
+    this._chatService.getIpAddress().subscribe((ipAddress: any) => {
+      this.ipAddress = ipAddress.ip;
+      console.log(ipAddress.ip);
+      this._messages = this._chatService.getMessagesForChat(ipAddress.ip);
+      this._chatService.getChatThread(ipAddress.ip)
+        .subscribe(activeThread => {
+          if (activeThread) {
+            this.activeThread = activeThread;
+            this.isAdminTyping = activeThread.adminTyping;
+            // this.isUserTyping = activeThread.userTyping;
+          }
+        });
+      });
   }
 
   sendPayment() {

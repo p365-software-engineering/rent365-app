@@ -43,13 +43,15 @@ export class ChatService {
       .doc(activeThreadID)
       .valueChanges();
   }
+  
+  getAllChatThreads(): Observable<ChatThread[]> {
+    return this.chatThreadsCollection.valueChanges();
+  }
 
   getActiveChatThreads(): Observable<ChatThread[]> {
-    return this.chatThreadsCollection
-      .valueChanges()
-      .pipe(
-        map(chatThreads => chatThreads.filter(chatThread => chatThread.isActive === true))
-      );
+    return this.afs.collection<ChatThread>('chat-threads', 
+        ref => ref.where("active", "==", true))
+      .valueChanges();
   }
 
   updateChatThread(activeThreadID: string, data: {}): Promise<void> {

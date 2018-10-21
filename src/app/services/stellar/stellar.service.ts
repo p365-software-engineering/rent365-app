@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as StellarSdk from 'stellar-sdk/dist/stellar-sdk.min.js';
-import * as Constants from '../../constants';
+import { environment } from 'environments/environment';
 
 declare const StellarSdk: any;
 
@@ -8,10 +8,6 @@ declare const StellarSdk: any;
   providedIn: 'root'
 })
 export class StellarService {
-
-    ////////////// ADMIN KEYS ///////////////////////
-    // GCAT3TTEHLU7VSM42AYV34FGNUFI4XEGSZNVHLFLHSUV4RG2GCML7SLE
-    // SDQV6ESQO7UIYCL5IOXMGQPQUSDV345FC7OCE7N3XSRM2KOG2SCAEO6Y
 
     /////////// CLIENT KEYS //////////////////////
     // GBT7DUXFTBW6CLYHB4UKLLIX3IENABCXLXAZASJF4I6J73NAV4TR4ZTQ
@@ -76,7 +72,7 @@ export class StellarService {
           .then(function(sourceAccount) {
               const transaction = new StellarSdk.TransactionBuilder(sourceAccount)
                 .addOperation(StellarSdk.Operation.payment({
-                    destination: Constants.ADMIN_PUBLIC_KEY,
+                    destination: environment.ADMIN_PUBLIC_KEY,
                     asset: StellarSdk.Asset.native(),
                     memo: memo || 'Rent Payment',
                     amount: amount

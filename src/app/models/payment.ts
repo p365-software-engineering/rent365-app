@@ -14,5 +14,5 @@ export class Payment {
         this.amount         = obj.amount;
         this.dateDue        = obj.dateDue;
     }
-    
+
 }

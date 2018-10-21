@@ -8,10 +8,12 @@ import { Payment } from '../../models/payment';
 })
 export class PaymentService {
 
+  // TODO: Need to nest under user/payments...
+
   private paymentCollection: AngularFirestoreCollection<Payment>;
 
-  constructor(private afs: AngularFirestore) { 
-    this.paymentCollection = afs.collection<Payment>('payment');
+  constructor(private afs: AngularFirestore) {
+    this.paymentCollection = afs.collection('payment');
   }
 
   createNewPayment(): Promise<void> {

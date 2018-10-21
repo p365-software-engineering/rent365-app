@@ -3,7 +3,7 @@ export class Payment {
     paymentID: string;
     userID: string;
     apartmentID: string;
-    amount: number;
+    amount: string;
     dateDue: number;
     datePaid: number | null;
 

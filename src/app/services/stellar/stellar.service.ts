@@ -61,6 +61,18 @@ export class StellarService {
         .then((account: any) => <Array<AssetBalance>> account.balances);
     }
 
+    validateNewBalance(publicKey: string, paymentAmount: string): Promise<boolean> {
+        return this.loadBalances(publicKey)
+          .then((balances: any) => {
+              console.log(balances);              
+              const { balance } = balances[0];
+              console.log(balance);
+              const newAmount = (parseFloat(balance) - parseFloat(paymentAmount));
+              console.log(newAmount);
+              return newAmount >= 0;
+          });
+      }
+
     sendPayment (amount: string | number, memo: string): Promise<any> {
       const secretKey = sessionStorage.getItem('seed_key');
       const pubKey = sessionStorage.getItem('public_key');

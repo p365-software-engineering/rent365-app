@@ -13,6 +13,7 @@ import { ServiceHistoryComponent } from './service-history/service-history.compo
 import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { ChatThreadComponent } from 'app/public/chat/chat-thread/chat-thread.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 /**
@@ -66,6 +67,10 @@ import { ChatThreadComponent } from 'app/public/chat/chat-thread/chat-thread.com
           {
             path: 'history',
             component: ServiceHistoryComponent
+          },
+          {
+            path: 'profile',
+            component: ProfileComponent
           }
         ]
       }
@@ -79,7 +84,8 @@ import { ChatThreadComponent } from 'app/public/chat/chat-thread/chat-thread.com
     StatementComponent,
     PaymentComponent,
     ServiceComponent,
-    ServiceHistoryComponent],
+    ServiceHistoryComponent,
+    ProfileComponent],
   exports: []
 })
 export class ClientModule { }

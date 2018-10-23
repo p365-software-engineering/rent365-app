@@ -27,6 +27,9 @@ import { ApartmentComponent } from './public/lease/apartment/apartment.component
 import { AmenitiesComponent } from './public/lease/amenities/amenities.component';
 import { LeaseInfoComponent } from './public/lease/lease-info/lease-info.component';
 import { SubmitComponent } from './public/lease/submit/submit.component';
+import { EnquiryComponent } from './public/enquiry/enquiry.component';
+
+
 
 @NgModule({
   declarations: [
@@ -42,7 +45,8 @@ import { SubmitComponent } from './public/lease/submit/submit.component';
     ApartmentComponent,
     AmenitiesComponent,
     LeaseInfoComponent,
-    SubmitComponent
+    SubmitComponent,
+    EnquiryComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,9 @@ import { ApartmentComponent } from './public/lease/apartment/apartment.component
 import { AmenitiesComponent } from './public/lease/amenities/amenities.component';
 import { LeaseInfoComponent } from './public/lease/lease-info/lease-info.component';
 import { SubmitComponent } from './public/lease/submit/submit.component';
+import { EnquiryComponent } from './public/enquiry/enquiry.component';
+import { DashbaordComponent } from './client/dashbaord/dashbaord.component';
+
 
 
 export const appRoutes: Routes = [
@@ -47,7 +50,10 @@ export const appRoutes: Routes = [
         ]
     },
     {
-        // Client Dashboard Controls
+        path : 'enquiry',
+        component: EnquiryComponent
+    },
+    {
         path: 'client',
         loadChildren: './client/client.module#ClientModule',
         canActivateChild: [AuthXGuardClientService]

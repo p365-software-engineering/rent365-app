@@ -32,7 +32,7 @@ export const appRoutes: Routes = [
         component: LeaseComponent,
         children: [
             {
-                path: '',
+                path: 'apartment',
                 component: ApartmentComponent
             },
             {

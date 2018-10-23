@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule }  from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -56,6 +56,7 @@ import { EnquiryComponent } from './public/enquiry/enquiry.component';
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot(appRoutes),
     ToastrModule.forRoot()

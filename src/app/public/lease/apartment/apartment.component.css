@@ -1,3 +1,17 @@
 .display-hide{
-    opacity: 0.5;
+    opacity: 0;
+}
+
+.currency {
+    font-size: 2rem;
+    color: #000;
+}
+
+.card {
+    width: 100%;
+}
+
+input:checked + .card {
+    border: 0.25rem solid #d32f2f;
+    border-radius: 4px 4px 4px 4px !important;
 }

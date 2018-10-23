@@ -9,26 +9,27 @@
 
     <div class="card-body">
       <br>
-        <ul class="nav nav-tabs justify-content-center bg-light">
-            <li class="nav-item">
-              <a class="nav-link active"><i class="material-icons" style="font-size:2rem;">home</i> Apartment</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled"><i class="material-icons" style="font-size:2rem;">offline_bolt</i> Amenities</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled"><i class="material-icons" style="font-size:2rem;">supervised_user_circle</i> Lease Info</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled"><i class="material-icons" style="font-size:2rem;">verified_user</i> Submit</a>
-            </li>
-          </ul>
-          <br>
-          <br>
-
-          <form #leaseForm="ngForm" (ngSubmit)="onLeaseSubmit(leaseForm)">
-              <router-outlet></router-outlet>
-          </form>
+      <ul class="nav nav-tabs justify-content-center bg-light">
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['apartment']"><i class="material-icons" style="font-size:2rem;">home</i>
+            Apartment</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " [routerLink]="['amenities']" routerLinkActive=""><i class="material-icons" style="font-size:2rem;">offline_bolt</i>
+            Amenities</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" [routerLink]="['userinfo']"><i class="material-icons" style="font-size:2rem;">supervised_user_circle</i>
+            Lease Info</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" [routerLink]="['submit']"><i class="material-icons" style="font-size:2rem;">verified_user</i>
+            Submit</a>
+        </li>
+      </ul>
+      <br>
+      <br>
+      <router-outlet></router-outlet>
     </div>
   </div>
 </div>

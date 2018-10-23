@@ -1,4 +1,5 @@
 export class Apartment {
+    aptID: string;
     title: string;
     sub_title: string;
     description: string;
@@ -8,6 +9,7 @@ export class Apartment {
     beds; string;
 
     clearData(): void {
+        this.aptID = null;
         this.title = null;
         this.sub_title = null;
         this.description = null;

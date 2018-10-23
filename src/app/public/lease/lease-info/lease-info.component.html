@@ -1,3 +1,86 @@
-<p>
-  lease-info works!
-</p>
+<h4 class="card-title"><span class="badge badge-secondary">3</span> LEASE INFO</h4>
+<hr class="my-2 bg-light">
+<br>
+<!-- INFO CARDS -->
+<form #amenitiesID="ngForm" (ngSubmit)="amentiesSubmit(amenitiesID)">
+  <div class="card text-dark bg-light">
+    <!-- <img class="card-img-top" src="" alt="Hello"> -->
+    <div class="card-body">
+      <br>
+      <form (ngSubmit)="saveLeaseInfo()" [formGroup]="customerForm">
+        <h6 class="card-title">Main Leasee</h6>
+
+        <div class="form-row">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <div class="floating-label">
+                <label for="exampleFloatingLabel1">First Name</label>
+                <input aria-describedby="main-firstname" class="form-control" id="main-firstname" placeholder="John (required)" type="text" formControlName="firstName">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <div class="floating-label">
+                <label for="exampleFloatingLabel1">Last Name</label>
+                <input aria-describedby="main-lastname" class="form-control" id="main-lastname" placeholder="Carpenter (required)"
+                  type="text" formControlName="lastName">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">  
+              <div class="floating-label">
+                <label for="exampleFloatingLabel1">Email</label>
+                <input aria-describedby="main-email" class="form-control" id="main-email" placeholder="john.carpenter@superrentals.com (required)"
+                  type="email" formControlName="email">
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+        <h6 class="card-title">Add Additional Leasee(s)</h6>
+
+        <div class="form-row">
+          <div class="col-lg-4">
+            <div class="form-group">
+              <div class="floating-label">
+                <label for="exampleFloatingLabel1">First Name</label>
+                <input aria-describedby="ls-firstname" class="form-control" id="firstname" placeholder="John" type="text">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <div class="floating-label">
+                <label for="exampleFloatingLabel1">Last Name</label>
+                <input aria-describedby="ls-lastname" class="form-control" id="firstname" placeholder="Carpenter"
+                  type="text">
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <div class="floating-label">
+                <label for="exampleFloatingLabel1">Email</label>
+                <input aria-describedby="ls-email" class="form-control" id="firstname" placeholder="john.carpenter@superrentals.com"
+                  type="email">
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="button" class="btn btn-primary btn-sm">Add +</button>
+
+
+      </form>
+
+    </div>
+  </div>
+  <br>
+  <div class="col">
+    <button type="submit" class="btn btn-primary float-left" role="button"><i class="material-icons" style="font-size:1.5rem;">navigate_before</i>
+      Apartment </button>
+    <button type="submit" class="btn btn-primary float-right" role="button">Amenities <i class="material-icons" style="font-size:1.5rem;">navigate_next</i></button>
+  </div>
+
+</form>

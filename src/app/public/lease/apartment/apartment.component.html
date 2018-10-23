@@ -2,71 +2,36 @@
 <hr class="my-2 bg-light">
 <br>
 <!-- INFO CARDS -->
-<div class="card-group">
-
-  <div class="info-card col-lg-3 col-md-6 col-sm-12">
-    <label class="form-check-label">
-      <input type="radio" class="form-check-input display-hide" name="apartment" id="item4" value="checkedValue">
-      <div class="card bg-light">
-        <img class="card-img-top" src="https://s26551.pcdn.co/wp-content/uploads/2012/03/kettler-dev-cc.jpg" style="height: 15rem;"
-          alt="Card image cap">
-        <div class="card-body">
-          <p class="card-text text-dark">Some quick example text to build on the card title and make up the bulk of the
-            card's
-            content.</p>
+<form #apartment="ngForm" (ngSubmit)="apartmentSubmit(apartment)">
+    <div class="alert alert-danger" role="alert" *ngIf="alert">
+        Please select an Apartment
+    </div>
+  <div class="card-group">
+    <div class="info-card col-lg-3 col-md-6 col-sm-12 " *ngFor="let apartment of apartments ">
+      <label class="form-check-label">
+        <input type="radio" class="display-hide" ngModel name="apartment1" value="{{apartment.aptID}}" required>
+        <div class="card">
+          <img class="card-img-top" src="https://s26551.pcdn.co/wp-content/uploads/2012/03/kettler-dev-cc.jpg" style="height: 15rem;"
+            alt="Card image cap">
+          <hr class="my-2 bg-dark">
+          <div class="card-body">
+            <div class="card-title text-dark">{{apartment.title}}</div>
+            <h6 class="card-subtitle mb-2 text-muted">{{apartment.type}}</h6>
+            <p class=" mb-2 text-muted">{{apartment.description}}</p>
+            <ul class="text-dark">
+              <li>Beds : {{apartment.beds}}</li>
+              <li>Bath : {{apartment.baths}}</li>
+            </ul>
+            <div class="currency">{{apartment.price | currency}}</div>
+          </div>
         </div>
-      </div>
-      <br>
-    </label>
-  </div>
-  <div class="info-card col-lg-3 col-md-6 col-sm-12">
-    <label class="form-check-label">
-      <input type="radio" class="form-check-input display-hide" name="apartment" id="item4" value="checkedValue">
-      <div class="card bg-light">
-        <img class="card-img-top" src="https://s26551.pcdn.co/wp-content/uploads/2012/03/kettler-dev-cc.jpg" style="height: 15rem;"
-          alt="Card image cap">
-        <div class="card-body">
-          <p class="card-text text-dark">Some quick example text to build on the card title and make up the bulk of the
-            card's
-            content.</p>
-        </div>
-      </div>
-      <br>
-    </label>
-  </div>
-  <div class="info-card col-lg-3 col-md-6 col-sm-12">
-    <label class="form-check-label">
-      <input type="radio" class="form-check-input display-hide" name="apartment" id="item4" value="checkedValue">
-      <div class="card bg-light">
-        <img class="card-img-top" src="https://s26551.pcdn.co/wp-content/uploads/2012/03/kettler-dev-cc.jpg" style="height: 15rem;"
-          alt="Card image cap">
-        <div class="card-body">
-          <p class="card-text text-dark">Some quick example text to build on the card title and make up the bulk of the
-            card's
-            content.</p>
-        </div>
-      </div>
-      <br>
-    </label>
-  </div>
-  <div class="info-card col-lg-3 col-md-6 col-sm-12">
-    <label class="form-check-label">
-      <input type="radio" class="form-check-input display-hide" name="apartment" id="item4" value="checkedValue">
-      <div class="card bg-light">
-        <img class="card-img-top" src="https://s26551.pcdn.co/wp-content/uploads/2012/03/kettler-dev-cc.jpg" style="height: 15rem;"
-          alt="Card image cap">
-        <div class="card-body">
-          <p class="card-text text-dark">Some quick example text to build on the card title and make up the bulk of the
-            card's
-            content.</p>
-        </div>
-      </div>
-      <br>
-    </label>
-  </div>
-
-  <div class="row float-right">
-      <a name="" id="" class="btn btn-primary " href="#" role="button">Amenities <i class="material-icons" style="font-size:1.5rem;">navigate_next</i></a>
-  </div>
+      </label>
+    </div>
 
 </div>
+<br>
+<div class="col">
+  <button name="" id="" type="submit" class="btn btn-primary float-right" role="button" >Amenities <i class="material-icons" style="font-size:1.5rem;">navigate_next</i></button>
+</div>
+
+</form>

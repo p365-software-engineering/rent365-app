@@ -1,7 +1,7 @@
 <div class="card" style="width: 18rem;">
     <div class="card-body">
         <h2 class="text-primary"> Chat Box</h2>
-        <div class="clearfix" style="display: flex; flex-direction: row; width: 100%" *ngFor="let message of _messages | async">
+        <div class="clearfix" style="display: flex; flex-direction: row; width: 100%" *ngFor="let message of _messages">
             <chat-message class="text-info float-right" [message]="message"></chat-message>
         </div>
 

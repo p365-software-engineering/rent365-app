@@ -16,6 +16,7 @@ export class ChatWindowComponent implements OnInit {
   private accordionOpened: boolean;
   private _chatThreads: Observable<ChatThread[]>;
   private _activeThread = new Subject<ChatThread>();
+  private _messages = new Subject<ChatMessage[]>();
   @Input() private ipAddress: string;
 
   constructor(private authXService: AuthXService,
@@ -74,6 +75,8 @@ export class ChatWindowComponent implements OnInit {
   setActiveThread(activeThreadID) {
     this._chatService.getChatThread(activeThreadID)
       .subscribe(activeThread => this._activeThread.next(activeThread));
+    this._chatService.getMessagesForChat(activeThreadID)
+      .subscribe(chatMessages => this._messages.next(chatMessages));
   }
 
   toggleAccordion = () => {

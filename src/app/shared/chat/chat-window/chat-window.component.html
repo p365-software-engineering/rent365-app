@@ -26,6 +26,7 @@
                     </div>
                     <chat-thread (eventEmitter)="switchTyping($event)" 
                                 [activeThread]="_activeThread"
+                                [messages]="_messages"
                                 [anonUser]="anonUser"> </chat-thread>
                 </div>
             </div>

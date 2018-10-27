@@ -15,9 +15,9 @@ export class ChatThreadComponent implements OnInit {
 
   @Input() private anonUser: boolean;
   @Input() private activeThread: Observable<ChatThread>;
-  private activeThread2: Observable<ChatThread>;
+  @Input() private messages: Observable<ChatMessage[]>;
   private _activeThread: ChatThread;
-  private _messages: Observable<ChatMessage[]>;
+  private _messages: ChatMessage[];
   private messageText$ = new Subject<string>();
   @Output() eventEmitter = new EventEmitter();
 
@@ -34,7 +34,10 @@ export class ChatThreadComponent implements OnInit {
     this.activeThread.subscribe(activeThread => {
       this._activeThread = activeThread;
       // TODO: Order by date
-      this._messages = this._chatService.getMessagesForChat(activeThread.chatThreadID);
+      // this._messages = this._chatService.getMessagesForChat(activeThread.chatThreadID);
+    });
+    this.messages.subscribe(messages => {
+      this._messages = messages;
     });
     // this.activeThread = this.activeThread;//.subscribe(activeThread => {
     //   this._activeThread = activeThread;

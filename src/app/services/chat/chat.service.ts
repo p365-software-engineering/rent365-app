@@ -61,10 +61,14 @@ export class ChatService {
   }
 
   getMessagesForChat(activeThreadID: string): Observable<ChatMessage[]> {
-    return this.chatThreadsCollection
+    return this.afs.collection('chat-threads')
       .doc(activeThreadID)
-      .collection<ChatMessage>('messages')
+      .collection<ChatMessage>('messages', ref => ref.orderBy('sentAt'))
       .valueChanges();
+    // return this.chatThreadsCollection
+    //   .doc(activeThreadID)
+    //   .collection<ChatMessage>('messages', ref => .ref.orderBy().
+    //   .valueChanges();
   }
 
   sendMessage(messageObj: any): Promise<void> {

@@ -1,33 +1,39 @@
 <div>
-        <div class="accordion" id="accordionExample">
-            <div class="card">
-              <div class="card-header" id="headingOne">
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingOne">
                 <h5 class="mb-0">
-                  <button *ngIf="!anonUser" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" 
+                    <button *ngIf="!anonUser" class="btn btn-link alert alert-danger" role="alert" type="button" data-toggle="collapse" data-target="#collapseOne"
                         aria-expanded="false" aria-controls="collapseOne" (click)="toggleAccordion()">
-                    {{ this.accordionOpened ? 'Close chat box' : 'Chat with interested tenants'}} 
-                  </button>
-                  <button *ngIf="anonUser" class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" 
+                        {{ this.accordionOpened ? 'Close chat box' : 'Chat with interested tenants'}}
+                    </button>
+                    <button *ngIf="anonUser" class="btn btn-link alert alert-danger" role="alert" type="button" data-toggle="collapse" data-target="#collapseOne"
                         aria-expanded="false" aria-controls="collapseOne" (click)="toggleAccordion()">
-                    {{ this.accordionOpened ? 'Close chat box' : 'Chat with a Realtor'}} 
-                  </button>
+                        {{ this.accordionOpened ? 'Close chat box' : 'Chat with a Realtor'}}
+                    </button>
                 </h5>
-              </div>
-              <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+            </div>
+            <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+
+                        <!-- *ngIf="!(anonUser)" -->
+                    <button type="button" class="btn btn-secondary">Select Chat Thread</button>
+
+                    <ul class="list-group" *ngFor="let thread of _chatThreads | async">
+                        <button type="button" class="list-group-item list-group-item-action" (click)="setActiveThread(thread.chatThreadID)">
+                            {{ thread.chatThreadID }}
+                        </button>
+                    </ul>
+                    <!-- [messages]="_messages" -->
+                    <chat-thread  [activeThreadID]="_activeThreadID"> </chat-thread>
+                </div>
+            </div>
+
+            <!-- <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
 
                         <div class="card" style="width: 18rem;">
                             <div class="card-body">
-                                <!-- <h5 *ngIf="(anonUser)" class="card-title">Chat Box</h5> -->
-                                <div class="dropdown show">
-                                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Select Chat Thread
-                                    </a>
-                                    <!-- TODO: Set chat thread for selected one ... -->
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink" *ngFor="let thread of _chatThreads | async">
-                                        <button class="dropdown-item"> {{ thread.chatThreadID }} </button>
-                                    </div>
-                                    </div>
                                 <div class="clearfix" style="display: flex; flex-direction: row; width: 100%" *ngFor="let message of _messages | async">
                                     <chat-message class="float-right" style="float:right !important" [message]="message"></chat-message>
                                 </div>
@@ -50,7 +56,7 @@
                         </div>
 
                     </div>
-                </div>
-              </div>
-          </div>
-      </div>                        
+                </div> -->
+        </div>
+    </div>
+</div>

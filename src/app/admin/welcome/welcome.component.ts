@@ -22,25 +22,20 @@ export class WelcomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._chatThreads = this._chatService.getActiveChatThreads();
-    // .pipe(
-    //   map(chatThreads => {
-    //     return chatThreads;
-    //   })
-    // )
+    this._chatThreads = this._chatService.getActiveChatThreads()
+    .pipe(
+      map(chatThreads => {
+        // console.log(chatThreads);
+        return chatThreads;
+      })
+    )
+    // this._chatService.getActiveChatThreads().subscribe(chatThreads => {
+    //   console.log(chatThreads);
+    // })
 
   }
 
-  setActiveThread = (activeThreadID) => {
-    this._chatService.getChatThread(activeThreadID)
-      .subscribe(activeThread => {
-        if (activeThread) {
-          this.activeThread = activeThread;
-          this.isUserTyping = activeThread.userTyping;
-        }
-      });
-      this._messages = this._chatService.getMessagesForChat(activeThreadID);
-  }
+  
 
 
 }

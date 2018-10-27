@@ -1,22 +1,24 @@
 <div class="card" style="width: 18rem;">
     <div class="card-body">
+        <h2 class="text-primary"> Chat Box</h2>
         <div class="clearfix" style="display: flex; flex-direction: row; width: 100%" *ngFor="let message of _messages | async">
-            <chat-message class="float-right" style="float:right !important" [message]="message"></chat-message>
+            <chat-message class="text-info float-right" [message]="message"></chat-message>
         </div>
-        <div style="clear:both">
-            <p [hidden]="(!anonUser || !isAdminTyping)"><em> admin is typing...</em> </p>
-            <p [hidden]="(!activeThread?.userTyping)"><em> user is typing...</em> </p>
-        </div>
-        <p style="color:black"> {{ textValue }} </p>
+
+        <!-- <p style="color:black"> {{ textValue }} </p> -->
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="message" name="messageBox" id="messageBox" 
-                    #messageBox [(ngModel)]="textValue">
+                    #messageBox [(ngModel)]="textValue" (keyup)="messageText$.next($event)">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button" 
                         (click)="sendMessage(messageBox.value); messageBox.value = ''">
-                    Send: {{ activeThreadID | async }}
+                    Send
                 </button>
             </div>
         </div>
+        <div style="clear:both">
+                <p class="text-secondary" [hidden]="(!anonUser || !_activeThread?.adminTyping)"><em> admin is typing...</em> </p>
+                <p class="text-secondary" [hidden]="anonUser || (!_activeThread?.userTyping)"><em> user is typing...</em> </p>
+            </div>
     </div>
 </div>

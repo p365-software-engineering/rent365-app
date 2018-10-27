@@ -13,14 +13,9 @@ import { map } from 'rxjs/operators';
 export class ChatWindowComponent implements OnInit {
 
   private anonUser: boolean;
-  // private isAdminTyping: boolean;
-  // private isUserTyping: boolean;
-  // private _activeThread: Observable<ChatThread>;
-  // private textValue = '';
   private accordionOpened: boolean;
   private _chatThreads: Observable<ChatThread[]>;
-  // private _messages: Observable<ChatMessage[]>;
-  private _activeThreadID = new Subject<string>();
+  private _activeThread = new Subject<ChatThread>();
   @Input() private ipAddress: string;
 
   constructor(private authXService: AuthXService,
@@ -47,7 +42,6 @@ export class ChatWindowComponent implements OnInit {
   }
 
   sendMessage(messageText: string) {
-    // console.log(this._activeThread);
     const sender = (this.anonUser) ? 'anonymous' : 'admin';
     const messageObj = {
       messageText: messageText,
@@ -60,29 +54,26 @@ export class ChatWindowComponent implements OnInit {
       .catch(err => console.log(err));
   }
 
-  // switchTyping = () => {
-  //   if (this.anonUser) {
-  //     this.isUserTyping = !this.isUserTyping;
-  //   } else {
-  //     this.isAdminTyping = !this.isAdminTyping;
-  //   }
-  // }
+  switchTyping(chatThreadData: any) {
+    console.log('from rentz');
+    const { chatThreadID, typing } = chatThreadData;
+    if (this.anonUser) {
+      this._chatService.updateChatThread(chatThreadID, {
+        userTyping: typing
+      });
+    } else {
+      this._chatService.updateChatThread(chatThreadID, {
+        adminTyping: typing
+      });
+    }
+  }
 
   // listenForText = () => {
   // }
 
   setActiveThread(activeThreadID) {
-    // this.ipAddress = activeThreadID;
-    this._activeThreadID.next(activeThreadID);
-    // this._chatService.getChatThread(activeThreadID)
-    //   .subscribe(activeThread => {
-    //     if (activeThread) {
-    //       this._activeThread = activeThread;
-    //       this.isUserTyping = activeThread.userTyping;
-    //     }
-    //   });
-    // this._messages = this._chatService.getMessagesForChat(activeThreadID);
-    // console.log(activeThreadID);
+    this._chatService.getChatThread(activeThreadID)
+      .subscribe(activeThread => this._activeThread.next(activeThread));
   }
 
   toggleAccordion = () => {

@@ -4,7 +4,7 @@
 <!-- INFO CARDS -->
 <form #amenitiesID="ngForm" (ngSubmit)="amentiesSubmit(amenitiesID)">
   <div class="card-group">
-    <div class="info-card col-lg-2 col-md-4 col-sm-6 " *ngFor="let amenity of amenities ">
+    <div class="info-card col-lg-2 col-md-6 col-sm" *ngFor="let amenity of amenities ">
       <label class="form-check-label">
         <input type="checkbox" class="display-hide" ngModel name="{{amenity.amntID}}" value="{{amenity.amntID}}">
         <div class="card">
@@ -24,7 +24,7 @@
 </div>
 <br>
 <div class="col">
-  <button type="submit" class="btn btn-primary float-left" role="button" ><i class="material-icons" style="font-size:1.5rem;">navigate_before</i> Apartment </button>
+  <button class="btn btn-primary float-left" role="button" (click)="navigateBack()" ><i class="material-icons" style="font-size:1.5rem;">navigate_before</i> Apartment </button>
   <button type="submit" class="btn btn-primary float-right" role="button" >Amenities <i class="material-icons" style="font-size:1.5rem;">navigate_next</i></button>
 </div>
 

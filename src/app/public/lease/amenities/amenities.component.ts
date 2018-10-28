@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { LeaseService } from 'app/services/lease/lease.service';
 import { Amenity } from 'app/models/amenity';
 import { isUndefined } from 'util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-amenities',
@@ -12,7 +13,7 @@ import { isUndefined } from 'util';
 export class AmenitiesComponent  {
   public amenities: Amenity[];
   public alert: boolean;
-  constructor(private ls: LeaseService) {
+  constructor(private ls: LeaseService, public router: Router) {
     this.ls.getAmenities().subscribe(
       next => {
         this.amenities = next;
@@ -21,6 +22,10 @@ export class AmenitiesComponent  {
         console.log(error);
       }
     );
+   }
+
+   public navigateBack() {
+    this.router.navigate(['lease']);
    }
 
 
@@ -37,6 +42,7 @@ export class AmenitiesComponent  {
       }
       this.ls.setLeaseAmenities(selected);
       this.alert = false;
+      this.router.navigate(['lease', 'userinfo']);
       return true;
     }
     this.alert = true;

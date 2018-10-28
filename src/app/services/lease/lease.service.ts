@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Apartment } from 'app/models/apartment';
 import { Amenity } from 'app/models/amenity';
-import { LeaseRequest } from 'app/models/lease-request';
+import { LeaseRequest, LeaseUserData } from 'app/models/lease-request';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import {  } from 'app/public/lease/lease.component';
 import { LeaseWorkflowService } from '../lease-workflow/lease-workflow.service';
 
 @Injectable({
@@ -47,5 +46,9 @@ export class LeaseService {
   public getAmenitybyID(amntID: string): Observable<any> {
     return this.db.collection('Amenities').doc(amntID).valueChanges();
   }
-  // Data Retrieval - Firebase [END]
+
+  public setUserDetails(userInfo: LeaseUserData) {
+    this.leaseInfo.setLeaseData(userInfo);
+    console.log(JSON.stringify(this.leaseInfo));
+  }
 }

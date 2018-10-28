@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthXGuardAdminService, AuthXService } from 'app/services/service-export';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  public lastName: string;
+  constructor(private authX: AuthXService) {
+
+  }
 
   ngOnInit() {
+    this.lastName = 'Nekkalapudi';
   }
 
 }

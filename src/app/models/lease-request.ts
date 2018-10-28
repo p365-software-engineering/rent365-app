@@ -2,16 +2,14 @@ export class LeaseRequest {
     // Identity Information
     aptID: string;
     leaseID: string;
-    MainLeasee: LeaseUserData;
-    OtherLeesee ?: LeaseUserData[];
+    leasee: LeaseUserData;
     amenities: string[];
     leaseInfo: LeaseInfo;
 
     clearData() {
         this.leaseID = null;
         this.aptID = null;
-        this.MainLeasee = null;
-        this.OtherLeesee = null;
+        this.leasee = null;
         this.amenities = null;
         this.leaseInfo = null;
     }
@@ -40,6 +38,13 @@ export class LeaseRequest {
         return this.leaseInfo;
     }
 
+    setLeaseData(leasee: LeaseUserData): void {
+        this.leasee = leasee;
+    }
+
+    getLeaseData(): LeaseUserData {
+        return this.leasee;
+    }
 }
 
 export class LeaseInfo {
@@ -61,13 +66,15 @@ export class LeaseInfo {
 export class LeaseUserData {
     firstName: string;
     lastName: string;
-    emailID: string;
+    email: string;
     userID ?: any;
+    otherLeasee?: LeaseUserData[];
 
     clearData(): void {
         this.firstName = null;
         this.lastName = null;
-        this.emailID = null;
+        this.email = null;
         this.userID = null;
     }
 }
+

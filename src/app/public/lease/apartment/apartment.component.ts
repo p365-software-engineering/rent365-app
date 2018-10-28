@@ -26,7 +26,7 @@ export class ApartmentComponent  {
   public apartmentSubmit(apartmentID: NgForm) {
     // Fill the data and route to next page [Amenities]
     if (apartmentID && apartmentID.valid) {
-      this.ls.setLeaseAptID(apartmentID.value);
+      this.ls.setLeaseAptID(Object.values(apartmentID.value).toString());
       this.alert = false;
       this.router.navigate(['/lease/amenities']);
     }

@@ -1,11 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ChatMessage, ChatThread } from 'app/models/chat';
-import { Observable, BehaviorSubject, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ChatService, AuthXService } from 'app/services/service-export';
 import { map } from 'rxjs/operators';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: 'chat-window',
   templateUrl: './chat-window.component.html',
   styleUrls: ['./chat-window.component.css']
@@ -42,18 +41,18 @@ export class ChatWindowComponent implements OnInit {
     }
   }
 
-  sendMessage(messageText: string) {
-    const sender = (this.anonUser) ? 'anonymous' : 'admin';
-    const messageObj = {
-      messageText: messageText,
-      chatThreadID: this.ipAddress,
-      sender: sender
-    };
-    this._chatService.sendMessage(messageObj)
-      // TODO: SEND UPDATE TO SAY NO LONGER TYPING FOR WHICH USER???
-      // .then(() => this.switchTyping())
-      .catch(err => console.log(err));
-  }
+  // sendMessage(messageText: string) {
+  //   const sender = (this.anonUser) ? 'anonymous' : 'admin';
+  //   const messageObj = {
+  //     messageText: messageText,
+  //     chatThreadID: this.ipAddress,
+  //     sender: sender
+  //   };
+  //   this._chatService.sendMessage(messageObj)
+  //     // TODO: SEND UPDATE TO SAY NO LONGER TYPING FOR WHICH USER???
+  //     // .then(() => this.switchTyping())
+  //     .catch(err => console.log(err));
+  // }
 
   switchTyping(chatThreadData: any) {
     console.log('from rentz');
@@ -68,9 +67,6 @@ export class ChatWindowComponent implements OnInit {
       });
     }
   }
-
-  // listenForText = () => {
-  // }
 
   setActiveThread(activeThreadID) {
     this._chatService.getChatThread(activeThreadID)

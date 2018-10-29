@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot } from '@angular/fire/firestore';
 import { ChatThread, ChatMessage } from 'app/models/chat';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +14,6 @@ export class ChatService {
   constructor(private afs: AngularFirestore,
               private _httpclient: HttpClient) {
     this.chatThreadsCollection = afs.collection<ChatThread>('chat-threads');
-  }
-
-  // TODO: See below
-  createSenderID = () => {
-    return;
   }
 
   getIpAddress(): Observable<any> {
@@ -65,10 +59,6 @@ export class ChatService {
       .doc(activeThreadID)
       .collection<ChatMessage>('messages', ref => ref.orderBy('sentAt'))
       .valueChanges();
-    // return this.chatThreadsCollection
-    //   .doc(activeThreadID)
-    //   .collection<ChatMessage>('messages', ref => .ref.orderBy().
-    //   .valueChanges();
   }
 
   sendMessage(messageObj: any): Promise<void> {
@@ -99,13 +89,15 @@ export class ChatService {
       });
   }
 
-  // TODO: Concurrency / overlapping request issue predictions
-  closeThread(chatThreadID: string): Promise<void> {
+  // TODO: TEST??? Concurrency / overlapping request issue predictions
+  async closeThread(chatThreadID: string): Promise<void> {
     const batch = this.afs.firestore.batch();
-    this.chatThreadsCollection
+    await this.chatThreadsCollection
       .doc(chatThreadID)
+      .collection('messages')
       .get()
-      .forEach(message => batch.delete(message.ref));
+      .toPromise()
+      .then((messages: QuerySnapshot<ChatMessage>) => messages.forEach(message => batch.delete(message.ref)));
     batch.delete(this.chatThreadsCollection.doc(chatThreadID).ref);
     return batch.commit();
   }

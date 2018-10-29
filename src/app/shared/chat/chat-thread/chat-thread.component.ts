@@ -11,8 +11,6 @@ import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 })
 export class ChatThreadComponent implements OnInit {
 
-  @ViewChild('messageBox') messageBox: ElementRef;
-
   @Input() private anonUser: boolean;
   @Input() private activeThread: Observable<ChatThread>;
   @Input() private messages: Observable<ChatMessage[]>;
@@ -31,19 +29,11 @@ export class ChatThreadComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.activeThread.subscribe(activeThread => {
-      this._activeThread = activeThread;
-      // TODO: Order by date
-      // this._messages = this._chatService.getMessagesForChat(activeThread.chatThreadID);
-    });
+    this.activeThread.subscribe(activeThread => this._activeThread = activeThread);
     this.messages.subscribe(messages => {
+      // messages.sort((m1, m2) => (m1.sentAt - m2.sentAt) > 0);
       this._messages = messages;
     });
-    // this.activeThread = this.activeThread;//.subscribe(activeThread => {
-    //   this._activeThread = activeThread;
-    //   // TODO: Order by date
-    //   this._messages = this._chatService.getMessagesForChat(activeThread.chatThreadID);
-    // });
   }
 
   sendMessage(message: string) {

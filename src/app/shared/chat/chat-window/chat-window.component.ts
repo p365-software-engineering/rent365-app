@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { ChatMessage, ChatThread } from 'app/models/chat';
 import { Observable, Subject } from 'rxjs';
 import { ChatService, AuthXService } from 'app/services/service-export';
@@ -24,22 +24,23 @@ export class ChatWindowComponent implements OnInit {
   ngOnInit() {
     this.accordionOpened = false;
     this.anonUser = !(this.authXService.authenticated);
-    // TODO: if (ipAddress)
-    if (this.ipAddress) {
-      this._chatService.getChatThread(this.ipAddress)
-        .subscribe(activeThread => {
-            this.setActiveThread(activeThread);
-        });
-    } else {
-      this._chatThreads = this._chatService.getActiveChatThreads()
-        .pipe(
-          map(chatThreads => {
-            console.log(chatThreads);
-            return chatThreads;
-          })
-        );
-    }
+    if( !this.anonUser ) {
+        this._chatThreads = this._chatService.getActiveChatThreads()
+          .pipe(
+            map(chatThreads => {
+              console.log(chatThreads);
+              return chatThreads;
+            })
+          );
+      }
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['ipAddress'] && this.ipAddress !== undefined) {
+      console.log("changes['ipAddress']" + this.ipAddress);
+      this.setActiveThread(this.ipAddress);
+    }
+}
 
   // sendMessage(messageText: string) {
   //   const sender = (this.anonUser) ? 'anonymous' : 'admin';

@@ -1,10 +1,12 @@
-<div class="card" style="max-height: 15%;">
+<div class="card">
     <div class="card-body" id="chatThread">
         <h2 class="text-primary"> Chat Box</h2>
-        <div class="clearfix" style="overflow-y: scroll;" 
-            *ngFor="let message of _messages" data-spy="scroll" data-offset="0" data-target="#chatThread">
+        <div class="clearfix" style="max-height: 1em" 
+            *ngFor="let message of _messages" data-offset="0" data-target="#chatThread">
             <app-chat-message class="text-info" [message]="message" 
-                [style.float]="message.sender=='admin' ? 'left' : 'right'"></app-chat-message>
+                style="clear: both;"
+                [style.float]="message.sender=='admin' ? 'left' : 'right'">
+            </app-chat-message>
         </div>
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="message" name="messageBox" id="messageBox" 

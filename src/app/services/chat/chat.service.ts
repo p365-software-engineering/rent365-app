@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot, DocumentSnapshot } from '@angular/fire/firestore';
 import { ChatThread, ChatMessage } from 'app/models/chat';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,14 +17,17 @@ export class ChatService {
     this.chatThreadsCollection = afs.collection<ChatThread>('chat-threads');
   }
 
-  getIpAddress(): Observable<any> {
+  getIpAddress(): Promise<any> {
     const url = 'http://ipv4.myexternalip.com/json';
-    return this._httpclient.get(url);
+    return this._httpclient.get(url).toPromise();
   }
 
-  async createNewChatThread() {
-    const result_1 = await this.getIpAddress().toPromise();
-    const chatThreadID = result_1.ip || this.afs.createId();
+  async createNewChatThread(_chatThreadID: string = '') {
+    // let chatThreadID = '';
+    // let result_1;
+    // if (_chatThreadID !== '') chatThreadID = _chatThreadID;
+    const result_1 = await this.getIpAddress();
+    const chatThreadID = _chatThreadID || result_1.ip || this.afs.createId();
     const chatThreadObj = (<ChatThread>{
       chatThreadID: chatThreadID
     });
@@ -33,9 +37,18 @@ export class ChatService {
   }
 
   getChatThread(activeThreadID: string): Observable<any> {
-    return this.chatThreadsCollection
+    console.log(activeThreadID);
+    return from(this.chatThreadsCollection
       .doc(activeThreadID)
-      .valueChanges();
+      .get()
+      .toPromise()
+      .then((docSnapshot: any) => {
+      if (docSnapshot.exists) {
+        return docSnapshot;
+      } else {
+        return this.createNewChatThread(activeThreadID);
+      }
+    }));
   }
 
   getAllChatThreads(): Observable<ChatThread[]> {

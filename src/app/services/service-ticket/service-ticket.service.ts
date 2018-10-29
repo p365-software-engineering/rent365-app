@@ -14,14 +14,10 @@ export class ServiceTicketService {
     this.serviceTicketCollection = afs.collection<ServiceTicket>('service-ticket');
   }
 
-  createNewServiceTicket(): Promise<void> {
-      const serviceTicketID = this.afs.createId();
-      const serviceTicketObj = <ServiceTicket> {
-          serviceTicketID: serviceTicketID
-      };
+  createNewServiceTicket(serviceTicket: ServiceTicket): Promise<void> {
       return this.serviceTicketCollection
-        .doc(serviceTicketID)
-        .set(serviceTicketObj);
+        .doc(serviceTicket.serviceTicketID)
+        .set(Object.assign({}, serviceTicket));
   }
 
   getAllServiceTickets(): Observable<ServiceTicket[]> {

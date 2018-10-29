@@ -10,7 +10,7 @@ import { StatementComponent } from './statement/statement.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ServiceComponent } from './service/service.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { ChatThreadComponent } from 'app/public/chat/chat-thread/chat-thread.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -38,6 +38,7 @@ import { ProfileComponent } from './profile/profile.component';
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     ToastrModule.forRoot(),
     RouterModule.forChild([
       {

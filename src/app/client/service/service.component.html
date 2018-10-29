@@ -17,21 +17,20 @@
               </div>
             </div>
           </div>
-          
         </div>
         <br>
         <div class="container-fluid bg-white form-input">
           <div class="row">
             <div class="col-lg-7">
-                <form #request="ngForm" (ngSubmit)="onSubmitRequest(request)" autocomplete="off">
+                <form [formGroup]="serviceRequest" autocomplete="off">
                     <div class="form-group">
                       <label for="subject">Subject</label>
-                      <input type="text" ngModel class="form-control" name="subject" id="subject" aria-describedby="request-subject" placeholder="Accidentally flushed my cape" required>
+                      <input type="text" formControlName="subject" class="form-control" name="subject" id="subject" aria-describedby="request-subject" placeholder="Accidentally flushed my cape" required>
                     </div>
                     <div class="form-group">
                       <label for="description">Description</label>
-                      <textarea ngModel
-                        class="form-control"  name="description" id="description" aria-describedby="description-help" placeholder="More info on how you flushed the cape" rows="5" required></textarea>
+                      <textarea  
+                        class="form-control" formControlName="ticketDescription" name="ticketDescription" id="description" aria-describedby="description-help" placeholder="More info on how you flushed the cape" rows="5" required></textarea>
                         <small id="description-help" class="form-text text-muted">*Please enter the description</small>
                     </div>
                     <div class="form-group">
@@ -40,12 +39,12 @@
                       <br>
                       <div class="form-check form-check-inline">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="radio" ngModel name="permission" id="permission1" value="checkedValue" checked> Oh Yes!
+                            <input class="form-check-input" formControlName="permission" type="radio"   name="permission" id="permission1" value="yes"> Yes
                           </label>
                         </div>
                         <div class="form-check form-check-inline">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="permission" id="permission2" value="checkedValue"> Argh NO!
+                            <input class="form-check-input" formControlName="permission" type="radio" name="permission" id="permission2" value="no"> No
                           </label>
                         </div>
                     </div>
@@ -56,12 +55,12 @@
                       <br>
                       <div class="form-check form-check-inline">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="radio" ngModel name="pets" id="pets1" value="checkedValue" checked> Oh Yes!
+                            <input class="form-check-input" formControlName="pets" type="radio"  name="pets" id="pets1" value="yes"> Yes
                           </label>
                         </div>
                         <div class="form-check form-check-inline">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="pets" id="pets2" value="checkedValue"> Argh NO!
+                            <input class="form-check-input" formControlName="pets" type="radio" name="pets" id="pets2" value="no"> No
                           </label>
                         </div>
                     </div>
@@ -72,20 +71,18 @@
                       <br>
                       <div class="form-check form-check-inline">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="radio" ngModel name="security" id="security1" value="checkedValue" checked> Oh Yes!
+                            <input class="form-check-input" formControlName="security" type="radio"   name="security" id="security1" value="yes"> Yes
                           </label>
                         </div>
                         <div class="form-check form-check-inline">
                           <label class="form-check-label">
-                            <input class="form-check-input" type="radio" name="security" id="security2" value="checkedValue"> Argh NO!
+                            <input class="form-check-input" formControlName="security" type="radio" name="security" id="security2" value="no"> No
                           </label>
                         </div>
                     </div>
-
-                    <button type="submit" name="requestSubmit" id="requestSubmit" class="btn btn-primary btn-lg">SUBMIT</button>
+                    <button type="button" (click)="onSubmitRequest()" name="requestSubmit" id="requestSubmit" class="btn btn-primary btn-lg">SUBMIT</button>
                   </form>
             </div>
-
           </div>
         </div>
       </div>

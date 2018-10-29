@@ -20,8 +20,7 @@ export const appRoutes: Routes = [
     },
     {
         path : 'login',
-        component : LoginXComponent,
-        canActivate: [AuthXGuardClientService]
+        component : LoginXComponent
     },
     {
         path : 'register',

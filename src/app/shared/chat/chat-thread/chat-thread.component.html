@@ -8,7 +8,7 @@
         </div>
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="message" name="messageBox" id="messageBox" 
-                    #messageBox [(ngModel)]="textValue" (keyup)="messageText$.next($event)">
+                    #messageBox (keyup)="messageText$.next($event)">
             <div class="input-group-append">
                 <button class="btn btn-secondary btn-lg" type="button" 
                         (click)="sendMessage(messageBox.value); messageBox.value = ''"

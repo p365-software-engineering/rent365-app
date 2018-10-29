@@ -27,7 +27,7 @@ export class LeaseInfoComponent implements OnInit {
     });
   }
 
-  private getOtherLease(): FormArray {
+  public getOtherLease(): FormArray {
     return <FormArray>this.customerForm.get('otherLeasee');
   }
 

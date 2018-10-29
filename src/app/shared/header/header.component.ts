@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthXService} from '../../services/service-export';
-import { HostListener, Inject } from "@angular/core";
+import { HostListener, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import * as $ from 'jquery';
 
@@ -18,7 +18,7 @@ export class HeaderComponent implements OnInit {
   }
 
   public ngOnInit() {
-    $(window).scroll(function(){
+    $(window).scroll(function() {
       $('nav').toggleClass('scrolled', $(this).scrollTop() > 500);
     });
   }

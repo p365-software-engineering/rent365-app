@@ -1,3 +1,8 @@
+export enum ServiceTicketStatus {
+    COMPLETED = 'Completed',
+    PROGRESS = 'Progress'
+}
+
 export class ServiceTicket {
 
     serviceTicketID: string;
@@ -27,7 +32,3 @@ export class ServiceTicket {
     }
 }
 
-export enum ServiceTicketStatus {
-    COMPLETED = 'Completed',
-    PROGRESS = 'Progress'
-}

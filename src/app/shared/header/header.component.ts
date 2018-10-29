@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthXService} from '../../services/service-export';
+import { HostListener, Inject } from "@angular/core";
 import { Router } from '@angular/router';
+import * as $ from 'jquery';
 
 
 
@@ -15,8 +17,10 @@ export class HeaderComponent implements OnInit {
     // this.authX.getUserInfo();
   }
 
-
-  ngOnInit() {
+  public ngOnInit() {
+    $(window).scroll(function(){
+      $('nav').toggleClass('scrolled', $(this).scrollTop() > 500);
+    });
   }
 
   public show(): boolean {

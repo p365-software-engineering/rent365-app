@@ -26,6 +26,7 @@
               "src/fonts.css",
               "./node_modules/daemonite-material/css/material.css",
               "node_modules/ngx-toastr/toastr.css",
+              "./node_modules/font-awesome/css/font-awesome.min.css",
               "src/styles.css"
               
             ],

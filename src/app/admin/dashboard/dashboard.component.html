@@ -1,0 +1,15 @@
+<app-sidenav *ngIf="showNav"></app-sidenav>
+
+<!-- Page Content  -->
+<div id="content admin" [ngClass]="{'active': !showNav }">
+    <nav class="navbar  navbar-light bg-dark justify-content-between">
+        <span class="navbar-toggler-icon" (click)="display()"></span>
+      </nav>
+
+      <router-outlet></router-outlet>
+          </div>
+<!-- Futere Scope -->
+<div id="overlay" >
+</div>
+
+

@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
 import { IUser, IUserData } from '../../models/user-model';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { auth } from 'firebase/app';
-import { first } from 'rxjs/operators';
+import { first, map } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { StellarService } from '../stellar/stellar.service';
+
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthXService {
 
   public currentUserState: Observable<firebase.User>;
   public _currentUser: firebase.User;
   public userRegister: Observable<String>;
 
-  constructor(private http: HttpClient, private firebaseAuth: AngularFireAuth,
-    private router: Router,
-    private afs: AngularFirestore) {
+  constructor(private firebaseAuth: AngularFireAuth,
+              private stellarService: StellarService,
+              private router: Router,
+              private afs: AngularFirestore) {
       this._currentUser = null;
       this.currentUserState = firebaseAuth.authState;
       this.currentUserState.subscribe((user: firebase.User) => {
         this._currentUser = user;
-        // console.log('authState$ changed', this._currentUser);
       });
    }
 
@@ -37,38 +37,42 @@ export class AuthXService {
   }
 
   public updateUserData(user: any) {
-    const userRef: AngularFirestoreDocument<IUserData> = this.afs.doc('User/' + user.uid);
-    const data: IUserData = {
-      uid: user.uid,
-      email: user.email,
-      first_name: user.displayName || user.first_name,
-      last_name: user.displayName || user.last_name,
-      middle_name: user.displayName || user.middle_name || 'na',
-      password: 'na',
-      role: user.role || 'client'
-    };
-    userRef.set(data);
+      const userRef = this.afs.collection<IUserData>('User').doc(user.uid).ref;
+      this.afs.collection('Role').doc(user.uid).valueChanges().subscribe((roleDoc: any) => {
+          const role: string = (roleDoc) ? roleDoc.role : 'client';
+          const data: IUserData = {
+              uid: user.uid,
+              email: user.email,
+              first_name: user.displayName || user.first_name,
+              last_name: user.displayName || user.last_name,
+              middle_name: user.displayName || user.middle_name || 'na',
+              password: 'na',
+              role: role || 'client'
+            };
+          return userRef.set(data)
+            .then(() => this.router.navigate([`/${role}`]));
+      });
   }
 
   public register(formData: IUserData): any {
     return this.firebaseAuth.auth.createUserWithEmailAndPassword(formData.email.toString(), formData.password.toString())
-    .then((user) => {
-      if (user && user.user.emailVerified === false) {
-        user.user.sendEmailVerification();
-          const data: IUserData = {
-            uid: user.user.uid,
-            email: user.user.email,
-            first_name: formData.first_name,
-            last_name: formData.last_name,
-            middle_name: formData.last_name || 'na',
-            password: 'na',
-            role: 'client'
-          };
-          // console.log("success")
-          this.updateUserData(data);
-          this.logout();
-          return 'success';
-        }
+      .then((user) => {
+        if (user && user.user.emailVerified === false) {
+          user.user.sendEmailVerification();
+            const data: IUserData = {
+              uid: user.user.uid,
+              email: user.user.email,
+              first_name: formData.first_name,
+              last_name: formData.last_name,
+              middle_name: formData.last_name || 'na',
+              password: 'na',
+              role: 'client'
+            };
+            this.updateUserData(data);
+            // TODO: LOGOUT???
+            this.logout();
+            return 'success';
+          }
     })
     .catch((error) => {
           // Handle Errors here.
@@ -88,7 +92,6 @@ export class AuthXService {
   public loginGoogle() {
     this.firebaseAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((credential) => {
       this.updateUserData(credential.user);
-      this.router.navigate(['/client']);
     }).catch((error) => {
       console.log(error);
     });
@@ -97,7 +100,7 @@ export class AuthXService {
   public loginFacebook() {
     this.firebaseAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then((credential) => {
       this.updateUserData(credential.user);
-      this.router.navigate(['/client']);
+      // this.router.navigate(['/client']);
     }).catch((error) => {
       console.log(error);
     });
@@ -125,6 +128,7 @@ export class AuthXService {
   }
 
   public logout(): void {
+    this.stellarService.clearKeyCache();
     this.firebaseAuth.auth.signOut().then(() => {
       this.router.navigate(['/login']);
     }).catch(function(error) {
@@ -132,3 +136,5 @@ export class AuthXService {
     });
   }
 }
+
+const ADMIN_LIST = ['tcitrin@iu.edu'];

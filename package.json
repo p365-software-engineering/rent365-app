@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "compodoc": "compodoc -p src/tsconfig.app.json",
-    "compodoc-serve": "compodoc -p src/tsconfig.app.json --watch --serve --port 8091"
+    "compodoc-serve": "compodoc -p src/tsconfig.app.json --watch --serve --port 8091",
+    "plop": "plop"
   },
   "private": true,
   "dependencies": {
@@ -39,6 +40,7 @@
     "open-iconic": "^1.1.1",
     "popper.js": "^1.14.3",
     "rxjs": "~6.2.0",
+    "stellar-sdk": "^0.11.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
@@ -59,6 +61,7 @@
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "plop": "^2.1.0",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",

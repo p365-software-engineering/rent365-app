@@ -3,8 +3,7 @@ export class ChatMessage {
     messageID: string;
     sentAt: number;
     isRead: boolean;
-    // senderID: string;
-    // receiverID: string;
+    sender: string;
     messageText: string;
     chatThreadID: string;
 
@@ -13,6 +12,7 @@ export class ChatMessage {
         this.isRead             = obj.isRead || false;
         this.sentAt             = obj.sentAt;
         this.messageText        = obj.messageText;
+        this.sender             = obj.sender;
         this.chatThreadID       = obj.chatThreadID;
     }
 }
@@ -20,12 +20,11 @@ export class ChatMessage {
 export class ChatThread {
 
     chatThreadID: string;
-    // senderID: string;
-    // receiverID: string;
+    isActive: boolean;
+    adminTyping: boolean;
+    userTyping: boolean;
 
     constructor(obj?: any) {
         this.chatThreadID         = obj.chatThreadID;
-        // this.senderID             = obj.senderID;
-        // this.receiverID           = obj.receiverID;
     }
 }

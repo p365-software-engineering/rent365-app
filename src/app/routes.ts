@@ -9,7 +9,7 @@ import { AmenitiesComponent } from './public/lease/amenities/amenities.component
 import { LeaseInfoComponent } from './public/lease/lease-info/lease-info.component';
 import { SubmitComponent } from './public/lease/submit/submit.component';
 import { EnquiryComponent } from './public/enquiry/enquiry.component';
-import { DashbaordComponent } from './client/dashbaord/dashbaord.component';
+import { DashboardComponent } from './client/dashboard/dashboard.component';
 
 
 

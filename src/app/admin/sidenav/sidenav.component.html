@@ -5,12 +5,12 @@
       <h5>ADMINISTRATION</h5>
   </div>
   <div class="text-center">
-    <span class=" chip text-bold"><i class="chip-icon">{{ (this.authX._currentUser.displayName == undefined) ? this.authX._currentUser.email.charAt(0) : this.authX._currentUser.displayName.charAt(0) }}</i>{{ (this.authX._currentUser.displayName == undefined) ? this.authX._currentUser.email : this.authX._currentUser.displayName}}</span>   
+    <span class=" chip text-bold"><i class="chip-icon">{{ (this.authX._currentUser?.displayName == undefined) ? this.authX._currentUser?.email.charAt(0) : this.authX._currentUser.displayName?.charAt(0) }}</i>{{ (this.authX._currentUser?.displayName == undefined) ? this.authX._currentUser?.email : this.authX._currentUser?.displayName}}</span>   
   </div>
   <br>
   <br>
   <div class="text-center">
-    <button class="btn btn-primary my-1" (click)="this.authX.logout()">Exit </button>
+    <button class="btn btn-primary my-1" (click)="this.authX.logout()">Logout </button>
   </div>
   <ul class="list-unstyled components">
         <li>

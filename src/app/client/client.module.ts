@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { DashbaordComponent } from './dashbaord/dashbaord.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { CommunityComponent } from './community/community.component';
 import { StatementComponent } from './statement/statement.component';
@@ -12,8 +11,9 @@ import { ServiceComponent } from './service/service.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { ChatThreadComponent } from 'app/public/chat/chat-thread/chat-thread.component';
 import { ProfileComponent } from './profile/profile.component';
+import { DashboardComponent } from '../client/dashboard/dashboard.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 /**
@@ -34,52 +34,49 @@ import { ProfileComponent } from './profile/profile.component';
  *  View Service History : ServiceHistoryComponent
  *
  */
+const routes = [
+  {
+    path: '',
+    component: DashboardComponent,
+    children: [
+      {
+        path: '',
+        component: WelcomeComponent
+      },
+      {
+        path: 'community',
+        component: CommunityComponent
+      },
+      {
+        path: 'pay',
+        component: PaymentComponent
+      },
+      {
+        path: 'statement',
+        component: StatementComponent
+      },
+      {
+        path: 'request',
+        component: ServiceComponent
+      },
+      {
+        path: 'history',
+        component: ServiceHistoryComponent
+      }
+    ]
+  }
+];
+
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    SharedModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    RouterModule.forChild([
-      {
-        path: '',
-        component: DashbaordComponent,
-        children: [
-          {
-            path: '',
-            component: WelcomeComponent
-          },
-          {
-            path: 'community',
-            component: CommunityComponent
-          },
-          {
-            path: 'pay',
-            component: PaymentComponent
-          },
-          {
-            path: 'statement',
-            component: StatementComponent
-          },
-          {
-            path: 'request',
-            component: ServiceComponent
-          },
-          {
-            path: 'history',
-            component: ServiceHistoryComponent
-          },
-          {
-            path: 'profile',
-            component: ProfileComponent
-          }
-        ]
-      }
-
-    ])
+    RouterModule.forChild(routes)
   ],
   declarations: [SidenavComponent,
-    DashbaordComponent,
+    DashboardComponent,
     WelcomeComponent,
     CommunityComponent,
     StatementComponent,

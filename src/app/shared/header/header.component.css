@@ -1,9 +1,28 @@
-nav {
-    z-index:100;
+.navbar-default  {
+    transition: 0.2s ease;
+    background: transparent;
 }
 
-.user-name{
+.navbar-default.scrolled {
+    background: #232323;
+}
+
+.navbar .btn {
+    border: 1px solid white;
+}
+
+.navbar-brand {
+    font-size: 28px;
+}
+
+.nav-link {
+    color: #fcfcfc;
+    opacity: 1;
+}
+
+
+/* .user-name {
     position: relative;
     top: 0.30rem;
     margin-right: 1rem;
-}
+} */

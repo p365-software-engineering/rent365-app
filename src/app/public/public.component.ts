@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from 'app/services/service-export';
 import * as $ from 'jquery';
+import '../../../node_modules/daemonite-material/js/material';
 
 @Component({
   selector: 'app-public',
@@ -24,7 +25,6 @@ export class PublicComponent implements OnInit {
       });
     });
 
-    
+    $('#input-date-picker').pickdate();
   }
-
 }

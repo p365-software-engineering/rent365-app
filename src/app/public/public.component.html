@@ -99,7 +99,7 @@
           do et eu mollit elit occaecat nulla excepteur Lorem veniam. Eiusmod ex ut proident et dolore ipsum magna
           aliqua excepteur. Occaecat nostrud reprehenderit dolore tempor ea aliqua. Laboris cupidatat minim consectetur
           eu enim. Consectetur consectetur exercitation cillum laboris dolore.</p>
-        <a class="btn btn-outline-light" href="#">Start Customizing</a>
+        <a class="btn nav-link" routerLink="">Start Customizing</a>
       </div>
     </div>
     <div class="row mb-4">
@@ -114,7 +114,7 @@
           do et eu mollit elit occaecat nulla excepteur Lorem veniam. Eiusmod ex ut proident et dolore ipsum magna
           aliqua excepteur. Occaecat nostrud reprehenderit dolore tempor ea aliqua. Laboris cupidatat minim consectetur
           eu enim. Consectetur consectetur exercitation cillum laboris dolore.</p>
-        <a class="btn btn-outline-light" href="#">Start Customizing</a>
+        <a class="btn nav-link" routerLink="">Start Customizing</a>
       </div>
     </div>
     <div class="row">
@@ -129,7 +129,7 @@
           do et eu mollit elit occaecat nulla excepteur Lorem veniam. Eiusmod ex ut proident et dolore ipsum magna
           aliqua excepteur. Occaecat nostrud reprehenderit dolore tempor ea aliqua. Laboris cupidatat minim consectetur
           eu enim. Consectetur consectetur exercitation cillum laboris dolore.</p>
-        <a class="btn btn-outline-light" href="#">Start Customizing</a>
+        <a class="btn nav-link" routerLink="">Start Customizing</a>
       </div>
     </div>
   </div>
@@ -137,7 +137,6 @@
 <section id="testimonials">
   <div class="container">
     <h2 class="section-title text-center font-weight-bold">You'll be in good company</h2>
-    <h2 class="text-center">(Testimonials/Reviews -- on Monday!)</h2>
   </div>
 </section>
 <section id="gallery">
@@ -166,8 +165,33 @@
 </section>
 <section id="cta-contact">
   <div class="container">
-    <h2 class="section-title text-center font-weight-bold">Interested? Let's set up a tour!</h2>
-    <h2 class="text-center">(Contact/Tour Scheduler -- on Monday!)</h2>
+    <h2 class="section-title text-center font-weight-bold">Interested? Set up a tour!</h2>
+    <div class="row">
+      <div class="col-lg-10 col-xl-9 mx-auto">
+        <div class="card card-contact flex-row my-5">
+          <div class="card-img-left d-none d-md-flex"></div>
+          <div class="card-body px-4">
+            <h5 class="card-title text-center"><strong>Schedule a Tour</strong></h5>
+            <form class="form-signin">
+              <div class="form-label-group">
+                <input type="text" id="input-name-alias" class="form-control" placeholder="Name or Alias" required>
+              </div>
+              <div class="form-label-group">
+                <input type="email" id="input-email" class="form-control" placeholder="Email address" required>
+              </div>
+              <div class="form-label-group">
+                  <input class="form-control" id="input-date-picker" placeholder="Requested tour date" type="text" required>
+              </div>
+              <div class="form-label-group">
+                <textarea class="form-control" id="input-additional-comments" placeholder="Additional questions or comments" rows="4"></textarea>
+              </div>
+
+              <button class="btn btn-lg btn-outline-light btn-block text-uppercase" type="submit">Submit Request</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 <button id="chat-now-button" type="button" class="btn btn-light btn-circle"><i class="fa fa-comments fa-2x" aria-hidden="true"></i></button>

@@ -25,6 +25,7 @@
             "styles": [
               "src/fonts.css",
               "./node_modules/daemonite-material/css/material.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": [

@@ -1,17 +1,18 @@
-<div class="card" style="width: 18rem;">
-    <div class="card-body">
+<div class="card" style="max-height: 15%;">
+    <div class="card-body" id="chatThread">
         <h2 class="text-primary"> Chat Box</h2>
-        <div class="clearfix" style="display: flex; flex-direction: row; width: 100%" *ngFor="let message of _messages">
-            <chat-message class="text-info float-right" [message]="message"></chat-message>
+        <div class="clearfix" style="overflow-y: scroll;" 
+            *ngFor="let message of _messages" data-spy="scroll" data-offset="0" data-target="#chatThread">
+            <chat-message class="text-info" [message]="message" 
+                [style.float]="message.sender=='admin' ? 'left' : 'right'"></chat-message>
         </div>
-
-        <!-- <p style="color:black"> {{ textValue }} </p> -->
         <div class="input-group mb-3">
             <input type="text" class="form-control" placeholder="message" name="messageBox" id="messageBox" 
                     #messageBox [(ngModel)]="textValue" (keyup)="messageText$.next($event)">
             <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" 
-                        (click)="sendMessage(messageBox.value); messageBox.value = ''">
+                <button class="btn btn-secondary btn-lg" type="button" 
+                        (click)="sendMessage(messageBox.value); messageBox.value = ''"
+                        [disabled]="_activeThread === undefined || _activeThread === null">
                     Send
                 </button>
             </div>

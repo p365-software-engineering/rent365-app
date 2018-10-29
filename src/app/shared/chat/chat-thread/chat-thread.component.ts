@@ -3,6 +3,7 @@ import { Observable, Subject } from 'rxjs';
 import { ChatMessage, ChatThread } from 'app/models/chat';
 import { ChatService } from 'app/services/service-export';
 import { map, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'chat-thread',

@@ -25,6 +25,9 @@ export class ChatThread {
     userTyping: boolean;
 
     constructor(obj?: any) {
-        this.chatThreadID         = obj.chatThreadID;
+        this.chatThreadID       = obj.chatThreadID;
+        this.isActive           = obj.isActive;
+        this.adminTyping        = obj.adminTyping;
+        this.userTyping         = obj.userTyping;
     }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { ChatMessage, ChatThread } from 'app/models/chat';
 import { Observable, Subject } from 'rxjs';
 import { ChatService, AuthXService } from 'app/services/service-export';
@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './chat-window.component.html',
   styleUrls: ['./chat-window.component.css']
 })
-export class ChatWindowComponent implements OnInit {
+export class ChatWindowComponent implements OnInit, OnChanges {
 
   public anonUser: boolean;
   public accordionOpened: boolean;
@@ -24,7 +24,7 @@ export class ChatWindowComponent implements OnInit {
   ngOnInit() {
     this.accordionOpened = false;
     this.anonUser = !(this.authXService.authenticated);
-    if( !this.anonUser ) {
+    if ( !this.anonUser ) {
         this._chatThreads = this._chatService.getActiveChatThreads()
           .pipe(
             map(chatThreads => {
@@ -35,27 +35,22 @@ export class ChatWindowComponent implements OnInit {
       }
   }
 
+  // TODO: https://stackoverflow.com/questions/38893207/angular-2-ngonchanges-fires-when-template-renders
+  // tslint:disable-next-line:member-ordering
+  firstChange: boolean;
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['ipAddress'] && this.ipAddress !== undefined) {
-      console.log("changes['ipAddress']" + this.ipAddress);
-      this.setActiveThread(this.ipAddress);
+    // if (changes['ipAddress'] && this.ipAddress !== undefined && !this.firstChange && changes['ipAddress'].isFirstChange()) {
+    //   this.firstChange = true;
+    //   // console.log('changes[\'ipAddress\']' + this.ipAddress);
+    // }
+    if (!changes['ipAddress'].isFirstChange() && !this.firstChange) {
+        this.firstChange = true;
+        this.setActiveThread(this.ipAddress);
     }
 }
 
-  // sendMessage(messageText: string) {
-  //   const sender = (this.anonUser) ? 'anonymous' : 'admin';
-  //   const messageObj = {
-  //     messageText: messageText,
-  //     chatThreadID: this.ipAddress,
-  //     sender: sender
-  //   };
-  //   this._chatService.sendMessage(messageObj)
-  //     // TODO: SEND UPDATE TO SAY NO LONGER TYPING FOR WHICH USER???
-  //     // .then(() => this.switchTyping())
-  //     .catch(err => console.log(err));
-  // }
-
   switchTyping(chatThreadData: any) {
+    console.log(chatThreadData);
     console.log('from rentz');
     const { chatThreadID, typing } = chatThreadData;
     if (this.anonUser) {
@@ -70,8 +65,12 @@ export class ChatWindowComponent implements OnInit {
   }
 
   setActiveThread(activeThreadID) {
+    console.log(activeThreadID);
     this._chatService.getChatThread(activeThreadID)
-      .subscribe(activeThread => this._activeThread.next(activeThread));
+      .subscribe(activeThread => {
+        console.log(activeThread);
+        this._activeThread.next(activeThread)
+      });
     this._chatService.getMessagesForChat(activeThreadID)
       .subscribe(chatMessages => this._messages.next(chatMessages));
   }

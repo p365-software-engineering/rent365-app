@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StellarService, ChatService } from '../services/service-export';
 import { environment } from '../../environments/environment.prod';
-import { Observable, Subject } from 'rxjs';
-import { ChatMessage, ChatThread } from 'app/models/chat';
+import { Observable } from 'rxjs';
 import { PaymentOrchestratorService } from 'app/services/payment-orchestrator/payment-orchestrator.service';
 import { Payment } from 'app/models/model-export';
 import * as $ from 'jquery';
@@ -15,34 +14,17 @@ import * as $ from 'jquery';
 export class PublicComponent implements OnInit {
 
   private _adminPubKey: string;
-  private _messages: Observable<ChatMessage[]>;
-  private isAdminTyping: boolean;
-  private activeThread: Observable<ChatThread>;
-  // public ipAddress = new Subject<string>();
   public ipAddress: Observable<string>;
 
   constructor(private stellarService: StellarService,
               private _chatService: ChatService,
               private _pmtOrchestrator: PaymentOrchestratorService) {
               }
-              
+
   ngOnInit() {
-    this._chatService.getIpAddress().then(ipAddress => this.ipAddress = ipAddress.ip) ;
+    this._chatService.getIpAddress().then(ipAddress => this.ipAddress = ipAddress.ip);
     this._adminPubKey = environment.ADMIN_PUBLIC_KEY;
     this.stellarService.cacheKeys('SAV6VEIM2477EYBVOM2SXY3JG6JFKL734KKQRICCAQVMV57PC2KUMYH7');
-    // this._chatService.getIpAddress().then((ipAddress: any) => {
-    //   // this.ipAddress = ipAddress.ip;
-    //   this.ipAddress.next(ipAddress.ip);
-    //   // console.log(ipAddress.ip);
-    //   // this._messages = this._chatService.getMessagesForChat(ipAddress.ip);
-    //   // this._chatService.getChatThread(ipAddress.ip)
-    //   //   .subscribe(activeThread => {
-    //   //     if (activeThread) {
-    //   //       this.activeThread = activeThread;
-    //   //       this.isAdminTyping = activeThread.adminTyping;
-    //   //     }
-    //   //   });
-    //   });
   }
 
   sendPayment() {

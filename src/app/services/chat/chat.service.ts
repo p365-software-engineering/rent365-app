@@ -23,17 +23,17 @@ export class ChatService {
   }
 
   async createNewChatThread(_chatThreadID: string = '') {
-    // let chatThreadID = '';
-    // let result_1;
-    // if (_chatThreadID !== '') chatThreadID = _chatThreadID;
-    const result_1 = await this.getIpAddress();
-    const chatThreadID = _chatThreadID || result_1.ip || this.afs.createId();
-    const chatThreadObj = (<ChatThread>{
-      chatThreadID: chatThreadID
-    });
+    const chatThreadID = _chatThreadID || this.afs.createId();
+    const chatThreadObj = {
+      chatThreadID: chatThreadID,
+      active: true,
+      userTyping: false,
+      adminTyping: false
+    };
     return this.chatThreadsCollection
       .doc(chatThreadID)
-      .set(chatThreadObj);
+      .set(chatThreadObj)
+      .then(() => chatThreadObj);
   }
 
   getChatThread(activeThreadID: string): Observable<any> {
@@ -43,12 +43,12 @@ export class ChatService {
       .get()
       .toPromise()
       .then((docSnapshot: any) => {
-      if (docSnapshot.exists) {
-        return docSnapshot;
-      } else {
-        return this.createNewChatThread(activeThreadID);
-      }
-    }));
+        if (docSnapshot.exists) {
+          return docSnapshot.data();
+        } else {
+          return this.createNewChatThread(activeThreadID);
+        }
+      }));
   }
 
   getAllChatThreads(): Observable<ChatThread[]> {
@@ -75,6 +75,7 @@ export class ChatService {
   }
 
   sendMessage(messageObj: any): Promise<void> {
+    console.log(messageObj);
     const messageID = this.afs.createId();
     const { messageText, chatThreadID, sender } = messageObj;
     const chatThreadObj = <ChatMessage> {

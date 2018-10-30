@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { SidenavComponent } from './sidenav/sidenav.component';
@@ -9,7 +8,7 @@ import { StatementComponent } from './statement/statement.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ServiceComponent } from './service/service.component';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from '../client/dashboard/dashboard.component';

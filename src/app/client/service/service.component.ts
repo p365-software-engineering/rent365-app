@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthXService, ServiceTicketService } from 'app/services/service-export';
-import { Guid } from 'guid-typescript';
 import { Router } from '@angular/router';
 import { ServiceTicket } from 'app/models/model-export';
-import { tick } from '@angular/core/src/render3';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-service',
@@ -14,20 +13,23 @@ import { tick } from '@angular/core/src/render3';
 })
 export class ServiceComponent implements OnInit {
 
-  serviceRequest: FormGroup;
-  date: string;
+  public serviceRequest: FormGroup;
+  private date: string;
+  private stid: string;
 
   constructor(private ticket: ServiceTicketService ,
     private toastr: ToastrService,
     private router: Router,
     private fb: FormBuilder,
-    private authX: AuthXService) {
+    private authX: AuthXService,
+    private afs: AngularFirestore) {
     this.date = new Date().toISOString();
+    this.stid = this.afs.createId();
   }
 
   ngOnInit() {
     this.serviceRequest = this.fb.group({
-      serviceTicketID: Guid.create().toString(),
+      serviceTicketID: this.stid,
       userID: this.authX._currentUser.uid,
       apartmentID: '',
       subject: ['', Validators.required],

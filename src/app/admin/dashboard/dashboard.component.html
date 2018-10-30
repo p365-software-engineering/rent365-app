@@ -1,13 +1,17 @@
 <app-sidenav *ngIf="showNav"></app-sidenav>
 
 <!-- Page Content  -->
-<div id="content admin" [ngClass]="{'active': !showNav }">
+<div id="content" [ngClass]="{'active': !showNav }">
     <nav class="navbar  navbar-light bg-dark justify-content-between">
         <span class="navbar-toggler-icon" (click)="display()"></span>
+        <!-- <form class="form-inline">
+            <span class=" chip text-bold text-center"><i class="chip-icon">A</i><span class=" d-none d-md-block">Arun Nekkalapudi</span></span>
+        </form> -->
       </nav>
 
-      <router-outlet></router-outlet>
-          </div>
+      <router-outlet ></router-outlet>
+
+</div>
 <!-- Futere Scope -->
 <div id="overlay" >
 </div>

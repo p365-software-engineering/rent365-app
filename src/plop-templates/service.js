@@ -1,7 +1,10 @@
+// jshint ignore: start
+/* tslint:disable */
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { {{pascalCase name}} } from '../../models/{{dashCase name}}';
+
 
 @Injectable({
   providedIn: 'root'

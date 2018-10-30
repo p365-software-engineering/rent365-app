@@ -24,6 +24,7 @@ import { LeaseInfoComponent } from './public/lease/lease-info/lease-info.compone
 import { SubmitComponent } from './public/lease/submit/submit.component';
 import { EnquiryComponent } from './public/enquiry/enquiry.component';
 import { ToastrModule } from 'ngx-toastr';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,7 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   imports: [
     SharedModule,
-    BrowserModule,
+    NoopAnimationsModule,
     AngularFirestoreModule,
     AngularFireStorageModule,
     AngularFireAuthModule,

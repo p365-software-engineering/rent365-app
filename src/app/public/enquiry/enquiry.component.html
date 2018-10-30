@@ -8,18 +8,17 @@
             <div class="container-fluid bg-white form-input">
                 <div class="row">
                     <div class="col-lg-7">
-                        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                        <form [formGroup] ="enquiry">
                                 <div 
                                 id="user-data"
-                                ngModelGroup="userData"
-                                #userData="ngModelGroup">
+                                 Group="userData">
                                 <div class="form-group">
                                     <label for="firstname">First Name<span class="asterisk">*</span></label>
                                     <input type="text"
                                     id="firstname"
                                     class="form-control"
-                                    ngModel
                                     name="firstname"
+                                    formControlName="firstName"
                                     required>
                                 </div>
                                 <div class="form-group">
@@ -27,45 +26,43 @@
                                     <input type="text"
                                     id="lastname"
                                     class="form-control"
-                                    ngModel
                                     name="lastname"
+                                    formControlName="lastName"
                                     required>
                                 </div>
                                 <div class="form-group">
                                     <label for="email">Email<span class="asterisk">*</span></label>
                                     <input 
-                                        type="text"
+                                        type="email"
                                         id="email"
                                         class="form-control"
-                                        ngModel
                                         name="email"
-                                        required
-                                        email
-                                        #email="ngModel">
-                                    <span class="help-block" *ngIf="email.dirty && !email.valid">Please enter a valid email address!</span>
+                                        formControlName="email"
+                                        required>
                                 </div>
                                 <div class="form-group">
                                     <label for="phone">Phone Number</label>
                                     <input type="text"
                                     id="phone"
                                     class="form-control"
-                                    ngModel
-                                    name="phone">
+                                    name="phone"
+                                    formControlName="contact"
+                                    >
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="property">Which Property Are You Interested In?</label>
                                 <select 
                                     name="property" 
                                     id="property"
-                                    class="form-control"
-                                    ngModel>
+                                    class="form-control" formControlName="property"
+                                     >
                                     <option value="property1">Property 1</option>
                                     <option value="property2">Property 2</option>
                                     <option value="property3">Property 3</option>
                                     <option value="property4">Property 4</option>
                                 </select>
-                            </div>
+                            </div> -->
                             <div class="form-group">
                                 <label for="message">Message:</label>
                                 <textarea 
@@ -74,11 +71,10 @@
                                     cols="50" 
                                     rows="10"
                                     class="form-control"
-                                    ngModel>
+                                    formControlName="message">
                                 </textarea>
                             </div>
-                            <p class="help-block" *ngIf="userData.dirty && !userData.valid">* Please complete the required fields!</p>
-                            <button type="button" name="requestSubmit" id="requestSubmit" class="btn btn-primary btn-lg">SUBMIT</button>
+                            <button type="submit" (click)="enquire()" name="requestSubmit" id="requestSubmit" class="btn btn-primary btn-lg">SUBMIT</button>
                         </form>
                     </div>
                 </div>

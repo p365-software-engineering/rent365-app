@@ -4,3 +4,6 @@ export * from './user-model';
 export * from './payment';
 export * from './review';
 export * from './amenity';
+
+export * from './event';
+export * from './event';

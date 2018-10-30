@@ -17,6 +17,7 @@ export class ChatService {
     this.chatThreadsCollection = afs.collection<ChatThread>('chat-threads');
   }
 
+  // TODO: Make hTTPS
   getIpAddress(): Promise<any> {
     const url = 'http://ipv4.myexternalip.com/json';
     return this._httpclient.get(url).toPromise();

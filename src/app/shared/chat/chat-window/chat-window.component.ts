@@ -50,7 +50,7 @@ export class ChatWindowComponent implements OnInit, OnChanges {
 }
 
   switchTyping(chatThreadData: any) {
-    console.log(chatThreadData);
+    // console.log(chatThreadData);
     console.log('from rentz');
     const { chatThreadID, typing } = chatThreadData;
     if (this.anonUser) {
@@ -68,8 +68,14 @@ export class ChatWindowComponent implements OnInit, OnChanges {
     console.log(activeThreadID);
     this._chatService.getChatThread(activeThreadID)
       .subscribe(activeThread => {
-        console.log(activeThread);
-        this._activeThread.next(activeThread)
+        if (activeThread) {
+          console.log(activeThread);
+          this._activeThread.next(activeThread) 
+        } else {
+          this._chatService.createNewChatThread(activeThreadID)
+            .then((newChatObj: any) => newChatObj as ChatThread)
+            .then((newChatThread) => this._activeThread.next(newChatThread));
+        }
       });
     this._chatService.getMessagesForChat(activeThreadID)
       .subscribe(chatMessages => this._messages.next(chatMessages));

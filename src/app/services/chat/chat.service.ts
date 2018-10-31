@@ -18,6 +18,7 @@ export class ChatService {
   }
 
   // TODO: Make hTTPS
+  // https://api.ipify.org?format=json
   getIpAddress(): Promise<any> {
     const url = 'http://ipv4.myexternalip.com/json';
     return this._httpclient.get(url).toPromise();
@@ -39,17 +40,22 @@ export class ChatService {
 
   getChatThread(activeThreadID: string): Observable<any> {
     console.log(activeThreadID);
-    return from(this.chatThreadsCollection
+    return this.chatThreadsCollection
       .doc(activeThreadID)
-      .get()
-      .toPromise()
-      .then((docSnapshot: any) => {
-        if (docSnapshot.exists) {
-          return docSnapshot.data();
-        } else {
-          return this.createNewChatThread(activeThreadID);
-        }
-      }));
+      .valueChanges();
+      // return Observable.create(observer => {
+      //   this.chatThreadsCollection
+      //     .doc(activeThreadID)
+      //     .get()
+      //     .toPromise()
+      //     .then((docSnapshot: any) => {
+      //       if (docSnapshot.exists) {
+      //         return observer.next(docSnapshot.data());
+      //       } else {
+      //         this.createNewChatThread(activeThreadID)
+      //           .then(newChatThread => observer.next(newChatThread));
+      //       }
+      //     });
   }
 
   getAllChatThreads(): Observable<ChatThread[]> {

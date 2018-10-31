@@ -1,4 +1,15 @@
 <!-- [style.float]="right" style="float: right;" class="float-right" -->
-<p >
-    {{ message.sender }}: {{ message.messageText }}
-</p>
+<div>
+    <p>
+        {{ message.sender }}:
+        {{ message.messageText }}
+        <i>
+            <small *ngIf="message.sender === 'admin' && !anonUser"> 
+                ({{ (message.isRead) ? 'read' : 'not read' }} )
+            </small>
+            <small *ngIf="message.sender !== 'admin' && anonUser"> 
+                ({{ (message.isRead) ? 'read' : 'not read' }} )
+            </small>
+        </i>
+    </p>
+</div>

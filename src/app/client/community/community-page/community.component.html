@@ -1,7 +1,9 @@
 <div class="container-fluid">
-  <button type="button" name="" id="" class="btn new-post btn-secondary btn-lg" (click)="createNewEvent()">
-    + NEW COMMUNITY POST
-  </button>
+  <a class="nav-link" [routerLink]="['add-event']">
+    <button type="button" name="" id="" class="btn new-post btn-secondary btn-lg" (click)="createNewEvent()">
+      + NEW COMMUNITY EVENT
+    </button>
+  </a>
   <div class="card-group">
     <!-- Iterate over list of events -->
     <div class="news" *ngFor="let _event of _events | async">

@@ -13,12 +13,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from '../client/dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
-<<<<<<< HEAD
 
-=======
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommunityPageCardComponent } from './community/community-page-card/community-page-card.component';
->>>>>>> 0638a9c2b233bb8ff20694878c71c57efd3ebd7b
+import { AddEventComponent } from './community/add-event/add-event.component';
 
 
 
@@ -51,7 +49,11 @@ const routes = [
       },
       {
         path: 'community',
-        component: CommunityComponent
+        component: CommunityComponent,
+      },
+      {
+        path: 'community/add-event',
+        component: AddEventComponent
       },
       {
         path: 'pay',
@@ -93,7 +95,8 @@ const routes = [
     ServiceComponent,
     ServiceHistoryComponent,
     ProfileComponent,
-    CommunityPageCardComponent],
+    CommunityPageCardComponent,
+    AddEventComponent],
   exports: []
 })
 export class ClientModule { }

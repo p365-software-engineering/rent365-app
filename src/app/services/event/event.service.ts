@@ -14,17 +14,15 @@ export class EventService {
   private eventCollection: AngularFirestoreCollection<Event>;
 
   constructor(private afs: AngularFirestore) { 
-    this.eventCollection = afs.collection<Event>('event');
+    this.eventCollection = afs.collection<Event>('events');
   }
 
-  createNewEvent(): Promise<void> {
+  createNewEvent(data: any): Promise<void> {
       const eventID = this.afs.createId();
-      const eventObj = <Event> {
-          eventID: eventID
-      };
+      data.eventID = eventID;
       return this.eventCollection
         .doc(eventID)
-        .set(eventObj);
+        .set(data);
   }
 
   getAllEvents(): Observable<Event[]> {

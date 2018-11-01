@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { CommunityComponent } from './community/community.component';
+import { CommunityComponent } from './community/community-page/community.component';
 import { StatementComponent } from './statement/statement.component';
 import { PaymentComponent } from './payment/payment.component';
 import { ServiceComponent } from './service/service.component';
@@ -14,6 +14,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from '../client/dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { CommunityPageCardComponent } from './community/community-page-card/community-page-card.component';
 
 
 
@@ -87,7 +88,8 @@ const routes = [
     PaymentComponent,
     ServiceComponent,
     ServiceHistoryComponent,
-    ProfileComponent],
+    ProfileComponent,
+    CommunityPageCardComponent],
   exports: []
 })
 export class ClientModule { }

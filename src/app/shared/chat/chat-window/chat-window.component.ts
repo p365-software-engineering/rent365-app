@@ -14,7 +14,8 @@ export class ChatWindowComponent implements OnInit, OnChanges {
   public anonUser: boolean;
   public accordionOpened: boolean;
   public _chatThreads: Observable<ChatThread[]>;
-  public _activeThread = new Subject<ChatThread>();
+  public _activeThread: ChatThread;
+  public _activeThreadSubject = new Subject<ChatThread>();
   public _messages = new Subject<ChatMessage[]>();
   @Input() public ipAddress: string;
 
@@ -50,8 +51,7 @@ export class ChatWindowComponent implements OnInit, OnChanges {
 }
 
   switchTyping(chatThreadData: any) {
-    console.log(chatThreadData);
-    console.log('from rentz');
+    // console.log('from rentz');
     const { chatThreadID, typing } = chatThreadData;
     if (this.anonUser) {
       this._chatService.updateChatThread(chatThreadID, {
@@ -68,14 +68,41 @@ export class ChatWindowComponent implements OnInit, OnChanges {
     console.log(activeThreadID);
     this._chatService.getChatThread(activeThreadID)
       .subscribe(activeThread => {
+<<<<<<< HEAD
         console.log(activeThread);
         this._activeThread.next(activeThread);
       });
+=======
+        if (activeThread) {
+          // this.handleReadReceipts();
+          this._activeThread = activeThread;
+          this._activeThreadSubject.next(activeThread);
+        } else {
+          this._chatService.createNewChatThread(activeThreadID)
+            .then((newChatObj: any) => newChatObj as ChatThread)
+            .then((newChatThread) => {
+              this._activeThreadSubject.next(newChatThread);
+              this._activeThread = activeThread;
+            });
+        }
+    });
+>>>>>>> 0638a9c2b233bb8ff20694878c71c57efd3ebd7b
     this._chatService.getMessagesForChat(activeThreadID)
       .subscribe(chatMessages => this._messages.next(chatMessages));
   }
 
   toggleAccordion = () => {
+    this.handleReadReceipts(); 
     this.accordionOpened = !this.accordionOpened;
+  }
+
+  handleReadReceipts() {
+    console.log('toggle');
+    console.log(this._activeThread);
+    if (this._activeThread) {
+      console.log('activeThread');
+      const user = (this.anonUser) ? 'anon-user' : 'admin';
+      return this._chatService.markMessagesAsRead(this._activeThread.chatThreadID, user);
+    }
   }
 }

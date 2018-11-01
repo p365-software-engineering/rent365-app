@@ -15,7 +15,6 @@
             </div>
             <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
-                    <!-- TODO: *ngIf="!(anonUser)" -->
                     <div *ngIf="!(anonUser)">
                         <button type="button" class="btn btn-secondary">Select Chat Thread</button>
                         <ul class="list-group" *ngFor="let thread of _chatThreads | async">
@@ -25,9 +24,10 @@
                         </ul>
                     </div>
                     <app-chat-thread (eventEmitter)="switchTyping($event)" 
-                                [activeThread]="_activeThread"
+                                [activeThread]="_activeThreadSubject"
                                 [messages]="_messages"
-                                [anonUser]="anonUser"> </app-chat-thread>
+                                [anonUser]="anonUser"> 
+                    </app-chat-thread>
                 </div>
             </div>
         </div>

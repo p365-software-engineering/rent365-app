@@ -16,6 +16,7 @@ export class ServiceComponent implements OnInit {
   public serviceRequest: FormGroup;
   private date: string;
   private stid: string;
+  public count: number;
 
   constructor(private ticket: ServiceTicketService ,
     private toastr: ToastrService,
@@ -25,6 +26,7 @@ export class ServiceComponent implements OnInit {
     private afs: AngularFirestore) {
     this.date = new Date().toISOString();
     this.stid = this.afs.createId();
+    this.count = 0;
   }
 
   ngOnInit() {
@@ -39,6 +41,10 @@ export class ServiceComponent implements OnInit {
       security: ['', Validators.required],
       dateCreated: this.date
     });
+    this.ticket.getProgressServiceticketsByUserID(this.authX._currentUser.uid).subscribe(
+      next => this.count = next.length,
+      error => console.log(error)
+    );
   }
 
   public onSubmitRequest(): void {

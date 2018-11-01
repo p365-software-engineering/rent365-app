@@ -13,7 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from '../client/dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 

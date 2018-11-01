@@ -69,7 +69,7 @@ export class ChatWindowComponent implements OnInit, OnChanges {
     this._chatService.getChatThread(activeThreadID)
       .subscribe(activeThread => {
         console.log(activeThread);
-        this._activeThread.next(activeThread)
+        this._activeThread.next(activeThread);
       });
     this._chatService.getMessagesForChat(activeThreadID)
       .subscribe(chatMessages => this._messages.next(chatMessages));

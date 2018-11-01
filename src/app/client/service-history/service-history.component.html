@@ -13,7 +13,7 @@
             <div class="card-body">
               <h5 class="card-title">Total Request</h5>
               <h6 class="card-subtitle mb-2 text-muted">Till Date</h6>
-              <p class="currency">{{20}}</p>
+              <p class="currency">{{allCount}}</p>
             </div>
           </div>
         </div>
@@ -22,7 +22,7 @@
             <div class="card-body">
               <h5 class="card-title">Pending</h5>
               <h6 class="card-subtitle mb-2 text-muted">Till Date </h6>
-              <p class="currency">{{10}}</p>
+              <p class="currency">{{pendingCount}}</p>
             </div>
           </div>
         </div>
@@ -31,7 +31,7 @@
             <div class="card-body">
               <h5 class="card-title">Completed</h5>
               <h6 class="card-subtitle mb-2 text-muted">Till Date </h6>
-              <p class="currency">{{15}}</p>
+              <p class="currency">{{completedCount}}</p>
             </div>
           </div>
         </div>
@@ -51,32 +51,17 @@
                             <th scope="col">Status</th>
                             <th scope="col">Description</th>
                             <th scope="col">Assigned To</th>
-                            <th scope="col">ETC</th>
+                            <th scope="col">Completed On</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                            <td>@mdo</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                            <td>@fat</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
-                            <td>@twitter</td>
+                        <tbody >
+                          <tr *ngFor="let request of allRequests">
+                            <th scope="row">{{request.serviceTicketID | slice:-8}}</th>
+                            <td>{{request.dateCreated | date:'shortDate'}}</td>
+                            <td>{{request.ticketStatus}}</td>
+                            <td>{{request.ticketDescription | slice:0:15}}...</td>
+                            <td>-- </td>
+                            <td>{{request.dateResolved || "--"}} </td>
                           </tr>
                         </tbody>
                       </table>

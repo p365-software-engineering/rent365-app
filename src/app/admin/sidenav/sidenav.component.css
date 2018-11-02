@@ -2,7 +2,6 @@
  All the copyrights for the below code belongs to 
  @https://bootstrapious.com/p/bootstrap-sidebar
 */
-
 h2{
     font-family: 'Bangers', cursive;
     letter-spacing: 0.02em;
@@ -61,7 +60,7 @@ a:focus {
     left: 0;
     height: 100vh;
     z-index: 999;
-    background: #1A237E;
+    background: #c62828;
     color: #fff;
     transition: all 0.3s;
     
@@ -73,12 +72,12 @@ a:focus {
 
 #sidebar .sidebar-header {
     padding: 20px;
-    background: #1A237E;
+    background: #c62828;
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    border-bottom: 1px solid #ffcdd2;
 }
 
 #sidebar ul p {
@@ -93,14 +92,14 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #1A237E;
+    color: #c62828;
     background: #fff;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #1A237E;
+    background: #c62828;
 }
 
 a[data-toggle="collapse"] {
@@ -118,7 +117,7 @@ a[data-toggle="collapse"] {
 ul ul a {
     font-size: 0.98em !important;
     padding-left: 30px !important;
-    background: #1A237E;
+    background: #c62828;
 }
 
 ul.CTAs {
@@ -135,12 +134,12 @@ ul.CTAs a {
 
 a.download {
     background: #fff;
-    color: #1A237E;
+    color: #c62828;
 }
 
 a.article,
 a.article:hover {
-    background: #1A237E !important;
+    background: #c62828 !important;
     color: #fff !important;
 }
 

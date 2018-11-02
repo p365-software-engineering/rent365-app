@@ -45,12 +45,13 @@ export class AuthXService {
               email: user.email,
               first_name: user.displayName || user.first_name,
               last_name: user.displayName || user.last_name,
-              middle_name: user.displayName || user.middle_name || 'na',
+              middle_name: user.displayName || user.middle_name || '',
+              gender: '' || user.gender,
+              about_me: user.about_me || '',
               password: 'na',
-              role: role || 'client'
+              role: user.role || 'client'
             };
-          return userRef.set(data)
-            .then(() => this.router.navigate([`/${role}`]));
+          return userRef.set(data);
       });
   }
 
@@ -69,7 +70,6 @@ export class AuthXService {
               role: 'client'
             };
             this.updateUserData(data);
-            // TODO: LOGOUT???
             this.logout();
             return 'success';
           }
@@ -89,9 +89,28 @@ export class AuthXService {
     });
   }
 
+  public navigateUser(user: Observable<any>) {
+    user.subscribe(
+      (data) => {
+        if (data.role !== undefined) {
+          this.router.navigate([data.role]);
+        }
+      }
+    );
+  }
+
   public loginGoogle() {
     this.firebaseAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((credential) => {
-      this.updateUserData(credential.user);
+      const user = this.afs.collection<IUserData>('User').doc(credential.user.uid);
+      user.ref.get().then(
+        (userSnapshot) => {
+          if (!userSnapshot.exists) {
+            console.log('Profile Updated');
+            this.updateUserData(credential.user);
+          }
+          this.navigateUser(user.valueChanges());
+        }
+      );
     }).catch((error) => {
       console.log(error);
     });
@@ -99,8 +118,16 @@ export class AuthXService {
 
   public loginFacebook() {
     this.firebaseAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then((credential) => {
-      this.updateUserData(credential.user);
-      // this.router.navigate(['/client']);
+      const user = this.afs.collection<IUserData>('User').doc(credential.user.uid);
+      user.ref.get().then(
+        (userSnapshot) => {
+          if (!userSnapshot.exists) {
+            console.log('Profile Updated');
+            this.updateUserData(credential.user);
+          }
+          this.navigateUser(user.valueChanges());
+        }
+      );
     }).catch((error) => {
       console.log(error);
     });
@@ -135,6 +162,9 @@ export class AuthXService {
       console.log('Unable to sign Out' + error);
     });
   }
+
+  public getCurrentUser(): Observable<any> {
+    return this.afs.collection<IUserData>('User').doc(this._currentUser.uid).valueChanges();
+  }
 }
 
-const ADMIN_LIST = ['tcitrin@iu.edu'];

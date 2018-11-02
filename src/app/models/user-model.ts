@@ -6,13 +6,15 @@ export interface IUser {
 
 // Any Registration module has to implement the IRegister interface.
 export interface IUserData {
-    uid: String;
+    uid: string;
     first_name: string;
     middle_name: string;
     last_name: string;
-    email: String;
-    password?: String;
+    email: string;
+    password?: string;
+    gender?: string;
     role?: string;
+    about_me?: string;
 }
 
 export interface IRegister {

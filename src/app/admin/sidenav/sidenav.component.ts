@@ -8,7 +8,9 @@ import { AuthXService } from 'app/services/login/auth-x.service';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor(public authX: AuthXService) { }
+  constructor(public authX: AuthXService) {
+    console.log(this.authX._currentUser.uid);
+  }
   @Input() showNav: boolean;
 
   ngOnInit() {

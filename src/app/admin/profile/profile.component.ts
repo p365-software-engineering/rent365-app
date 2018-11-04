@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthXGuardAdminService, AuthXService } from 'app/services/service-export';
+import { AuthXService } from 'app/services/login/auth-x.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
       gender: [''],
       about_me: [''],
       uid: this.authX._currentUser.uid,
-      role: 'client',
+      role: 'admin',
       email: this.authX._currentUser.email
     });
 

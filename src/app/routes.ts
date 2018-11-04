@@ -3,6 +3,7 @@ import { LoginXComponent } from './public/login-x/login-x.component';
 import { RegisterXComponent } from './public/register-x/register-x.component';
 import { PublicComponent } from './public/public.component';
 import { AuthXGuardClientService} from './services/service-export';
+import { AuthXGuardAdminService} from './services/service-export';
 import { LeaseComponent } from './public/lease/lease.component';
 import { ApartmentComponent } from './public/lease/apartment/apartment.component';
 import { AmenitiesComponent } from './public/lease/amenities/amenities.component';
@@ -61,7 +62,7 @@ export const appRoutes: Routes = [
         // Admin Dashboard Controls
         path: 'admin',
         loadChildren: './admin/admin.module#AdminModule',
-        canActivateChild: []
+        canActivateChild: [AuthXGuardAdminService]
     }
 
 ];

@@ -134,15 +134,19 @@ export class AuthXService {
   }
 
   public login(formData: IUser): any {
-   return this.firebaseAuth.auth.signInWithEmailAndPassword(formData['email'], formData['password'])
-    .then((user) => {
-      if (!user.user.emailVerified) {
+    this.firebaseAuth.auth.signInWithEmailAndPassword(formData['email'], formData['password'])
+    .then((credential) => {
+      const user = this.afs.collection<IUserData>('User').doc(credential.user.uid);
+      if (!credential.user.emailVerified) {
         this.logout();
         console.log('Verify your email');
         return 'verify';
       } else {
-        this.router.navigate(['/client']);
-        return 'success';
+        user.ref.get().then(
+          (userSnapshot) => {
+            this.navigateUser(user.valueChanges());
+          }
+        );
       }
     }).catch((error) => {
           return error.code;

@@ -6,11 +6,14 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ProfileComponent } from 'app/admin/profile/profile.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     SharedModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',
@@ -19,11 +22,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
           {
             path: '',
             component: WelcomeComponent
+          },
+          {
+            path: 'profile',
+            component: ProfileComponent
           }
         ]
       }
     ])
   ],
-  declarations: [DashboardComponent, WelcomeComponent, SidenavComponent]
+  declarations: [DashboardComponent, WelcomeComponent, SidenavComponent, ProfileComponent]
 })
 export class AdminModule { }

@@ -1,0 +1,93 @@
+<div class="container-fluid">
+  <div class="card text-white bg-dark">
+    <img class="card-img-top" src="https://hdqwalls.com/wallpapers/avengers-infinity-war-mf.jpg"
+      alt="">
+    <div class="card-body">
+      <h4 class="card-title">MY PROFILE</h4>
+      <hr class="my-2 bg-light">
+      <br>
+      <!-- INFO CARDS -->
+      <div class="container-fluid bg-white form-input">
+        <div class="row">
+          <div class="col-lg-7">
+              <form autocomplete="off" [formGroup] = "profile" >
+                  <div class="form-group">
+                    <label for="subject">First Name<span class="asterisk">*</span></label>
+                    
+                    <input 
+                      formControlName="first_name" 
+                      type="text" 
+                      class="form-control" 
+                      name="firtName" 
+                      id="firtName">
+                  </div>
+                  <div class="form-group">
+                    <label for="subject">Middle Name</label>
+                    <input 
+                      formControlName="middle_name"
+                      type="text" 
+                      class="form-control" 
+                      name="middleName" 
+                      id="middleName">
+                  </div>
+                  <div class="form-group">
+                    <label for="subject">Last Name<span class="asterisk">*</span></label>
+                    
+                    <input 
+                      formControlName="last_name"
+                      type="text" 
+                      class="form-control" 
+                      name="lastName" 
+                      id="lastName">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Gender</label>
+                    <br>
+                    <br>
+                    <div class="form-check form-check-inline">
+                      <label class="form-check-label">
+                        <input 
+                          formControlName="gender"
+                          class="form-check-input" 
+                          type="radio" 
+                          name="gender" 
+                          id="gender" 
+                          value="male"> Male
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <label class="form-check-label">
+                        <input 
+                          formControlName="gender"
+                          class="form-check-input" 
+                          type="radio" 
+                          name="gender" 
+                          id="gender" 
+                          value="female"> Female
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <label class="form-check-label">
+                        <input 
+                          formControlName="gender"
+                          class="form-check-input" 
+                          type="radio" 
+                          name="gender" 
+                          id="gender" 
+                          value="na"> I'd rather not to tell
+                      </label>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="description">About Me</label>
+                    <textarea 
+                      formControlName="about_me" class="form-control" name="description" id="description" aria-describedby="description" placeholder="Tell people about yourself" rows="5"></textarea>
+                  </div>
+                  <button type="button" name="requestSubmit" id="requestSubmit" (click)="updateProfile()" class="btn btn-primary btn-lg">Update</button>
+                </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,6 +9,7 @@ import { ChatMessage } from 'app/models/chat';
 export class ChatMessageComponent implements OnInit {
 
   @Input() public message: ChatMessage;
+  @Input() public anonUser: boolean;
   constructor() { }
 
   ngOnInit() {

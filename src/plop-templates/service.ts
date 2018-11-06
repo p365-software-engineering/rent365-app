@@ -14,17 +14,15 @@ export class {{pascalCase name}}Service {
   private {{camelCase name}}Collection: AngularFirestoreCollection<{{pascalCase name}}>;
 
   constructor(private afs: AngularFirestore) { 
-    this.{{camelCase name}}Collection = afs.collection<{{pascalCase name}}>('{{dashCase name}}');
+    this.{{camelCase name}}Collection = afs.collection<{{pascalCase name}}>('{{dashCase name}}s');
   }
 
-  createNew{{pascalCase name}}(): Promise<void> {
+  createNew{{pascalCase name}}(data: any): Promise<void> {
       const {{camelCase name}}ID = this.afs.createId();
-      const {{camelCase name}}Obj = <{{pascalCase name}}> {
-          {{camelCase name}}ID: {{camelCase name}}ID
-      };
+      data.{{camelCase name}}ID = {{camelCase name}}ID;
       return this.{{camelCase name}}Collection
         .doc({{camelCase name}}ID)
-        .set({{camelCase name}}Obj);
+        .set(data);
   }
 
   getAll{{pascalCase name}}s(): Observable<{{pascalCase name}}[]> {

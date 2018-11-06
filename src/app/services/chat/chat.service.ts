@@ -3,7 +3,6 @@ import { AngularFirestore, AngularFirestoreCollection, QuerySnapshot, DocumentSn
 import { ChatThread, ChatMessage } from 'app/models/chat';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +16,10 @@ export class ChatService {
     this.chatThreadsCollection = afs.collection<ChatThread>('chat-threads');
   }
 
+  // TODO: Verify this works on server
   getIpAddress(): Promise<any> {
-    const url = 'http://ipv4.myexternalip.com/json';
+    // const url = 'http://ipv4.myexternalip.com/json';
+    const url = 'https://api.ipify.org?format=json';
     return this._httpclient.get(url).toPromise();
   }
 
@@ -38,17 +39,9 @@ export class ChatService {
 
   getChatThread(activeThreadID: string): Observable<any> {
     console.log(activeThreadID);
-    return from(this.chatThreadsCollection
+    return this.chatThreadsCollection
       .doc(activeThreadID)
-      .get()
-      .toPromise()
-      .then((docSnapshot: any) => {
-        if (docSnapshot.exists) {
-          return docSnapshot.data();
-        } else {
-          return this.createNewChatThread(activeThreadID);
-        }
-      }));
+      .valueChanges();
   }
 
   getAllChatThreads(): Observable<ChatThread[]> {
@@ -100,6 +93,30 @@ export class ChatService {
       .doc(messageID)
       .update({
         read: true
+      });
+  }
+
+  markMessagesAsRead(chatThreadID: string, currentUser: string): Promise<void> {
+    const batch = this.afs.firestore.batch();
+    return this.chatThreadsCollection
+      .doc(chatThreadID)
+      .collection('messages')
+      .get()
+      .toPromise()
+      .then((messages: QuerySnapshot<ChatMessage>) => {
+        messages.forEach((message) => {
+          if (currentUser === 'anon-user' && message.data().sender === 'admin') {
+            return batch.update(message.ref, {
+              isRead: true
+            });
+          } else if (currentUser === 'admin' && message.data().sender !== 'admin') {
+            return batch.update(message.ref, {
+              isRead: true
+            });
+          }
+        });
+        batch.delete(this.chatThreadsCollection.doc(chatThreadID).ref);
+        return batch.commit();
       });
   }
 

@@ -1,9 +1,10 @@
 <div class="card">
     <div class="card-body" id="chatThread">
         <h2 class="text-primary"> Chat Box</h2>
+        <!-- TODO: Check for async pipe -->
         <div class="clearfix" style="max-height: 1em" 
             *ngFor="let message of _messages" data-offset="0" data-target="#chatThread">
-            <app-chat-message class="text-info" [message]="message" 
+            <app-chat-message class="text-info" [message]="message" [anonUser]="anonUser"
                 style="clear: both;"
                 [style.float]="message.sender=='admin' ? 'left' : 'right'">
             </app-chat-message>

@@ -5,7 +5,7 @@ export enum enquiryStatus {
 }
 
 export class Enquiry {
-    eid: string;
+    enquiryID: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -14,7 +14,7 @@ export class Enquiry {
     status: string;
 
     constructor(obj: any) {
-        this.eid = obj.eid || '' ;
+        this.enquiryID = obj.enquiryID || '' ;
         this.firstName = obj.firstName;
         this.lastName = obj.lastName;
         this.email = obj.email;

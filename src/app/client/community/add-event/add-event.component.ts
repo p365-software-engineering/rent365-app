@@ -25,8 +25,6 @@ export class AddEventComponent implements OnInit {
   }
 
   createNewEvent() {
-    // $event.preventDefault();
-    // this.router.navigate['community'];
     return this._eventService.createNewEvent({
       date: Date.now(),
       eventTitle: this.add_event_form.get('eventTitle').value,

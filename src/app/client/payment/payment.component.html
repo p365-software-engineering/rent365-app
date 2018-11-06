@@ -12,7 +12,7 @@
             <div class="card-body">
               <h5 class="card-title">My Statement</h5>
               <h6 class="card-subtitle mb-2 text-muted">Current Balance</h6>
-              <p class="currency">{{2000 | currency}}</p>
+              <p class="currency">{{ bill?.amount | currency}}</p>
             </div>
           </div>
         </div>
@@ -21,7 +21,7 @@
             <div class="card-body">
               <h5 class="card-title">My Lease</h5>
               <h6 class="card-subtitle mb-2 text-muted">Expiration Date</h6>
-                <p class="currency"> {{ "12/31/2018" | date }}</p>
+              <p class="currency"> {{ bill?.dateDue | date }}</p>
             </div>
           </div>
         </div>
@@ -29,13 +29,22 @@
       <br>
       <div class="container-fluid bg-white form-input">
         <form>
-            <div class="form-group">
-                <label for="amount">Amount</label>
-                <input type="text" class="form-control" name="amount" id="amount" aria-describedby="amount-help" placeholder="{{2000 | currency}}">
-                <small id="amount-help" class="form-text text-muted">*Balance amount</small>
-              </div>
-              <br>
-              <button type="button" name="" id="" class="btn btn-primary btn-lg">PAY</button>
+          <div class="form-group">
+            <label for="amount">Secret Key</label>
+            <input type="text" class="form-control" name="stellarKey"
+              placeholder="stellar key" type="password"
+              #secretKey>
+          </div>
+          <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="text" class="form-control" name="amount" id="amount" aria-describedby="amount-help"
+              placeholder="{{ bill?.amount | currency}}">
+            <small id="amount-help" class="form-text text-muted">*Balance amount</small>
+          </div>
+          <br>
+          <button type="button" name="" id="" (click)="makePayment(secretKey.value)" class="btn btn-primary btn-lg">
+            PAY
+          </button>
         </form>
       </div>
     </div>

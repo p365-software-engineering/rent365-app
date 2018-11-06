@@ -9,3 +9,6 @@ export * from './review/review.service';
 export * from './stellar/stellar.service';
 export * from './enquiry/enquiry.service';
 export * from './event/event.service';
+
+export * from './bill/bill.service';
+export * from './statement/statement.service';

@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-
-import { EnquiryService } from "./enquiry.service";
+import { EnquiryService } from './enquiry.service';
 
 describe('EnquiryService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

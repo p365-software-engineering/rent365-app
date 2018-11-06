@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { EnquiryService } from 'app/services/service-export';
+import { enquiryStatus } from 'app/models/enquiry';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-enquiry',
@@ -11,29 +14,36 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class EnquiryComponent implements OnInit {
   public enquiry: FormGroup;
   private eid: string;
-  constructor(private fb: FormBuilder, private toastr: ToastrService, public afs: AngularFirestore) {
+  constructor(private fb: FormBuilder,
+    private router: Router,
+    private toastr: ToastrService,
+    public afs: AngularFirestore,
+    public enquiryS: EnquiryService) {
     this.eid = this.afs.createId();
   }
   ngOnInit() {
     this.enquiry = this.fb.group({
-      eid: this.eid,
+      enquiryID: this.eid,
       firstName: ['', [ Validators.required]],
       lastName: ['', [ Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       contact: [''],
-      message: ['', [Validators.required]]
+      message: ['', [Validators.required]],
+      status: [enquiryStatus.RECIEVED]
     });
   }
 
   public enquire() {
     if (this.enquiry && this.enquiry.valid) {
+        this.enquiryS.createNewEnquiry(this.enquiry.value);
         this.toastr.success('Enquiry has been succesfully submitted', 'Submitted', {
         timeOut: 2000
       });
-      console.log(this.enquiry.value);
+      this.router.navigate(['']);
     } else {
-      console.log('Invalid details has been submitted');
+      this.toastr.error('Failed to submit enquiry', 'Try once again', {
+        timeOut: 2000
+      });
     }
   }
-
 }

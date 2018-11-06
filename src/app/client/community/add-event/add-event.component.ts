@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'add-event',
+  selector: 'app-add-event',
   templateUrl: './add-event.component.html',
   styleUrls: ['./add-event.component.css']
 })
@@ -26,8 +26,7 @@ export class AddEventComponent implements OnInit {
 
   createNewEvent() {
     // $event.preventDefault();
-    console.log('cne');
-    this.router.navigate['community'];
+    // this.router.navigate['community'];
     return this._eventService.createNewEvent({
       date: Date.now(),
       eventTitle: this.add_event_form.get('eventTitle').value,

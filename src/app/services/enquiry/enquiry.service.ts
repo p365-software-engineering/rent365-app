@@ -17,14 +17,10 @@ export class EnquiryService {
     this.enquiryCollection = afs.collection<Enquiry>('enquiry');
   }
 
-  createNewEnquiry(): Promise<void> {
-      const enquiryID = this.afs.createId();
-      const enquiryObj = <Enquiry> {
-          enquiryID: enquiryID
-      };
-      return this.enquiryCollection
-        .doc(enquiryID)
-        .set(enquiryObj);
+  createNewEnquiry(enquiry: Enquiry): void {
+      this.enquiryCollection
+        .doc(enquiry.enquiryID)
+        .set(enquiry);
   }
 
   getAllEnquirys(): Observable<Enquiry[]> {

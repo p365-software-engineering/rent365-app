@@ -10,11 +10,10 @@ import { Event } from 'app/models/event';
 })
 export class CommunityComponent implements OnInit {
 
-  private _events: Observable<Event[]>;
+  public _events: Observable<Event[]>;
   constructor(private _eventService: EventService) { }
 
   ngOnInit() {
     this._events = this._eventService.getAllEvents();
   }
-  
 }

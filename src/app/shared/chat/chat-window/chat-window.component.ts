@@ -86,7 +86,7 @@ export class ChatWindowComponent implements OnInit, OnChanges {
   }
 
   toggleAccordion = () => {
-    this.handleReadReceipts(); 
+    this.handleReadReceipts();
     this.accordionOpened = !this.accordionOpened;
   }
 

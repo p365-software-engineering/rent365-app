@@ -57,15 +57,20 @@ export class BillService {
   }
 
   moveBillToUserStatements(userId: string, bill: any) {
-    return this.billCollection
+    const batch = this.afs.firestore.batch();
+    batch.delete(this.billCollection
       .doc(userId)
-      .delete()
-      .then(() => 
-        this.afs.collection('statements')
-          .doc(userId)
-          .collection('userStatements')
-          .add(bill)
-      );
+      .ref
+    );
+    const newID = this.afs.createId();
+    bill.id = newID;
+    batch.set(this.afs.collection('statements')
+      .doc(userId)
+      .collection('userStatements')
+      .doc(newID)
+      .ref, bill
+    );
+    return batch.commit();
   }
 
 }

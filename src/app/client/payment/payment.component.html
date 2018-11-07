@@ -12,7 +12,7 @@
             <div class="card-body">
               <h5 class="card-title">My Statement</h5>
               <h6 class="card-subtitle mb-2 text-muted">Current Balance</h6>
-              <p class="currency">{{ bill?.amount | currency}}</p>
+              <p class="currency">{{ (bill) ? (bill.amount | currency) : 'You have no balance due at the moment' }}</p>
             </div>
           </div>
         </div>
@@ -38,11 +38,16 @@
           <div class="form-group">
             <label for="amount">Amount</label>
             <input type="text" class="form-control" name="amount" id="amount" aria-describedby="amount-help"
-              placeholder="{{ bill?.amount | currency}}">
+              placeholder="{{ (bill) ? (bill.amount | currency) : '00.00' }}" 
+              #amountInput>
+            <!-- <input *ngIf="!bill" type="text" class="form-control" name="amount" id="amount" aria-describedby="amount-help"
+              placeholder="You have no balance due at the moment" 
+              #amountInput> -->
             <small id="amount-help" class="form-text text-muted">*Balance amount</small>
           </div>
           <br>
-          <button type="button" name="" id="" (click)="makePayment(secretKey.value)" class="btn btn-primary btn-lg">
+          <button type="button" name="" id="" class="btn btn-primary btn-lg" value="bill?.amount"
+            (click)="makePayment(secretKey.value); secretKey.value = ''; amountInput.value = '';">
             PAY
           </button>
         </form>

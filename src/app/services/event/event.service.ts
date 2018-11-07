@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Event } from '../../models/event';
+import { first } from 'rxjs/operators';
 
 
 @Injectable({
@@ -47,6 +48,10 @@ export class EventService {
     return this.eventCollection
       .doc(eventID)
       .delete();
+  }
+
+  getNextEvent() {
+    return this.afs.collection('events', ref => ref.orderBy('date')).valueChanges();
   }
   
 }

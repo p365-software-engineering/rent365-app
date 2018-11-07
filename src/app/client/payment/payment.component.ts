@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BillService, AuthXService } from 'app/services/service-export';
+import { BillService, AuthXService, EventService } from 'app/services/service-export';
 import { IUserData } from 'app/models/user-model';
 import { Observable } from 'rxjs';
 import { Bill } from 'app/models/bill';
@@ -13,7 +13,7 @@ import { PaymentOrchestratorService } from 'app/services/payment-orchestrator/pa
 export class PaymentComponent implements OnInit {
 
   // !# TODO: Delete SAV6VEIM2477EYBVOM2SXY3JG6JFKL734KKQRICCAQVMV57PC2KUMYH7 --> Testing only
-  private bill: Bill;
+  public bill: Bill;
   private user: IUserData;
 
   constructor(private _billService: BillService,
@@ -25,12 +25,12 @@ export class PaymentComponent implements OnInit {
         this.user = user;
         this._billService.getBillByUserID(user.uid)
           .subscribe(bill => this.bill = bill);
-      })
+      });
     }
 
     makePayment(_secretKey: string) {
-      if (!this.bill ) return alert('You have no balance due at the moment');
-      if (!_secretKey) return alert('Uh oh, looks like you didnt enter a secret key');
+      if (!this.bill ) { return alert('You have no balance due at the moment'); }
+      if (!_secretKey) { return alert('Uh oh, looks like you didnt enter a secret key'); }
       const pmtObj = {
         userID: this.user.uid,
         apartmentID: this.bill.apartmentID,

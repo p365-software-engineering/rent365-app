@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { BillService, AuthXService } from 'app/services/service-export';
+import { AuthXService, StatementService } from 'app/services/service-export';
 import { Observable } from 'rxjs';
-import { Bill } from 'app/models/bill';
 import { IUserData } from 'app/models/user-model';
+import { Statement } from '../../models/statement';
 
 @Component({
   selector: 'app-statement',
@@ -11,20 +11,15 @@ import { IUserData } from 'app/models/user-model';
 })
 export class StatementComponent implements OnInit {
 
-  private bill: Bill;
+  public _statements: Observable<Statement[]>;
 
-  constructor(private _billService: BillService,
+  constructor(private _statementService: StatementService,
               private authX: AuthXService) { }
 
   ngOnInit() {
     this.authX.getCurrentUser().subscribe((user: IUserData) => {
-        this._billService.getBillByUserID(user.uid).subscribe(
-            bill => {
-              this.bill = bill;
-            }
-        );
-      }
-    )
+      this._statements = this._statementService.getStatementsByUserID(user.uid);
+    });
   }
 
 }

@@ -30,6 +30,13 @@ export class StatementService {
       .valueChanges();
   }
 
+  getStatementsByUserID(userID: string): Observable<Statement[]> {
+    return this.statementCollection
+      .doc(userID)
+      .collection<Statement>('userStatements')
+      .valueChanges();
+  }
+
   getOneStatement(statementID: string): Observable<any> {
     return this.statementCollection
       .doc(statementID)

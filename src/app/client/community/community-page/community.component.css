@@ -10,3 +10,8 @@
 .new-post {
     margin-bottom: 1rem;
 } 
+
+.nav-link {
+    display: block;
+    padding: 0.5rem 0rem;
+}

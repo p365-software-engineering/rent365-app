@@ -1,15 +1,17 @@
 <div class="card bg-light">
-    <h1 class="card-text">
-        {{ event.eventTitle }}
-    </h1>
-    <p class="card-text">
-        {{ event.date }}
-      </p>
-    <img class="card-img-top" src="{{ event.pictureURL }}" style="height: 15rem;"
-      alt="Card image cap">
-    <div class="card-body">
+  <div class="community-heading card-header">
+      <h1 class="card-text-title">
+          {{ event.eventTitle }}
+      </h1>
       <p class="card-text">
-        {{ event.eventDescription }}
+          {{ event.date | date }}
+      </p>
+  </div>
+    <img class="card-img-top" src="{{ event.pictureURL || 'https://imgc.allpostersimages.com/img/print/u-g-PW8RI50.jpg?w=900&h=900&p=0'}}" style="height: 15rem;"
+      alt="Card image cap">
+    <div class="card-footer">
+      <p class="card-text">
+        {{ event.eventDescription | slice:0:50 }}
       </p>
     </div>
   </div>

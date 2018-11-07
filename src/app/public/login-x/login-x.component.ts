@@ -23,7 +23,7 @@ export class LoginXComponent implements OnInit {
   }
 
   onSubmit(formData: NgForm) {
-    console.log(formData);
+    // console.log(formData);
     if (formData && formData.valid) {
       this.currentUser = {
         email : formData.value['email'],

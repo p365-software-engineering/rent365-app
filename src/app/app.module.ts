@@ -22,6 +22,7 @@ import { SubmitComponent } from './public/lease/submit/submit.component';
 import { EnquiryComponent } from './public/enquiry/enquiry.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     AmenitiesComponent,
     LeaseInfoComponent,
     SubmitComponent,
-    EnquiryComponent
+    EnquiryComponent,
+    ForgotXComponent
   ],
   imports: [
     SharedModule,

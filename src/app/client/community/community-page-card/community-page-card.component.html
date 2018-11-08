@@ -8,8 +8,17 @@
     <img class="card-img-top" src="{{ event.pictureURL }}" style="height: 15rem;"
       alt="Card image cap">
     <div class="card-body">
-      <p class="card-text">
+      <p class="card-text"><strong>  Description:  </strong>
         {{ event.eventDescription }}
       </p>
+      <p class="card-text"> <strong> Attendees: </strong>
+          {{ event.attendees }}
+        </p>
+      <div>
+        <button (click)="joinEvent()"> Join </button>
+        <button *ngIf="currentUserID === event.eventCreator" (click)="deleteEvent()"> 
+          Delete Event 
+        </button>
+      </div>
     </div>
   </div>

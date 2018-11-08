@@ -4,8 +4,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { Event } from '../../models/event';
-import { first } from 'rxjs/operators';
 
+// TODO: SHRINK THIS PACKAGE IMPORT
+import { firestore } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +53,14 @@ export class EventService {
 
   getNextEvent() {
     return this.afs.collection('events', ref => ref.orderBy('date')).valueChanges();
+  }
+
+  joinEvent(eventID: string, userData: any) {
+    this.eventCollection
+      .doc(eventID)
+      .update({ attendees: 
+        firestore.FieldValue.arrayUnion(userData.userName)
+      });
   }
   
 }

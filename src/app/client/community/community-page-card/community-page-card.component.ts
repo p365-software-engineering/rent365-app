@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Event } from 'app/models/event';
 
 @Component({
@@ -8,10 +8,28 @@ import { Event } from 'app/models/event';
 })
 export class CommunityPageCardComponent implements OnInit {
 
+  @Input() public currentUserID: string;
   @Input() public event: Event;
+  @Output() eventEmitter = new EventEmitter();
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  joinEvent() {
+    this.eventEmitter.emit({
+      action: 'join',
+      eventID: this.event.eventID,
+      currentUserID: this.currentUserID
+    });
+  }
+
+  deleteEvent() {
+    this.eventEmitter.emit({
+      action: 'delete',
+      eventID: this.event.eventID
+    });
   }
 
 }

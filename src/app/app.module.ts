@@ -21,7 +21,7 @@ import { LeaseInfoComponent } from './public/lease/lease-info/lease-info.compone
 import { SubmitComponent } from './public/lease/submit/submit.component';
 import { EnquiryComponent } from './public/enquiry/enquiry.component';
 import { ToastrModule } from 'ngx-toastr';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
 
 @NgModule({
@@ -47,7 +47,8 @@ import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot(appRoutes),
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [AuthXService, AuthXGuardClientService],
   bootstrap: [AppComponent]

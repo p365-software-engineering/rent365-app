@@ -29,7 +29,8 @@ export class EnquiryComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       contact: [''],
       message: ['', [Validators.required]],
-      status: [enquiryStatus.RECIEVED]
+      status: ['RECIEVED', [Validators.required]],
+      recievedDate: new Date().toISOString()
     });
   }
 

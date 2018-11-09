@@ -1,18 +1,18 @@
-export class Payment {
+export class Statement {
 
-    paymentID: string;
+    statementID: string;
     userID: string;
     apartmentID: string;
     amount: string;
-    // dateDue: number;
+    dateDue: number;
     datePaid: number | null;
 
     constructor(obj?: any) {
-        this.paymentID      = obj.paymentID;
+        this.statementID    = obj.statementID;
         this.userID         = obj.userID;
         this.apartmentID    = obj.apartmentID;
         this.amount         = obj.amount;
-        this.datePaid       = obj.datePaid;
+        this.dateDue        = obj.dateDue;
     }
 
 }

@@ -1,4 +1,6 @@
-# RentalManagementApp
+# Super Rentals
+
+[![CircleCI](https://circleci.com/gh/p365-software-engineering/rent365-app/tree/master.svg?style=svg)](https://circleci.com/gh/p365-software-engineering/rent365-app/tree/master)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2.
 
@@ -8,7 +10,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Documentation:
 # https://runionow1-doc.azurewebsites.net
 
-# Build Sequence (TODO: ADD TEST AUTOMATION???)
+# Build Sequence 
 
 ## 1. Build artifacts for application, documentation, API
 

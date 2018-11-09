@@ -25,9 +25,9 @@
           <div class="info-card col-lg-3 col-md-6 col-sm-12">
             <div class="card h-100">
               <div class="card-body">
-                <h5 class="card-title">My Statement</h5>
+                <h5 class="card-title">Current Bill</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Current Balance</h6>
-                <p class="currency">{{2000 | currency}}</p>
+                <p class="currency">{{ (bill) ? (bill?.amount | currency) : 'You have no balance at this time'}}</p>
                 <button type="button" routerLink= "pay" name="quickpay" id="quickpay" class="btn btn-info btn-sm">QUICK PAY</button>
               </div>
             </div>
@@ -59,9 +59,12 @@
             <div class="card h-100">
               <div class="card-body">
                 <h5 class="card-title">Upcoming Events</h5>
-                <h6 class="card-subtitle mb-2 text-muted">News</h6>
-                  <p class="currency">{{ "12/31/2018" | date }}</p>
-                <button type="button" routerLink="community" name="quickpay" id="quickpay" class="btn btn-info btn-sm">MORE INFO</button>
+                <h6 class="card-subtitle mb-2 text-muted">{{ event?.eventTitle }}</h6>
+                  <p class="currency">{{ event?.date | date }}</p>
+                  <p class="currency">{{ event?.eventDescription }}</p>
+                <button type="button" routerLink="community" class="btn btn-info btn-sm" (click)="goToEvents()"> 
+                  Go to Events!
+                </button>
               </div>
             </div>
           </div>

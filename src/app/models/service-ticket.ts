@@ -30,7 +30,7 @@ export class ServiceTicket {
         this.security           = obj.security;
         this.dateCreated        = obj.dateCreated;
         this.dateResolved       = obj.dateResolved || '';
-        this.ticketStatus       = obj.ticketStatus || ServiceTicketStatus.PROGRESS;
+        this.ticketStatus       = obj.ticketStatus || 'PROGRESS';
     }
 }
 

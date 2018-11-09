@@ -19,7 +19,7 @@ export class ChatService {
   // TODO: Verify this works on server
   getIpAddress(): Promise<any> {
     // const url = 'http://ipv4.myexternalip.com/json';
-    const url = 'https://api.ipify.org?format=json';
+    const url = 'https://json.geoiplookup.io/api';
     return this._httpclient.get(url).toPromise();
   }
 

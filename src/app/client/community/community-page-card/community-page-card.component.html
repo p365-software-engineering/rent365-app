@@ -9,9 +9,19 @@
   </div>
     <img class="card-img-top" src="{{ event.pictureURL || 'https://imgc.allpostersimages.com/img/print/u-g-PW8RI50.jpg?w=900&h=900&p=0'}}" style="height: 15rem;"
       alt="Card image cap">
+
     <div class="card-footer">
-      <p class="card-text">
+      <p class="card-text"><strong>  Description:  </strong>
         {{ event.eventDescription | slice:0:50 }}
       </p>
+      <p class="card-text"> <strong> Attendees: </strong>
+          {{ event.attendees }}
+        </p>
+      <div>
+        <button (click)="joinEvent()"> Join </button>
+        <button *ngIf="currentUserID === event.eventCreator" (click)="deleteEvent()"> 
+          Delete Event 
+        </button>
+      </div>
     </div>
   </div>

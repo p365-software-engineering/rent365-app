@@ -7,18 +7,18 @@
       <hr class="my-2 bg-light">
       <br>
       <!-- INFO CARDS -->
-      <div class="row">
+      <!-- TODO: Note, this is not needed here -->
+      <!-- <div class="row">
         <div class="info-card col-lg-3 col-md-6 col-sm-12">
           <div class="card h-100">
             <div class="card-body">
               <h5 class="card-title">Current Balance</h5>
               <h6 class="card-subtitle mb-2 text-muted">Current Balance</h6>
-              <p class="currency">{{2000 | currency}}</p>
+              <p class="currency">{{ bill?.amount | currency  }}</p>
             </div>
           </div>
         </div>
-        
-      </div>
+      </div> -->
       <br>
       <div class="container-fluid bg-white form-input">
         <div class="row">
@@ -27,37 +27,18 @@
               <table class="table table-hover ">
                   <thead class="thead-light">
                     <tr>
+                      <th scope="col">Transaction ID</th>
                       <th scope="col">Transaction Date</th>
-                      <th scope="col">Type</th>
-                      <th scope="col">Description</th>
-                      <th scope="col">Charges</th>
-                      <th scope="col">Credits</th>
-                      <th scope="col">Balance</th>
+                      <th scope="col">ApartmentID</th>
+                      <th scope="col">Amount</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody *ngFor="let statement of _statements | async">
                     <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                      <td>@fat</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td colspan="2">Larry the Bird</td>
-                      <td>@twitter</td>
-                      <td>@twitter</td>
-                      <td>@twitter</td>
+                      <td> {{ statement.id }} </td>
+                      <td> {{ statement.datePaid | date }} </td>
+                      <td> {{ statement.apartmentID }} </td>
+                      <td> {{ statement.amount }} </td>
                     </tr>
                   </tbody>
                 </table>

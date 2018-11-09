@@ -24,7 +24,7 @@ export class ServiceHistoryComponent implements OnInit {
     private authX: AuthXService) { }
 
   ngOnInit() {
-    this.ticket.getServiceticketsByAptID(this.authX._currentUser.uid).subscribe(
+    this.ticket.getAllServiceTickets().subscribe(
       next => {
         this.allRequests = next;
         this.dataTable = new MatTableDataSource(next);

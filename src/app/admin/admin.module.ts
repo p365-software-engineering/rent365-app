@@ -10,6 +10,8 @@ import { ProfileComponent } from 'app/admin/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ServiceHistoryComponent } from './service-history/service-history.component';
 import { EditServiceComponent } from './service-history/edit-service/edit-service.component';
+import { EnquiryHistoryComponent } from './enquiry-history/enquiry-history.component';
+import { EditComponent } from './enquiry-history/edit/edit.component';
 
 @NgModule({
   imports: [
@@ -36,6 +38,14 @@ import { EditServiceComponent } from './service-history/edit-service/edit-servic
           {
             path: 'manage/:id',
             component: EditServiceComponent
+          },
+          {
+            path: 'enquiry',
+            component: EnquiryHistoryComponent
+          },
+          {
+            path: 'enquiry/:id',
+            component: EditComponent
           }
         ]
       }
@@ -46,6 +56,8 @@ import { EditServiceComponent } from './service-history/edit-service/edit-servic
       SidenavComponent,
       ProfileComponent,
       ServiceHistoryComponent,
-      EditServiceComponent]
+      EditServiceComponent,
+      EnquiryHistoryComponent,
+      EditComponent]
 })
 export class AdminModule { }

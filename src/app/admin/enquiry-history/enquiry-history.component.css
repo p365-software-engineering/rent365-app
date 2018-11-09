@@ -1,40 +1,20 @@
-.container {
-    background-color: white;
-    padding-left: 100px;
-}
-
-h3 {
-    font-weight: bold;
-}
-
-label {
-    font-size: 15px;
-    color: black;
-}
-
-.asterisk {
-    color:red;
-  }
-
-.help-block{
-    color:red;
-}
-
-select {
-    border: solid 1px gray;
-}
-
 .card-img-top{
     display: block;
     object-fit: cover;
     height:23rem;
 }
 
+.currency {
+    font-size: 2rem;
+    color: #000;
+}
 .info {
     font-size: 1rem;
 }
 
-
+.info .currency {
+    font-size: 1rem;
+}
 .info-card .card-title{
     color: #000;
 }
@@ -71,10 +51,5 @@ select {
 
 .form-input {
     padding: 2rem;
-}
-
-.container-enquiry{
-    padding-left: 1rem;
-    padding-right: 1rem; 
 }
 

@@ -12,6 +12,11 @@ import { ServiceHistoryComponent } from './service-history/service-history.compo
 import { EditServiceComponent } from './service-history/edit-service/edit-service.component';
 import { EnquiryHistoryComponent } from './enquiry-history/enquiry-history.component';
 import { EditComponent } from './enquiry-history/edit/edit.component';
+import { ApartmentComponent } from './apartment/apartment.component';
+import { AmenitiesComponent } from './amenities/amenities.component';
+import { LeaseComponent } from './lease/lease.component';
+// import { EditAmenitiesComponent } from './amenities/edit/edit.component';
+import { EditApartmentComponent } from './apartment/edit-apartment/edit-apartment.component';
 
 @NgModule({
   imports: [
@@ -46,7 +51,23 @@ import { EditComponent } from './enquiry-history/edit/edit.component';
           {
             path: 'enquiry/:id',
             component: EditComponent
-          }
+          },
+          {
+            path: 'apartment',
+            component: ApartmentComponent
+          },
+          {
+            path: 'apartment/:id',
+            component: EditApartmentComponent
+          },
+          {
+            path: 'amenities',
+            component: AmenitiesComponent
+          },
+          // {
+          //   path: 'amenities/:id',
+          //   component: EditAmenitiesComponent
+          // }
         ]
       }
     ])
@@ -58,6 +79,10 @@ import { EditComponent } from './enquiry-history/edit/edit.component';
       ServiceHistoryComponent,
       EditServiceComponent,
       EnquiryHistoryComponent,
-      EditComponent]
+      EditComponent,
+      EditApartmentComponent,
+      ApartmentComponent,
+      AmenitiesComponent,
+      LeaseComponent]
 })
 export class AdminModule { }

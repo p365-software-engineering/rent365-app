@@ -37,13 +37,13 @@
           <a href="#leaseSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">LEASE</a>
           <ul class="collapse list-unstyled" id="leaseSubmenu">
               <li>
-                  <a href="#">Manage</a>
+                  <a [routerLink]="['lease']">Manage</a>
               </li>
               <li>
-                  <a href="#">Amenities</a>
+                  <a [routerLink]="['amenities']">Amenities</a>
               </li>
               <li>
-                  <a href="#">Apartments</a>
+                  <a [routerLink]="['apartment']">Apartments</a>
               </li>
               <li>
                   <a [routerLink]="['enquiry']">Enquiries</a>
@@ -56,9 +56,9 @@
                 <li>
                     <a routerLink='manage'>Manage </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a routerLink='history'>History</a>
-                </li>
+                </li> -->
             </ul>
         </li>
         <li>

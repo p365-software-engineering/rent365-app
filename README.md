@@ -2,13 +2,15 @@
 
 [![CircleCI](https://circleci.com/gh/p365-software-engineering/rent365-app/tree/master.svg?style=svg)](https://circleci.com/gh/p365-software-engineering/rent365-app/tree/master)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2
+
+This project is ```CI/CD``` enabled
 
 ## Website:
-# https://runionow1.azurewebsites.net
+### https://runionow1.azurewebsites.net
 
 ## Documentation:
-# https://runionow1-doc.azurewebsites.net
+### https://runionow1-doc.azurewebsites.net
 
 # Build Sequence 
 
@@ -28,13 +30,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## 2. Build Images
 
 ### 2.1 Build App Image
-    > docker build -f App.Dockerfile -t ren365/rms-app:latest .
+    > docker build -f App.Dockerfile -t runionow.azurecr.io/rms-app:latest .
 
 ### 2.2 Documentation Image
-    > docker build -f Docu.Dockerfile -t ren365/rms-doc:latest .
+    > docker build -f Docu.Dockerfile -t runionow.azurecr.io/rms-doc:latest .
 
-### 2.3 API Image
-    > docker build -f API.Dockerfile -t ren365/rms-api:latest .
+### 2.3 API Image (Legacy-Unstable) [Ignored]
+    > docker build -f API.Dockerfile -t runionow.azurecr.io/rms-api:latest .
 
 
 # (Todo: configure below)

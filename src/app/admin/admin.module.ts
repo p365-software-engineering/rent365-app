@@ -8,6 +8,8 @@ import { SharedModule } from '../shared/shared.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from 'app/admin/profile/profile.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ServiceHistoryComponent } from './service-history/service-history.component';
+import { EditServiceComponent } from './service-history/edit-service/edit-service.component';
 
 @NgModule({
   imports: [
@@ -26,11 +28,24 @@ import { ReactiveFormsModule } from '@angular/forms';
           {
             path: 'profile',
             component: ProfileComponent
+          },
+          {
+            path: 'manage',
+            component: ServiceHistoryComponent
+          },
+          {
+            path: 'manage/:id',
+            component: EditServiceComponent
           }
         ]
       }
     ])
   ],
-  declarations: [DashboardComponent, WelcomeComponent, SidenavComponent, ProfileComponent]
+  declarations: [DashboardComponent,
+     WelcomeComponent,
+      SidenavComponent,
+      ProfileComponent,
+      ServiceHistoryComponent,
+      EditServiceComponent]
 })
 export class AdminModule { }

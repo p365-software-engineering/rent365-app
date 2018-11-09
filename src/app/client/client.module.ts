@@ -17,7 +17,6 @@ import { SharedModule } from '../shared/shared.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommunityPageCardComponent } from './community/community-page-card/community-page-card.component';
 import { AddEventComponent } from './community/add-event/add-event.component';
-import { MaterialModule } from './material-module';
 
 
 
@@ -87,7 +86,6 @@ const routes = [
     // BrowserAnimationsModule,
     ToastrModule.forRoot(),
     RouterModule.forChild(routes),
-    MaterialModule
   ],
   declarations: [SidenavComponent,
     DashboardComponent,

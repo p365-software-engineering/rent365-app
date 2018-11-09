@@ -75,6 +75,7 @@ export class ServiceTicketService {
   }
 
   updateServiceTicket(serviceTicketObj: any): Promise<void> {
+    console.log(serviceTicketObj);
     const serviceTicketID = serviceTicketObj.serviceTicketID;
     return this.serviceTicketCollection
       .doc(serviceTicketID)

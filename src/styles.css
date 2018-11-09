@@ -37,7 +37,19 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
 }
 
 .form-input-filter {
-    padding: 1rem 2rem 0rem 2rem;
+    padding: 0rem;
     font-size: 1.25rem;
     color: black;
+}
+
+.form-input {
+    padding: 1.35rem !important;
+}
+
+.container-fluid {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 0px;
+    padding-left: 0px;
+    width: 100%;
 }

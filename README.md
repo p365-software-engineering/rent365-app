@@ -1,5 +1,7 @@
 # Super Rentals
 
+[![CircleCI](https://circleci.com/gh/p365-software-engineering/rent365-app/tree/master.svg?style=svg)](https://circleci.com/gh/p365-software-engineering/rent365-app/tree/master)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.2.
 
 ## Website:

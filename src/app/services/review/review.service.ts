@@ -29,6 +29,13 @@ export class ReviewService {
       .valueChanges();
   }
 
+  getAllReviewsByAptID(apartmentID: string): Observable<Review[]> {
+    return this.reviewCollection
+      .doc(apartmentID)
+      .collection<Review>('reviews')
+      .valueChanges();
+  }
+
   getOneReview(reviewID: string): Observable<any> {
     return this.reviewCollection
       .doc(reviewID)

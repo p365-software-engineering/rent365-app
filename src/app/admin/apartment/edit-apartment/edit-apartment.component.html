@@ -43,25 +43,27 @@
                 </mat-form-field>
 
                 <mat-form-field class="col-lg-1">
-                  <input matInput formControlName="baths" placeholder="1.5" type="number">
+                  <input matInput formControlName="baths" placeholder="1" type="number">
                   <mat-label><i class="fa fa-bath" aria-hidden="true"></i> Baths</mat-label>
                 </mat-form-field>
               </div>
               <div class="row">
                 <mat-form-field class="col-lg-4">
-                  <textarea matInput formControlName="description" placeholder="Description" rows="5"></textarea>
-                  <mat-label>Description</mat-label>
+                  <input matInput type="text" formControlName="type" placeholder="Bunker" >
+                  <mat-label>Type</mat-label>
                 </mat-form-field>
               </div>
-              
+
               <div class="row">
                 <mat-form-field class="col-lg-4">
-                  <textarea matInput formControlName="description" placeholder="Description" rows="5"></textarea>
-                  <mat-label>Description</mat-label>
+                  <input matInput formControlName="image" placeholder="http://coolimgae/hello.jpg" type="url">
+                  <mat-label>Thumbnail</mat-label>
                 </mat-form-field>
               </div>
+              <br>
+              <button type="button" (click)="onSubmitRequest()" name="requestSubmit" id="requestSubmit" class="btn btn-primary btn-lg">SUBMIT</button>
+                &nbsp;<button type="button" (click)="goBack()" name="requestSubmit" class="btn btn-danger btn-lg">CANCEL</button>
             </form>
-
           </div>
         </div>
       </div>

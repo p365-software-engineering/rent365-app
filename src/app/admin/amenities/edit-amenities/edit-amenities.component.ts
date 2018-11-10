@@ -6,15 +6,15 @@ import { LeaseService } from 'app/services/lease/lease.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-edit-apartment',
-  templateUrl: './edit-apartment.component.html',
-  styleUrls: ['./edit-apartment.component.css']
+  selector: 'app-edit-amenities',
+  templateUrl: './edit-amenities.component.html',
+  styleUrls: ['./edit-amenities.component.css']
 })
-export class EditApartmentComponent implements OnInit {
+export class EditAmenitiesComponent implements OnInit {
 
-  public apartmentData: FormGroup;
-  public aptID: string;
-  public newAptID: string;
+  public amenityData: FormGroup;
+  public amntID: string;
+  public newAmntID: string;
   private routeID: string;
   constructor(private fb: FormBuilder,
       private router: Router,
@@ -22,18 +22,15 @@ export class EditApartmentComponent implements OnInit {
       private afs: AngularFirestore,
       private ls: LeaseService,
       private toastr: ToastrService) {
-        this.newAptID = this.afs.createId();
+        this.newAmntID = this.afs.createId();
       }
 
   ngOnInit() {
-    this.apartmentData = this.fb.group({
-      aptID: [this.newAptID, [Validators.required]],
-      baths: ['', [Validators.max(8), Validators.min(1), Validators.required]],
-      beds: ['', [Validators.max(8), Validators.min(1), Validators.required]],
+    this.amenityData = this.fb.group({
+      amntID: [this.newAmntID, [Validators.required]],
       description: ['', [Validators.maxLength(500), Validators.required]],
       title: ['', [Validators.maxLength(50), Validators.required]],
       sub_title: ['', [Validators.maxLength(50), Validators.required]],
-      type: ['', [Validators.required]],
       price: ['', [Validators.required]],
       image: ['', Validators.required]
     });
@@ -43,25 +40,22 @@ export class EditApartmentComponent implements OnInit {
         this.routeID = params['id'];
         if (params['id'] !== '0') {
           console.log(params['id']);
-          this.aptID = params['id'];
-          this.getApartmentData();
+          this.amntID = params['id'];
+          this.getAmenityData();
         }
       }
     );
   }
 
-  private getApartmentData() {
-    this.ls.getApartmentbyID(this.aptID).subscribe(
+  private getAmenityData() {
+    this.ls.getAmenitybyID(this.amntID).subscribe(
       (enquiry) => {
         console.log(enquiry);
-        this.apartmentData.patchValue({
-          aptID: enquiry.aptID,
-          baths: enquiry.baths,
-          beds: enquiry.beds,
+        this.amenityData.patchValue({
+          amntID: enquiry.amntID,
           description: enquiry.description,
           title: enquiry.title,
           sub_title: enquiry.sub_title,
-          type: enquiry.type,
           price: enquiry.price,
           image: enquiry.image
         });
@@ -69,21 +63,22 @@ export class EditApartmentComponent implements OnInit {
   }
 
   public onSubmitRequest() {
-    if (this.apartmentData.valid) {
-      console.log(this.apartmentData.value);
-      this.ls.addApartment(this.apartmentData.value);
-      this.router.navigate(['admin', 'apartment']);
-      this.toastr.success('Succesfully Updated', 'Apartment', {
+    console.log(this.amenityData.value);
+    if (this.amenityData.valid) {
+      this.ls.addAmenity(this.amenityData.value);
+      this.router.navigate(['admin', 'amenities']);
+      this.toastr.success('Succesfully Updated', 'Amenity', {
         timeOut: 2000
       });
     } else {
-      this.toastr.error('Failed to Update, Verify all the fields', 'Apartment', {
+      this.toastr.error('Failed to Update, Verify all the fields', 'Amenity', {
         timeOut: 2000
       });
     }
   }
 
   public goBack() {
-    this.router.navigate(['admin', 'apartment']);
+    this.router.navigate(['admin', 'amenities']);
   }
+
 }

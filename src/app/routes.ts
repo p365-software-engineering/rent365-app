@@ -11,6 +11,7 @@ import { LeaseInfoComponent } from './public/lease/lease-info/lease-info.compone
 import { SubmitComponent } from './public/lease/submit/submit.component';
 import { EnquiryComponent } from './public/enquiry/enquiry.component';
 import { DashboardComponent } from './client/dashboard/dashboard.component';
+import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
 
 
 
@@ -26,6 +27,10 @@ export const appRoutes: Routes = [
     {
         path : 'register',
         component : RegisterXComponent
+    },
+    {
+        path : 'forgot',
+        component : ForgotXComponent
     },
     {
         path: 'lease',

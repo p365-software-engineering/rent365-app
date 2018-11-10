@@ -43,13 +43,13 @@ export class ServiceTicketService {
   // By AptID - replace with [apartmentID] when apartmentID is available
   getProgressServiceticketsByAptID(aptid: string): Observable<ServiceTicket[]> {
       return this.afs.collection<ServiceTicket>('service-ticket', ref => {
-        return ref.where('ticketStatus', '==', 'Progress').where('userID', '==', aptid);
+        return ref.where('ticketStatus', '==', 'PROGRESS').where('userID', '==', aptid);
       }).valueChanges();
   }
 
   getCompletedServiceticketsByAptID(aptid: string): Observable<ServiceTicket[]> {
       return this.afs.collection<ServiceTicket>('service-ticket', ref => {
-        return ref.where('ticketStatus', '==', 'Completed').where('userID', '==', aptid);
+        return ref.where('ticketStatus', '==', 'COMPLETED').where('userID', '==', aptid);
       }).valueChanges();
   }
 
@@ -63,9 +63,15 @@ export class ServiceTicketService {
 
   }
 
-  getAllServiceTicketsID(): Observable<ServiceTicket[]> {
+  getAllServiceTickets(): Observable<ServiceTicket[]> {
     return this.serviceTicketCollection
       .valueChanges();
+  }
+
+  getProgressServiceTickets(): Observable<ServiceTicket[]> {
+    return this.afs.collection<ServiceTicket>('service-ticket', ref => {
+      return ref.where('ticketStatus', '==', 'PROGRESS');
+    }).valueChanges();
   }
 
   getOneServiceTicket(serviceTicketID: string): Observable<any> {
@@ -75,6 +81,7 @@ export class ServiceTicketService {
   }
 
   updateServiceTicket(serviceTicketObj: any): Promise<void> {
+    console.log(serviceTicketObj);
     const serviceTicketID = serviceTicketObj.serviceTicketID;
     return this.serviceTicketCollection
       .doc(serviceTicketID)

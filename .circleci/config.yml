@@ -45,7 +45,7 @@ jobs:
       - run: yarn ng build --prod
 
       # running test cases for one single
-      - run: yarn ng test --watch=false --progress=false --browsers=ChromeHeadless
+      # - run: yarn ng test --watch=false --progress=false --browsers=ChromeHeadless
 
       # Running on an headless chrome browser
       # - run: yarn ng e2e --protractor-config=./e2e/protractor-ci.conf.js
@@ -53,15 +53,15 @@ jobs:
       # ======================= Docker Registry Login ====================================
 
       # Login Azure Container Registry
-      - run: docker login --username $DOCKER_USER_NAME --password $DOCKER_PASSWORD rent365.azurecr.io
+      - run: docker login --username $DOCKER_USER_NAME --password $DOCKER_PASSWORD runionow.azurecr.io
 
       # ======================= PRODUCTION-BUILD =========================================
 
       # Upon success build the docker file
-      - run: docker build -f App.Dockerfile -t rent365.azurecr.io/rms-app:latest .
+      - run: docker build -f App.Dockerfile -t runionow.azurecr.io/rms:latest .
 
       # Pushing Azure container to the registry
-      - run: docker push rent365.azurecr.io/rms-app:latest
+      - run: docker push runionow.azurecr.io/rms:latest
 
       # ======================= DOCUMENTATION-BUILD =======================================
 
@@ -71,7 +71,7 @@ jobs:
       - run: yarn run compodoc
 
       # Upon success build the docker file
-      - run: docker build -f Docu.Dockerfile -t rent365.azurecr.io/rms-doc:latest .
+      - run: docker build -f Docu.Dockerfile -t runionow.azurecr.io/rms-doc:latest .
 
       # Pushing Azure container to the registry
-      - run: docker push rent365.azurecr.io/rms-doc:latest
+      - run: docker push runionow.azurecr.io/rms-doc:latest

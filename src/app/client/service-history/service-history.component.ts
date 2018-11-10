@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiceTicketService, AuthXService } from 'app/services/service-export';
 import { ServiceTicket } from 'app/models/model-export';
 import { Observable } from 'rxjs';
+import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-service-history',
@@ -14,6 +15,11 @@ export class ServiceHistoryComponent implements OnInit {
   public completedCount: number;
   public pendingCount: number;
   public allRequests: ServiceTicket[];
+  public displayedColumns: string[] = ['serviceTicketID', 'dateCreated', 'subject', 'ticketDescription', 'Status', 'dateResolved'];
+  public dataTable: MatTableDataSource<ServiceTicket>;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   constructor(private ticket: ServiceTicketService,
     private authX: AuthXService) { }
 
@@ -21,6 +27,9 @@ export class ServiceHistoryComponent implements OnInit {
     this.ticket.getServiceticketsByAptID(this.authX._currentUser.uid).subscribe(
       next => {
         this.allRequests = next;
+        this.dataTable = new MatTableDataSource(next);
+        this.dataTable.sort = this.sort;
+        this.dataTable.paginator = this.paginator;
         this.allCount = next.length;
       },
       error => console.log(error)
@@ -39,6 +48,10 @@ export class ServiceHistoryComponent implements OnInit {
       },
       error => console.log(error)
     );
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataTable.filter = filterValue.trim().toLowerCase();
   }
 
 }

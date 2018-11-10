@@ -37,10 +37,16 @@
           <a href="#leaseSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">LEASE</a>
           <ul class="collapse list-unstyled" id="leaseSubmenu">
               <li>
-                  <a href="#">Lease Info</a>
+                  <a [routerLink]="['lease']">Manage</a>
               </li>
               <li>
-                  <a href="#">Add Amenities</a>
+                  <a [routerLink]="['amenities']">Amenities</a>
+              </li>
+              <li>
+                  <a [routerLink]="['apartment']">Apartments</a>
+              </li>
+              <li>
+                  <a [routerLink]="['enquiry']">Enquiries</a>
               </li>
           </ul>
       </li>
@@ -48,11 +54,11 @@
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">SERVICE REQUEST</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
                 <li>
-                    <a routerLink='request'>New Service Request</a>
+                    <a routerLink='manage'>Manage </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a routerLink='history'>History</a>
-                </li>
+                </li> -->
             </ul>
         </li>
         <li>

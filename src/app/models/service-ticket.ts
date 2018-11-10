@@ -5,6 +5,7 @@ export enum ServiceTicketStatus {
 
 export class ServiceTicket {
 
+    leaseID?: string;
     serviceTicketID: string;
     userID: string;
     apartmentID: string;
@@ -13,11 +14,12 @@ export class ServiceTicket {
     permission: string;
     pets: string;
     security: string;
-    dateCreated: number;
-    dateResolved: number | null;
+    dateCreated: string;
+    dateResolved: string | null;
     ticketStatus: ServiceTicketStatus;
 
     constructor(obj?: any) {
+        this.leaseID            = obj.leaseID || '';
         this.serviceTicketID    = obj.serviceTicketID || '';
         this.userID             = obj.userID;
         this.apartmentID        = obj.apartmentID;
@@ -28,7 +30,7 @@ export class ServiceTicket {
         this.security           = obj.security;
         this.dateCreated        = obj.dateCreated;
         this.dateResolved       = obj.dateResolved || '';
-        this.ticketStatus       = obj.ticketStatus || ServiceTicketStatus.PROGRESS;
+        this.ticketStatus       = obj.ticketStatus || 'PROGRESS';
     }
 }
 

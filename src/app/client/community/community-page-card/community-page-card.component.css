@@ -1,0 +1,21 @@
+.card-img-top {
+    width:inherit; 
+    object-fit: contain;
+    background: white;
+}
+
+.card-text-title {
+    text-transform: capitalize;
+    font-size: 1.75rem;
+}
+
+.community-heading {
+    padding: 1rem 1.5rem;
+}
+
+.card {
+    border-radius: 0.65rem;
+    width: auto;
+    cursor: pointer;
+    overflow-wrap: break-word;
+}

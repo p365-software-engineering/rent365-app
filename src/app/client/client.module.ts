@@ -13,7 +13,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProfileComponent } from './profile/profile.component';
 import { DashboardComponent } from '../client/dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
-
+// import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { CommunityPageCardComponent } from './community/community-page-card/community-page-card.component';
 import { AddEventComponent } from './community/add-event/add-event.component';
@@ -83,8 +83,9 @@ const routes = [
   imports: [
     SharedModule,
     ReactiveFormsModule,
+    // BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
   declarations: [SidenavComponent,
     DashboardComponent,

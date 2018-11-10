@@ -7,6 +7,7 @@ export class Event {
     pictureURL: string;
     attendeeList: string[];
     eventCreator: string;
+    attendees: any;
 
     constructor(obj?: any) {
         this.eventID            = obj.eventID;

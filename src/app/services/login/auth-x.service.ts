@@ -7,6 +7,7 @@ import { auth } from 'firebase/app';
 import { first, map } from 'rxjs/operators';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { StellarService } from '../stellar/stellar.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class AuthXService {
   constructor(private firebaseAuth: AngularFireAuth,
               private stellarService: StellarService,
               private router: Router,
+              private toastr: ToastrService,
               private afs: AngularFirestore) {
       this._currentUser = null;
       this.currentUserState = firebaseAuth.authState;
@@ -133,8 +135,8 @@ export class AuthXService {
     });
   }
 
-  public login(formData: IUser): any {
-    this.firebaseAuth.auth.signInWithEmailAndPassword(formData['email'], formData['password'])
+  public login(formData: IUser) {
+    return this.firebaseAuth.auth.signInWithEmailAndPassword(formData['email'], formData['password'])
     .then((credential) => {
       const user = this.afs.collection<IUserData>('User').doc(credential.user.uid);
       if (!credential.user.emailVerified) {
@@ -156,6 +158,27 @@ export class AuthXService {
 
   public isLoggedIn(): boolean {
     return this._currentUser !== null;
+  }
+
+  public forgotPassword(email: string): any {
+    this.firebaseAuth.auth.sendPasswordResetEmail(email)
+    .then(
+      () => {
+        this.toastr.success('Please verify your inbox', 'Success', {
+          timeOut: 2000
+        });
+        this.router.navigate(['login']);
+        return 'sent';
+      }
+    )
+    .catch(
+      (error) => {
+        this.toastr.error('Please verify your email', error.code, {
+          timeOut: 2000
+        });
+         return error.code;
+      }
+    );
   }
 
   public logout(): void {

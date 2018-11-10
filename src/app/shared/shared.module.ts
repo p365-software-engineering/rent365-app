@@ -7,6 +7,7 @@ import { ChatMessageComponent } from './chat/chat-message/chat-message.component
 import { ChatWindowComponent } from './chat/chat-window/chat-window.component';
 import { HeaderComponent, FooterComponent } from './shared-export';
 import { BrowserModule } from '@angular/platform-browser';
+import { MaterialModule } from './material-module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { BrowserModule } from '@angular/platform-browser';
     CommonModule,
     FormsModule,
     HttpClientModule,
+    MaterialModule
   ],
   exports: [
     ChatThreadComponent,
@@ -29,7 +31,8 @@ import { BrowserModule } from '@angular/platform-browser';
     FooterComponent,
     FormsModule,
     HttpClientModule,
-    CommonModule
+    CommonModule,
+    MaterialModule
   ]
 })
 

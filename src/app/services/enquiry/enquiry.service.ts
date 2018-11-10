@@ -28,6 +28,18 @@ export class EnquiryService {
       .valueChanges();
   }
 
+  getPendingEnquiries(){
+    return this.afs.collection<Enquiry>('enquiry', ref => {
+      return ref.where('status', '==', 'RECIEVED');
+    }).valueChanges();
+  }
+
+  getCompletedEnquiries(){
+    return this.afs.collection<Enquiry>('enquiry', ref => {
+      return ref.where('status', '==', 'COMPLETED');
+    }).valueChanges();
+  }
+
   getOneEnquiry(enquiryID: string): Observable<any> {
     return this.enquiryCollection
       .doc(enquiryID)

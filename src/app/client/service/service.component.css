@@ -51,5 +51,20 @@
 
 .form-input {
     padding: 2rem;
+    
 }
+
+.full-table{
+    width: 100%;
+}
+
+table.mat-table {
+    border-spacing: 0;
+    width: 100%;
+}
+
+.increse-width{
+    word-wrap: break-word;
+}
+
 

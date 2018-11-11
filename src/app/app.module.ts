@@ -23,6 +23,8 @@ import { EnquiryComponent } from './public/enquiry/enquiry.component';
 import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
+import { ReviewsComponent } from './public/reviews/reviews.component';
+import { ReviewCardComponent } from './public/review-card/review-card.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
     LeaseInfoComponent,
     SubmitComponent,
     EnquiryComponent,
-    ForgotXComponent
+    ForgotXComponent,
+    ReviewsComponent,
+    ReviewCardComponent
   ],
   imports: [
     SharedModule,

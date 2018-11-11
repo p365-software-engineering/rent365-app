@@ -12,6 +12,26 @@
 }
 
 input:checked + .card {
-    border: 0.25rem solid #d32f2f;
+    border: 0.20rem solid #ff4081;
     border-radius: 4px 4px 4px 4px !important;
+}
+
+input + .card {
+    border: 0.20rem solid #ccc;
+    border-radius: 4px 4px 4px 4px !important;
+}
+
+.info-card{
+    margin: 1rem;
+}
+
+
+.info-list {
+    font-size: 1.1rem;
+    list-style: none;
+    padding-left: 0rem;
+    
+}
+.info-list li {
+    text-align: left;
 }

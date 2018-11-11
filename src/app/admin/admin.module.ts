@@ -17,6 +17,7 @@ import { AmenitiesComponent } from './amenities/amenities.component';
 import { LeaseComponent } from './lease/lease.component';
 import { EditApartmentComponent } from './apartment/edit-apartment/edit-apartment.component';
 import { EditAmenitiesComponent } from './amenities/edit-amenities/edit-amenities.component';
+import { EditLeaseComponent } from './lease/edit-lease/edit-lease.component';
 
 @NgModule({
   imports: [
@@ -67,6 +68,14 @@ import { EditAmenitiesComponent } from './amenities/edit-amenities/edit-amenitie
           {
             path: 'amenities/:id',
             component: EditAmenitiesComponent
+          },
+          {
+            path: 'lease',
+            component: LeaseComponent
+          },
+          {
+            path: 'lease/:id',
+            component: EditLeaseComponent
           }
         ]
       }
@@ -84,7 +93,8 @@ import { EditAmenitiesComponent } from './amenities/edit-amenities/edit-amenitie
       ApartmentComponent,
       AmenitiesComponent,
       LeaseComponent,
-      EditAmenitiesComponent]
+      EditAmenitiesComponent,
+      EditLeaseComponent]
 })
 
 export class AdminModule { }

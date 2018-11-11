@@ -31,7 +31,7 @@ export class LeaseService {
 
   public setLeaseAmenities(amenities: string[]): void {
     this.leaseInfo.setAmenities(amenities);
-    console.log(JSON.stringify(this.leaseInfo));
+    console.log(this.leaseInfo);
   }
   // New Lease -[END]
 

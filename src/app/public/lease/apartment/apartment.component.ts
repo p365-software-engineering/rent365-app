@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { LeaseService } from 'app/services/lease/lease.service';
 import { Apartment } from 'app/models/apartment';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./apartment.component.css']
 })
 export class ApartmentComponent  {
+  @Input() apartmentForm: FormGroup;
   public apartments: Apartment[];
   public apartment: any;
   public alert: boolean;

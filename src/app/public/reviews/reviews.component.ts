@@ -11,7 +11,7 @@ import { Review } from 'app/models/review';
 export class ReviewsComponent implements OnInit {
 
   @Input() apartmentID: string;
-  private _reviews: Observable<Review[]>;
+  public _reviews: Observable<Review[]>;
 
   constructor(private _reviewService: ReviewService) { }
 

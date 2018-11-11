@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apartment } from 'app/models/apartment';
 import { Amenity } from 'app/models/amenity';
-import { LeaseRequest, LeaseUserData } from 'app/models/lease-request';
+import { LeaseRequest, LeaseUserData, LeaseRequestStatus } from 'app/models/lease-request';
 import { AngularFirestore, CollectionReference, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { LeaseWorkflowService } from '../lease-workflow/lease-workflow.service';
@@ -15,12 +15,14 @@ export class LeaseService {
   private amenitiesData: Observable<Amenity[]>;
   public apartmentsCollection: AngularFirestoreCollection<Apartment>;
   public amenitiesCollection: AngularFirestoreCollection<Amenity>;
+  public leaseRequestCollection: AngularFirestoreCollection<LeaseRequest>;
   // New Lease
   private leaseInfo: LeaseRequest = new LeaseRequest();
 
   constructor(private db: AngularFirestore, private wf: LeaseWorkflowService) {
     this.apartmentsCollection = this.db.collection<Apartment>('Apartments');
     this.amenitiesCollection = this.db.collection<Amenity>('Amenities');
+    this.leaseRequestCollection =  this.db.collection<LeaseRequest>('lease-requests');
   }
   // New Lease -[START]
   public setLeaseAptID(aptID: string): void {
@@ -52,9 +54,21 @@ export class LeaseService {
     return this.amenitiesCollection.doc(amntID).valueChanges();
   }
 
+  public pushRequest() {
+    this.leaseInfo['requestID'] = this.db.createId();
+    this.leaseInfo['status'] = LeaseRequestStatus.RECIEVED;
+    // console.log(this.leaseInfo);
+    this.leaseRequestCollection.doc(this.leaseInfo['requestID']).set(Object.assign({}, this.leaseInfo));
+  }
+
   public setUserDetails(userInfo: LeaseUserData) {
+    const leasePeriod = userInfo['leaseInfo'];
+    const endDate = new Date(leasePeriod['startDate']);
+    endDate.setMonth(endDate.getMonth() + parseInt(leasePeriod['period'] , 10));
+    leasePeriod['endDate'] = endDate;
+    this.leaseInfo.setLeaseInfo(leasePeriod);
+    delete userInfo['leaseInfo'];
     this.leaseInfo.setLeaseData(userInfo);
-    console.log(JSON.stringify(this.leaseInfo));
   }
 
   public addApartment(apt: Apartment) {

@@ -6,7 +6,6 @@ import { Amenity } from 'app/models/amenity';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'app-lease',
   templateUrl: './lease.component.html',
@@ -87,6 +86,8 @@ export class LeaseComponent implements OnInit {
       this.ls.setLeaseAptID(this.apartmentForm.get('aptID').value);
       this.ls.setLeaseAmenities(consAmenityID);
       this.ls.setUserDetails(this.leaseDetailsForm.value);
+      // Always at the end call this - Refactoring required
+      this.ls.pushRequest();
       this.toastr.success('Submitted', 'Lease Request', {
         timeOut: 2000
       });

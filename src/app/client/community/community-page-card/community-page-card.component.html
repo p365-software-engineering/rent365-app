@@ -6,16 +6,15 @@
       {{ (event.eventTitle.length > 60)? (event.eventTitle | slice:0:60)+'..':(event.eventTitle) }}
     </div>
     <br>
-    <p class="card-text-users text-capitalize font-weight-bold"> <span><button class="btn btn-float btn-sm btn-info my-1 text-truncate"
-          type="button">{{ event.attendees.length }}</button></span> &nbsp;
-      {{ event.attendees }}
-    </p>
-    <div class="text-description">
-            {{ event.eventDescription }}
+    <div *ngIf="event.attendees != undefined">
+      <p class="card-text-users text-capitalize text-truncate font-weight-bold"> <span><button class="btn btn-float btn-sm btn-info my-1 text-truncate"
+            type="button">{{ event.attendees.length }}</button></span> &nbsp;
+        {{ event.attendees }}
+      </p>
     </div>
-
-    
-
+    <div class="text-description">
+      {{ event.eventDescription }}
+    </div>
   </div>
   <div class="card-footer">
     <div class="float-left">

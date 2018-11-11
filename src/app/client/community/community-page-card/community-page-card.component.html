@@ -1,27 +1,35 @@
-<div class="card bg-light">
-  <div class="community-heading card-header">
-      <h1 class="card-text-title">
-          {{ event.eventTitle }}
-      </h1>
-      <p class="card-text">
-          {{ event.date | date }}
-      </p>
-  </div>
-    <img class="card-img-top" src="{{ event.pictureURL || 'https://imgc.allpostersimages.com/img/print/u-g-PW8RI50.jpg?w=900&h=900&p=0'}}" style="height: 15rem;"
-      alt="Card image cap">
+<div class="card bg-light-2">
+  <img class="card-img-top" src="{{ event.pictureURL || 'https://imgc.allpostersimages.com/img/print/u-g-PW8RI50.jpg?w=900&h=900&p=0'}}"
+    style="height: 15rem;" alt="Card image cap">
+  <div class="card-body">
+    <div class="card-text-title text-bold">
+      {{ (event.eventTitle.length > 60)? (event.eventTitle | slice:0:60)+'..':(event.eventTitle) }}
+    </div>
+    <br>
+    <p class="card-text-users text-capitalize font-weight-bold"> <span><button class="btn btn-float btn-sm btn-info my-1 text-truncate"
+          type="button">{{ event.attendees.length }}</button></span> &nbsp;
+      {{ event.attendees }}
+    </p>
+    <div class="text-description">
+            {{ event.eventDescription }}
+    </div>
 
-    <div class="card-footer">
-      <p class="card-text"><strong>  Description:  </strong>
-        {{ event.eventDescription | slice:0:50 }}
+    
+
+  </div>
+  <div class="card-footer">
+    <div class="float-left">
+      <p class="card-text float-right font-italic">
+        {{ event.date | date }}
       </p>
-      <p class="card-text"> <strong> Attendees: </strong>
-          {{ event.attendees }}
-        </p>
-      <div>
-        <button (click)="joinEvent()"> Join </button>
-        <button *ngIf="currentUserID === event.eventCreator" (click)="deleteEvent()"> 
-          Delete Event 
-        </button>
-      </div>
+    </div>
+    <div class="float-right">
+      <button class="btn btn-sm btn-float btn-danger my-1" *ngIf="currentUserID === event.eventCreator" (click)="deleteEvent()">
+        <i class="fa fa-lg fa-trash-o" aria-hidden="true"></i>
+      </button>&nbsp;
+      <button class="btn btn-sm btn-float btn-primary my-1" (click)="joinEvent()"><i class="fa fa-lg fa-plus"
+          aria-hidden="true"></i>
+      </button>
     </div>
   </div>
+</div>

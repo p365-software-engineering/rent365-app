@@ -23,7 +23,7 @@ export class CommunityComponent implements OnInit {
   }
 
   handleEventCardAction(event: any) {
-    console.log(event);
+    // console.log(event);
     const { action, eventID, currentUserID} = event;
     switch (action) {
       case 'join':
@@ -33,7 +33,6 @@ export class CommunityComponent implements OnInit {
         });
       case 'delete':
         return this._eventService.deleteEvent(eventID);
-
     }
   }
 }

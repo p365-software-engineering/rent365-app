@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { EnquiryService } from 'app/services/service-export';
 import { Enquiry } from 'app/models/enquiry';
@@ -27,7 +26,6 @@ export class EnquiryHistoryComponent implements OnInit {
     this.enquiryS.getAllEnquirys().subscribe(
       (enquiries) => {
         this.allEnquiries = enquiries;
-        console.log(enquiries);
         this.dataTable = new MatTableDataSource(this.allEnquiries);
         this.dataTable.sort = this.sort;
         this.dataTable.paginator = this.paginator;

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Apartment } from 'app/models/apartment';
 import { Amenity } from 'app/models/amenity';
 import { LeaseRequest, LeaseUserData, LeaseRequestStatus } from 'app/models/lease-request';
-import { AngularFirestore, CollectionReference, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { LeaseWorkflowService } from '../lease-workflow/lease-workflow.service';
 
@@ -105,5 +105,13 @@ export class LeaseService {
     return this.amenitiesCollection
                 .doc(amt.amntID)
                 .delete();
+  }
+
+  public getAllLeaseRequests():  Observable<LeaseRequest[]> {
+    return this.db.collection<LeaseRequest>('lease-requests').valueChanges();
+  }
+
+  public updateLeaseRequests(leaseRequest: LeaseRequest) {
+    this.db.collection<LeaseRequest>('lease-requests').doc(leaseRequest.requestID).valueChanges();
   }
 }

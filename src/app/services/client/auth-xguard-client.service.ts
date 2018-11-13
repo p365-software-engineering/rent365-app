@@ -22,10 +22,9 @@ export class AuthXGuardClientService implements CanActivate, CanActivateChild, C
     return this.firebaseAuth.authState.pipe(
       map(auth => {
         if ((auth)) {
-          this.router.navigate(['/']);
-          return false;
-        } else {
           return true;
+        } else {
+          return false;
         }
       })
     );

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container-fluid">
     <div class="nav-link">
       <a [routerLink]="['add-review']" class="btn btn-secondary btn-lg">WRITE A REVIEW</a>
@@ -10,3 +11,8 @@
       </div>
     </div>
   </div>
+=======
+<div *ngFor="let  review of _reviews">
+    <app-review-card [review]=review></app-review-card>
+</div>
+>>>>>>> e8df05b7b4d6b651bd34f7f8fc3f85797a34a928

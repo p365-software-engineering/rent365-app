@@ -1,17 +1,27 @@
+export enum LeaseRequestStatus {
+    RECIEVED= 'Recieved',
+    COMPLETED = 'Completed',
+    PROGRESS = 'Progress'
+}
+
 export class LeaseRequest {
     // Identity Information
+    requestID: string;
     aptID: string;
     leaseID: string;
     leasee: LeaseUserData;
     amenities: string[];
     leaseInfo: LeaseInfo;
+    status: LeaseRequestStatus;
 
     clearData() {
+        this.requestID = null;
         this.leaseID = null;
         this.aptID = null;
         this.leasee = null;
         this.amenities = null;
         this.leaseInfo = null;
+        this.status = null;
     }
 
     setApartmentID(aptID: string): void {
@@ -77,3 +87,6 @@ export class LeaseUserData {
         this.userID = null;
     }
 }
+
+
+

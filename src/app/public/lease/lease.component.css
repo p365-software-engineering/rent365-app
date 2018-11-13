@@ -5,8 +5,8 @@
 }
 
 .container-lease{
-    margin-top: 1rem;
-    margin-bottom: 1.5rem;}
+    margin: 1rem 1rem 1.5rem 1rem;
+}
 
 .currency {
     font-size: 2rem;

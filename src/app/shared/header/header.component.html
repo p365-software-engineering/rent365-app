@@ -19,19 +19,13 @@
         <a class="nav-link" href="#gallery">Gallery</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link mr-2" href="#cta-contact">Tour</a>
+        <a class="nav-link mr-2" href="#cta-contact">Contact</a>
       </li>
       <li class="nav-item" *ngIf="!this.authX.isLoggedIn()">
         <a class="btn btn-outline-light font-weight-bold text-uppercase mr-2" href="#">Customize</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link mr-2" href="/enquiry">Contact Us</a>
-      </li>
-      <li class="nav-item">
-        <a class="btn btn-outline-light font-weight-bold text-uppercase" href="/login">Log In</a>
-      </li>
-      <li class="nav-item">
-        <a class="btn btn-outline-light font-weight-bold text-uppercase" href="/register">Sign Up</a>
+        <a class="btn btn-outline-light font-weight-bold text-uppercase" routerLink="/login">Residents</a>
       </li>
     </ul>
   </div>

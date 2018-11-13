@@ -37,24 +37,7 @@ export const appRoutes: Routes = [
     {
         path: 'lease',
         component: LeaseComponent,
-        children: [
-            {
-                path: '',
-                component: ApartmentComponent
-            },
-            {
-                path: 'amenities',
-                component: AmenitiesComponent
-            },
-            {
-                path: 'userinfo',
-                component: LeaseInfoComponent
-            },
-            {
-                path: 'submit',
-                component: SubmitComponent
-            }
-        ]
+        canActivate: [AuthXGuardClientService]
     },
     {
         path : 'enquiry',

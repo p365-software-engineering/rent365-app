@@ -6,7 +6,7 @@
   <div class="container h-100">
     <div class="d-flex text-left h-100">
       <div class="my-auto w-100 text-white">
-        <h1 class="display-3 font-weight-bold">Welcome To Super Rentals!</h1>
+        <h1 class="display-3 font-weight-bold">Hero Header Tagline</h1>
         <h4 style="width: 50%;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin sit amet tortor risus.
           Integer egestas purus nec velit mattis, a placerat lectus ullamcorper.</h4>
         <button type="button" class="btn btn-light font-weight-bold">Explore Options</button>
@@ -176,17 +176,10 @@
   <button (click)="sendPayment2()"> Send Payment </button> -->
 
 <!--  TODO: Style ?? -->
-<!-- <div style="z-index: 2;" class="chat-now-button">
-  <app-chat-window [ipAddress]="ipAddress"></app-chat-window>
-</div>
-
-<!--  Below one is not showing up on main page -->
-<!--
-<div style="float:right !important; position: fixed;  height: 10%; z-index: 2;">
-  <app-chat-window [ipAddress]="ipAddress"></app-chat-window>
-</div>
- -->
-
- <div class="chat">
-    <app-chat-window [ipAddress]="ipAddress"></app-chat-window>
+<section id="chat">
+  <div class="container">
+    <div style="z-index: 2;" class="chat-now-button">
+      <app-chat-window [ipAddress]="ipAddress"></app-chat-window>
+    </div>
   </div>
+</section>

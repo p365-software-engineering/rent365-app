@@ -56,7 +56,6 @@ export class EditServiceComponent implements OnInit {
       (params) => {
         this.serviceId = params['id'];
         this.getServiceTicket();
-        console.log(this.serviceId);
       }
     );
   }

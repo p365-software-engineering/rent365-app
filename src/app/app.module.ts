@@ -25,6 +25,7 @@ import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform
 import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
 import { ReviewsComponent } from './public/reviews/reviews.component';
 import { ReviewCardComponent } from './public/review-card/review-card.component';
+import { AddReviewComponent } from './public/reviews/add-review/add-review.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { ReviewCardComponent } from './public/review-card/review-card.component'
     EnquiryComponent,
     ForgotXComponent,
     ReviewsComponent,
-    ReviewCardComponent
+    ReviewCardComponent,
+    AddReviewComponent
   ],
   imports: [
     SharedModule,

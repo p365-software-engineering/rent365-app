@@ -12,6 +12,8 @@ import { SubmitComponent } from './public/lease/submit/submit.component';
 import { EnquiryComponent } from './public/enquiry/enquiry.component';
 import { DashboardComponent } from './client/dashboard/dashboard.component';
 import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
+import { ReviewsComponent} from './public/reviews/reviews.component';
+import { AddReviewComponent} from './public/reviews/add-review/add-review.component';
 
 
 
@@ -68,6 +70,14 @@ export const appRoutes: Routes = [
         path: 'admin',
         loadChildren: './admin/admin.module#AdminModule',
         canActivateChild: [AuthXGuardAdminService]
-    }
+    },
+    {
+        path: 'reviews',
+        component: ReviewsComponent
 
+    },
+    {
+        path: 'reviews/add-review',
+        component: AddReviewComponent
+      }
 ];

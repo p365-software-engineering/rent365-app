@@ -14,4 +14,6 @@ export class ReviewCardComponent implements OnInit {
   ngOnInit() {
   }
 
+  dummyReview: Review
+
 }

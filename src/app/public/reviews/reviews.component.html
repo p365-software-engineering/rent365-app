@@ -1,3 +1,12 @@
-<div *ngFor="let _review of reviews">
-    <app-review-card [review]=_review></app-review-card>
-</div>
+<div class="container-fluid">
+    <div class="nav-link">
+      <a [routerLink]="['add-review']" class="btn btn-secondary btn-lg">WRITE A REVIEW</a>
+    </div>
+    <br>
+    <div class="card-group">
+      <!-- Iterate over list of reviews -->
+      <div class="news" *ngFor="let _review of _reviews | async">
+        <app-review-card [review]="_review"></app-review-card>
+      </div>
+    </div>
+  </div>

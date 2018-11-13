@@ -14,7 +14,7 @@ export class ReviewService {
     this.reviewCollection = afs.collection<Review>('review');
   }
 
-  createNewReview(): Promise<void> {
+  createNewReview(data: any): Promise<void> {
       const reviewID = this.afs.createId();
       const reviewObj = <Review> {
           reviewID: reviewID

@@ -18,6 +18,9 @@ import { LeaseComponent } from './lease/lease.component';
 import { EditApartmentComponent } from './apartment/edit-apartment/edit-apartment.component';
 import { EditAmenitiesComponent } from './amenities/edit-amenities/edit-amenities.component';
 import { EditLeaseComponent } from './lease/edit-lease/edit-lease.component';
+import { ApartmentEditComponent} from './lease/edit-lease/apartment/apartment.component';
+import { AmenitiesLeaseComponent } from './lease/edit-lease/amenities/amenities.component';
+import { LeaseInfoComponent } from './lease/edit-lease/lease-info/lease-info.component';
 
 @NgModule({
   imports: [
@@ -94,6 +97,9 @@ import { EditLeaseComponent } from './lease/edit-lease/edit-lease.component';
       AmenitiesComponent,
       LeaseComponent,
       EditAmenitiesComponent,
+      ApartmentEditComponent,
+      AmenitiesLeaseComponent,
+      LeaseInfoComponent,
       EditLeaseComponent]
 })
 

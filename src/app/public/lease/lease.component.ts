@@ -64,14 +64,18 @@ export class LeaseComponent implements OnInit {
       () => {
         return this.fb.control(false);
       });
+
+      console.log(amentiesArr);
      this.amenitiesForm.patchValue({
-       'amntID': this.fb.array(amentiesArr)
+       amntID: this.fb.array(amentiesArr)
      });
 
      return <FormArray>this.amenitiesForm.get('amntID').value;
   }
 
   public onLeaseSubmit(): void {
+
+    console.log(this.amenitiesForm.value);
     if (this.apartmentForm.valid && this.amenitiesForm.valid && this.leaseDetailsForm.valid) {
       const amenitiesSelected = this.amenitiesForm.get('amntID').value.value;
       const consAmenityID = new Array<string>();

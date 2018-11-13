@@ -111,6 +111,10 @@ export class LeaseService {
     return this.db.collection<LeaseRequest>('lease-requests').valueChanges();
   }
 
+  public getLeaseRequestById(leaseID: string): Observable<any> {
+    return this.db.collection<LeaseRequest>('lease-requests').doc(leaseID).valueChanges();
+  }
+
   public updateLeaseRequests(leaseRequest: LeaseRequest) {
     this.db.collection<LeaseRequest>('lease-requests').doc(leaseRequest.requestID).valueChanges();
   }

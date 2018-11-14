@@ -5,6 +5,7 @@ import { LeaseService } from 'app/services/lease/lease.service';
 import { Amenity } from 'app/models/amenity';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { LeaseRequestStatus } from 'app/models/lease-request';
 
 @Component({
   selector: 'app-lease',
@@ -65,7 +66,7 @@ export class LeaseComponent implements OnInit {
         return this.fb.control(false);
       });
 
-      console.log(amentiesArr);
+      // console.log(amentiesArr);
      this.amenitiesForm.patchValue({
        amntID: this.fb.array(amentiesArr)
      });
@@ -74,8 +75,6 @@ export class LeaseComponent implements OnInit {
   }
 
   public onLeaseSubmit(): void {
-
-    console.log(this.amenitiesForm.value);
     if (this.apartmentForm.valid && this.amenitiesForm.valid && this.leaseDetailsForm.valid) {
       const amenitiesSelected = this.amenitiesForm.get('amntID').value.value;
       const consAmenityID = new Array<string>();
@@ -91,7 +90,7 @@ export class LeaseComponent implements OnInit {
       this.ls.setLeaseAmenities(consAmenityID);
       this.ls.setUserDetails(this.leaseDetailsForm.value);
       // Always at the end call this - Refactoring required
-      this.ls.pushRequest();
+      this.ls.pushRequest(LeaseRequestStatus.RECIEVED);
       this.toastr.success('Submitted', 'Lease Request', {
         timeOut: 2000
       });

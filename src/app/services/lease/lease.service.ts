@@ -54,7 +54,7 @@ export class LeaseService {
     return this.amenitiesCollection.doc(amntID).valueChanges();
   }
 
-  public pushRequest() {
+  public pushRequest(status: LeaseRequestStatus) {
     this.leaseInfo['requestID'] = this.db.createId();
     this.leaseInfo['status'] = LeaseRequestStatus.RECIEVED;
     // console.log(this.leaseInfo);

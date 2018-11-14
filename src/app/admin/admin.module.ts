@@ -21,6 +21,8 @@ import { EditLeaseComponent } from './lease/edit-lease/edit-lease.component';
 import { ApartmentEditComponent} from './lease/edit-lease/apartment/apartment.component';
 import { AmenitiesLeaseComponent } from './lease/edit-lease/amenities/amenities.component';
 import { LeaseInfoComponent } from './lease/edit-lease/lease-info/lease-info.component';
+import { CommunityComponent } from 'app/shared/community/community-page/community.component';
+import { AddEventComponent } from 'app/shared/community/add-event/add-event.component';
 
 @NgModule({
   imports: [
@@ -39,6 +41,14 @@ import { LeaseInfoComponent } from './lease/edit-lease/lease-info/lease-info.com
           {
             path: 'profile',
             component: ProfileComponent
+          },
+          {
+            path: 'community',
+            component: CommunityComponent,
+          },
+          {
+            path: 'community/add-event',
+            component: AddEventComponent
           },
           {
             path: 'manage',

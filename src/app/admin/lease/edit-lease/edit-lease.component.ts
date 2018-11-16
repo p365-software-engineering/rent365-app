@@ -4,8 +4,9 @@ import { AuthXService } from 'app/services/service-export';
 import { LeaseService } from 'app/services/lease/lease.service';
 import { Amenity } from 'app/models/amenity';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LeaseRequest } from 'app/models/lease-request';
+import { LeaseRequest, LeaseRequestStatus } from 'app/models/lease-request';
 import { materialize } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-lease',
@@ -22,7 +23,8 @@ export class EditLeaseComponent implements OnInit {
   public leaseID: string;
   constructor(private fb: FormBuilder,
               private routeParams: ActivatedRoute,
-              private route: Router,
+              private router: Router,
+              private toastr: ToastrService,
               private authX: AuthXService,
               private ls: LeaseService) { }
 
@@ -95,8 +97,20 @@ export class EditLeaseComponent implements OnInit {
             startDate: date.toISOString().substring(0, 10),
             period: next.leaseInfo['period'],
           },
-          // otherLeasee: this.fb.array(next.leasee['otherLeasee'])
+          otherLeasee: []
         });
+
+        const hello = next.leasee['otherLeasee'].map(
+          (value, index) => {
+            // console.log(JSON.stringify(value) + ' ' + index);
+            return (<FormArray>this.leaseDetailsForm.get('otherLeasee')).push(this.fb.group({
+              firstName: value['firstName'],
+              lastName: value['lastName'],
+              email: value['email']
+          }));
+
+          }
+        );
       }
     );
   }
@@ -133,6 +147,38 @@ export class EditLeaseComponent implements OnInit {
      return <FormArray>this.amenitiesForm.get('amntID').value;
   }
 
-   onSubmit() {
-   }
+  public onLeaseSubmit(status: LeaseRequestStatus): void {
+    if (this.apartmentForm.valid && this.amenitiesForm.valid && this.leaseDetailsForm.valid) {
+      const amenitiesSelected = this.amenitiesForm.get('amntID').value.value;
+      const consAmenityID = new Array<string>();
+
+      amenitiesSelected.forEach(
+        (arrayElement, index) => {
+          if (arrayElement) {
+            consAmenityID.push(this.amenities[index].amntID);
+          }
+        }
+      );
+      this.ls.setLeaseAptID(this.apartmentForm.get('aptID').value);
+      this.ls.setLeaseAmenities(consAmenityID);
+      this.ls.setUserDetails(this.leaseDetailsForm.value);
+      // Always at the end call this - Refactoring required
+      this.ls.pushRequest(status);
+      this.toastr.success(status, 'Lease Request', {
+        timeOut: 2000
+      });
+      this.router.navigate(['']);
+    } else {
+      this.toastr.error('Please Verify all the Fields', 'Update Failed', {
+        timeOut: 2000
+      });
+    }
+  }
+
+  public onSubmit(status: LeaseRequestStatus) {
+    console.log(LeaseRequestStatus['RECIEVED']);
+    console.log(LeaseRequestStatus['PROGRESS']);
+    console.log(LeaseRequestStatus['COMPLETED']);
+    console.log(LeaseRequestStatus['ACCEPT']);
+  }
 }

@@ -1,7 +1,9 @@
 export enum LeaseRequestStatus {
-    RECIEVED= 'Recieved',
-    COMPLETED = 'Completed',
-    PROGRESS = 'Progress'
+    RECIEVED= 'RECIEVED',
+    COMPLETED = 'COMPLETED',
+    PROGRESS = 'PROGRESS',
+    ACCEPT = 'ACCEPT',
+    REJECT = 'REJECT'
 }
 
 export class LeaseRequest {

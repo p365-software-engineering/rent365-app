@@ -13,7 +13,6 @@ import { EnquiryComponent } from './public/enquiry/enquiry.component';
 import { DashboardComponent } from './client/dashboard/dashboard.component';
 import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
 import { ReviewsComponent} from './public/reviews/reviews.component';
-import { AddReviewComponent} from './public/reviews/add-review/add-review.component';
 import { ReviewGaurdService } from './services/review/review-gaurd.service';
 
 

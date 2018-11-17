@@ -9,13 +9,13 @@ import { MatSnackBar } from '@angular/material';
 })
 export class StarRatingComponent implements OnInit {
 
-  @Input('rating') private rating: number;
-  @Input('starCount') private starCount: number;
-  @Input('color') private color: string;
+  @Input() public rating: number;
+  @Input() public starCount: number;
+  @Input() public color: string;
   @Output() private ratingUpdated = new EventEmitter();
 
-  private snackBarDuration: number = 2000;
-  private ratingArr = [];
+  public snackBarDuration = 2000;
+  public ratingArr = [];
 
   constructor(private snackBar: MatSnackBar) {
   }
@@ -26,16 +26,16 @@ export class StarRatingComponent implements OnInit {
       this.ratingArr.push(index);
     }
   }
-  onClick(rating:number) {
-    console.log(rating)
-    this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', {
-      duration: this.snackBarDuration
-    });
+  onClick(rating: number) {
+    // console.log(rating);
+    // this.snackBar.open('You rated ' + rating + ' / ' + this.starCount, '', {
+    //   duration: this.snackBarDuration
+    // });
     this.ratingUpdated.emit(rating);
     return false;
   }
 
-  showIcon(index:number) {
+  showIcon(index: number) {
     if (this.rating >= index + 1) {
       return 'star';
     } else {
@@ -45,7 +45,7 @@ export class StarRatingComponent implements OnInit {
 
 }
 export enum StarRatingColor {
-  primary = "primary",
-  accent = "accent",
-  warn = "warn"
+  primary = 'primary',
+  accent = 'accent',
+  warn = 'warn'
 }

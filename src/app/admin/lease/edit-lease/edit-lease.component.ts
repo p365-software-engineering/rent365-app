@@ -22,12 +22,15 @@ export class EditLeaseComponent implements OnInit {
   public amenitiesArray: Object[];
   public leaseID: string;
   public status: string;
+  public leaseRequestStatus: LeaseRequestStatus;
   constructor(private fb: FormBuilder,
               private routeParams: ActivatedRoute,
               private router: Router,
               private toastr: ToastrService,
               private authX: AuthXService,
-              private ls: LeaseService) { }
+              private ls: LeaseService) {
+                console.log(LeaseRequestStatus['ACCEPT']);
+              }
 
   ngOnInit() {
     this.apartmentForm = this.fb.group({
@@ -149,7 +152,7 @@ export class EditLeaseComponent implements OnInit {
      return <FormArray>this.amenitiesForm.get('amntID').value;
   }
 
-  public onLeaseSubmit(status: LeaseRequestStatus): void {
+  public onLeaseSubmit(status: any): void {
     if (this.apartmentForm.valid && this.amenitiesForm.valid && this.leaseDetailsForm.valid) {
       const amenitiesSelected = this.amenitiesForm.get('amntID').value.value;
       const consAmenityID = new Array<string>();

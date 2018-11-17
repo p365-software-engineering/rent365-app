@@ -21,6 +21,7 @@ export class EditLeaseComponent implements OnInit {
   public amenities: Amenity[];
   public amenitiesArray: Object[];
   public leaseID: string;
+  public status: string;
   constructor(private fb: FormBuilder,
               private routeParams: ActivatedRoute,
               private router: Router,
@@ -72,6 +73,7 @@ export class EditLeaseComponent implements OnInit {
   private updateLease(): void {
     this.ls.getLeaseRequestById(this.leaseID).subscribe(
       (next: LeaseRequest) => {
+        this.status = next['status'];
         this.apartmentForm.patchValue({
           aptID: next['aptID'] || ''
         });
@@ -159,15 +161,18 @@ export class EditLeaseComponent implements OnInit {
           }
         }
       );
+      this.ls.setLeaseRequestID(this.leaseID);
       this.ls.setLeaseAptID(this.apartmentForm.get('aptID').value);
       this.ls.setLeaseAmenities(consAmenityID);
+      // Bugfix for date
+      this.leaseDetailsForm.value.leaseInfo.startDate = new Date(this.leaseDetailsForm.value.leaseInfo.startDate);
       this.ls.setUserDetails(this.leaseDetailsForm.value);
       // Always at the end call this - Refactoring required
       this.ls.pushRequest(status);
       this.toastr.success(status, 'Lease Request', {
         timeOut: 2000
       });
-      this.router.navigate(['']);
+      this.router.navigate(['admin', 'lease']);
     } else {
       this.toastr.error('Please Verify all the Fields', 'Update Failed', {
         timeOut: 2000
@@ -175,10 +180,8 @@ export class EditLeaseComponent implements OnInit {
     }
   }
 
-  public onSubmit(status: LeaseRequestStatus) {
-    console.log(LeaseRequestStatus['RECIEVED']);
-    console.log(LeaseRequestStatus['PROGRESS']);
-    console.log(LeaseRequestStatus['COMPLETED']);
-    console.log(LeaseRequestStatus['ACCEPT']);
+  public goBack() {
+    this.router.navigate(['admin', 'lease' ]);
   }
+
 }

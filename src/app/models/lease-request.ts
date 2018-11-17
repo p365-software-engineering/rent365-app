@@ -6,6 +6,20 @@ export enum LeaseRequestStatus {
     REJECT = 'REJECT'
 }
 
+export class Tenant {
+    leaseID: string;
+    aptID: string;
+    uid: string;
+    requestID: string;
+
+    constructor(tenantDetails: Object) {
+        this.leaseID = tenantDetails['leaseID'] || '';
+        this.aptID = tenantDetails['aptID'] || '';
+        this.uid = tenantDetails['uid'] || '';
+        this.requestID = tenantDetails['requestID'] || '';
+    }
+}
+
 export class LeaseRequest {
     // Identity Information
     requestID: string;

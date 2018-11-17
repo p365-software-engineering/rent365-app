@@ -19,6 +19,9 @@
         <li>
             <a routerLink='community'>MY COMMUNITY</a>
         </li>
+        <li>
+            <a routerLink='lease'>LEASE REQUESTS</a>
+        </li>
         <li class="active">
           <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">BILLS</a>
           <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -28,9 +31,6 @@
               <li>
                   <a routerLink='pay'>Payment</a>
               </li>
-              <!-- <li>
-                  <a href="#">Setup Recurring Payment</a>
-              </li> -->
           </ul>
       </li>
       <li>
@@ -38,9 +38,6 @@
           <ul class="collapse list-unstyled" id="leaseSubmenu">
               <li>
                   <a [routerLink]="['lease']">Manage</a>
-              </li>
-              <li>
-                  <a [routerLink]="['lease']">View Requests</a>
               </li>
               <li>
                   <a [routerLink]="['amenities']">Amenities</a>

@@ -23,6 +23,7 @@ import { AmenitiesLeaseComponent } from './lease/edit-lease/amenities/amenities.
 import { LeaseInfoComponent } from './lease/edit-lease/lease-info/lease-info.component';
 import { CommunityComponent } from 'app/shared/community/community-page/community.component';
 import { AddEventComponent } from 'app/shared/community/add-event/add-event.component';
+import { TenantsComponent } from './tenants/tenants.component';
 
 @NgModule({
   imports: [
@@ -110,7 +111,8 @@ import { AddEventComponent } from 'app/shared/community/add-event/add-event.comp
       ApartmentEditComponent,
       AmenitiesLeaseComponent,
       LeaseInfoComponent,
-      EditLeaseComponent]
+      EditLeaseComponent,
+      TenantsComponent]
 })
 
 export class AdminModule { }

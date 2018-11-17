@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { ServiceTicket } from '../../models/service-ticket';
 import { refCount } from 'rxjs/operators';
+import { LeaseRequest } from 'app/models/lease-request';
 
 @Injectable({
   providedIn: 'root'
@@ -93,5 +94,4 @@ export class ServiceTicketService {
       .doc(serviceTicketID)
       .delete();
   }
-
 }

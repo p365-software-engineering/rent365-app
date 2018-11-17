@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apartment } from 'app/models/apartment';
 import { Amenity } from 'app/models/amenity';
-import { LeaseRequest, LeaseUserData, LeaseRequestStatus } from 'app/models/lease-request';
+import { LeaseRequest, LeaseUserData, LeaseRequestStatus, Tenant } from 'app/models/lease-request';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { LeaseWorkflowService } from '../lease-workflow/lease-workflow.service';
@@ -55,9 +55,29 @@ export class LeaseService {
   }
 
   public pushRequest(status: LeaseRequestStatus) {
-    this.leaseInfo['requestID'] = this.db.createId();
-    this.leaseInfo['status'] = LeaseRequestStatus.RECIEVED;
-    // console.log(this.leaseInfo);
+    if ( this.leaseInfo['requestID'] === undefined) {
+      this.leaseInfo['requestID'] = this.db.createId();
+    }
+    this.leaseInfo['status'] = status;
+     if (status === 'ACCEPT') {
+       if (this.leaseInfo['leaseID'] === undefined) {
+        this.leaseInfo['leaseID'] = this.db.createId();
+        const tf = new Tenant({
+          'leaseID': this.leaseInfo['leaseID'],
+          'requestID': this.leaseInfo['requestID'],
+          'aptID' : this.leaseInfo['aptID'],
+          'uid' : this.leaseInfo['leasee']['uid']
+        });
+        this.db.collection<Tenant>('tenants').doc(this.leaseInfo['leaseID']).set(Object.assign({}, tf));
+       }
+     }
+     if (status === 'REJECT') {
+      if (this.leaseInfo['leaseID'] !== undefined) {
+        this.db.collection<Tenant>('tenants').doc(this.leaseInfo['leaseID']).delete();
+        this.leaseInfo['leaseID'] = '';
+      }
+     }
+    //  console.log(this.leaseInfo);
     this.leaseRequestCollection.doc(this.leaseInfo['requestID']).set(Object.assign({}, this.leaseInfo));
   }
 
@@ -69,6 +89,10 @@ export class LeaseService {
     this.leaseInfo.setLeaseInfo(leasePeriod);
     delete userInfo['leaseInfo'];
     this.leaseInfo.setLeaseData(userInfo);
+  }
+
+  public setLeaseRequestID(requestID: string) {
+    this.leaseInfo.requestID = requestID;
   }
 
   public addApartment(apt: Apartment) {
@@ -111,11 +135,25 @@ export class LeaseService {
     return this.db.collection<LeaseRequest>('lease-requests').valueChanges();
   }
 
-  public getLeaseRequestById(leaseID: string): Observable<any> {
-    return this.db.collection<LeaseRequest>('lease-requests').doc(leaseID).valueChanges();
+  public getLeaseRequestById(requestID: string): Observable<any> {
+    return this.db.collection<LeaseRequest>('lease-requests').doc(requestID).valueChanges();
   }
 
   public updateLeaseRequests(leaseRequest: LeaseRequest) {
     this.db.collection<LeaseRequest>('lease-requests').doc(leaseRequest.requestID).valueChanges();
   }
+
+  getLeasePendingRequests(): Observable<LeaseRequest[]> {
+    return this.db.collection<LeaseRequest>('lease-requests', ref => {
+      return ref.where('status', '==', 'RECIEVED');
+    }).valueChanges();
+  }
+
+  calulateLeaseRequest(lr: LeaseRequest) {
+  }
+
+  getAllTenants() {
+    // this.db.collection<Tenen>
+  }
+
 }

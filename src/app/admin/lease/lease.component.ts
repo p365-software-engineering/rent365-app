@@ -24,6 +24,13 @@ export class LeaseComponent implements OnInit {
   constructor(private ls: LeaseService) { }
 
   ngOnInit() {
+
+    this.ls.getLeasePendingRequests().subscribe(
+      (count) => {
+        this.pendingCount = count.length;
+      }
+    );
+
     this.ls.getAllLeaseRequests().subscribe(
       (lease) => {
         this.leaseRequests = lease;

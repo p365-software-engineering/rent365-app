@@ -1,12 +1,18 @@
 <div class="container-fluid">
-    <div class="nav-link">
+    <!-- <div class="nav-link">
       <a [routerLink]="['add-review']" class="btn btn-secondary btn-lg">WRITE A REVIEW</a>
-    </div>
-    <br>
-    <div class="card-group">
-      <!-- Iterate over list of reviews -->
-      <div class="news" *ngFor="let _review of _reviews | async">
-        <app-review-card [review]="_review"></app-review-card>
+    </div> -->
+    <br> 
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            <app-description [aptID]="aptID"></app-description>          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <app-comments [aptID]="aptID"></app-comments>          
+        </div>
       </div>
     </div>
   </div>

@@ -14,6 +14,7 @@ import { DashboardComponent } from './client/dashboard/dashboard.component';
 import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
 import { ReviewsComponent} from './public/reviews/reviews.component';
 import { AddReviewComponent} from './public/reviews/add-review/add-review.component';
+import { ReviewGaurdService } from './services/review/review-gaurd.service';
 
 
 
@@ -55,12 +56,9 @@ export const appRoutes: Routes = [
         canActivateChild: [AuthXGuardAdminService]
     },
     {
-        path: 'reviews',
-        component: ReviewsComponent
+        path: 'reviews/:aptID',
+        component: ReviewsComponent,
+        canActivate: [ReviewGaurdService]
 
-    },
-    {
-        path: 'reviews/add-review',
-        component: AddReviewComponent
-      }
+    }
 ];

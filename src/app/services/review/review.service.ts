@@ -11,17 +11,13 @@ export class ReviewService {
   private reviewCollection: AngularFirestoreCollection<Review>;
 
   constructor(private afs: AngularFirestore) {
-    this.reviewCollection = afs.collection<Review>('review');
+    this.reviewCollection = afs.collection<Review>('comments');
   }
 
-  createNewReview(data: any): Promise<void> {
+  createNewReview(data: Review): Promise<void> {
       const reviewID = this.afs.createId();
-      const reviewObj = <Review> {
-          reviewID: reviewID
-      };
       return this.reviewCollection
-        .doc(reviewID)
-        .set(reviewObj);
+        .doc(data['aptID']).collection('reviews').doc(reviewID).set(data);
   }
 
   getAllReviews(): Observable<Review[]> {

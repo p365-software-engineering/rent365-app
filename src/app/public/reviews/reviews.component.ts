@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ReviewService } from 'app/services/service-export';
 import { Review } from 'app/models/review';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-reviews',
@@ -10,13 +11,19 @@ import { Review } from 'app/models/review';
 })
 export class ReviewsComponent implements OnInit {
 
-  @Input() apartmentID: string;
+  public aptID: string;
   public _reviews: Observable<Review[]>;
 
-  constructor(private _reviewService: ReviewService) { }
+  constructor(private _reviewService: ReviewService, private parameter: ActivatedRoute) { }
 
   ngOnInit() {
-    this._reviews = this._reviewService.getAllReviewsByAptID(this.apartmentID);
+    // this._reviews = this._reviewService.getAllReviewsByAptID(this.apartmentID);
+    this.parameter.params.subscribe(
+      (param) =>{
+        this.aptID = param['aptID'];
+
+      }
+    );
   }
 
 }

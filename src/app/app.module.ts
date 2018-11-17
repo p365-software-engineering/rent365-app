@@ -24,7 +24,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
 import { ReviewsComponent } from './public/reviews/reviews.component';
-import { ReviewCardComponent } from './public/review-card/review-card.component';
+import { DescriptionComponent } from './public/reviews/description/description.component';
+import { CommentsComponent } from './public/reviews/comments/comments.component';
+import { StarRatingComponent } from './public/star-rating/star-rating.component';
+
 
 @NgModule({
   declarations: [
@@ -40,7 +43,9 @@ import { ReviewCardComponent } from './public/review-card/review-card.component'
     EnquiryComponent,
     ForgotXComponent,
     ReviewsComponent,
-    ReviewCardComponent
+    DescriptionComponent,
+    CommentsComponent,
+    StarRatingComponent
   ],
   imports: [
     SharedModule,
@@ -57,7 +62,6 @@ import { ReviewCardComponent } from './public/review-card/review-card.component'
   providers: [AuthXService, AuthXGuardClientService],
   bootstrap: [AppComponent]
 })
-
 
 
 export class AppModule { }

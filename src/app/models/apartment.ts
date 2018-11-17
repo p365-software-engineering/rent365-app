@@ -6,7 +6,18 @@ export class Apartment {
     type: string;
     image: string;
     baths: string;
-    beds; string;
+    beds: string;
+
+    constructor(){
+        this.aptID = null;
+        this.title = null;
+        this.sub_title = null;
+        this.description = null;
+        this.type = null;
+        this.image = null;
+        this.baths = null;
+        this.beds = null;
+    }
 
     clearData(): void {
         this.aptID = null;

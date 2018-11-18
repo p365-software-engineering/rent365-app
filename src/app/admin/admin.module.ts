@@ -24,6 +24,7 @@ import { LeaseInfoComponent } from './lease/edit-lease/lease-info/lease-info.com
 import { CommunityComponent } from 'app/shared/community/community-page/community.component';
 import { AddEventComponent } from 'app/shared/community/add-event/add-event.component';
 import { TenantsComponent } from './tenants/tenants.component';
+import { ManageComponent } from './manage/manage.component';
 
 @NgModule({
   imports: [
@@ -90,6 +91,14 @@ import { TenantsComponent } from './tenants/tenants.component';
           {
             path: 'lease/:id',
             component: EditLeaseComponent
+          },
+          {
+            path: 'clients',
+            component: ManageComponent
+          },
+          {
+            path: 'clients/:id',
+            component: EditLeaseComponent
           }
         ]
       }
@@ -112,7 +121,8 @@ import { TenantsComponent } from './tenants/tenants.component';
       AmenitiesLeaseComponent,
       LeaseInfoComponent,
       EditLeaseComponent,
-      TenantsComponent]
+      TenantsComponent,
+      ManageComponent]
 })
 
 export class AdminModule { }

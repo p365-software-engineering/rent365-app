@@ -2,7 +2,7 @@
   <div class="card text-dark-2 bg-light-1">
     <img class="card-img-top" src="https://hdqwalls.com/wallpapers/mountains-landscape-nature-digital-art-1b.jpg" alt="">
     <div class="card-body">
-      <h4 class="card-title">LEASE REQUEST MANAGEMENT</h4>
+      <h4 class="card-title">LEASEE MANAGEMENT</h4>
       <hr class="my-2 bg-dark-1">
       <br>
       <!-- INFO CARDS -->
@@ -10,13 +10,13 @@
         <div class="info-card col-lg-3 col-md-6 col-sm-12">
           <div class="card h-100">
             <div class="card-body">
-              <h5 class="card-title">Total Requests</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Recieved</h6>
+              <h5 class="card-title">Active Leasee(s) </h5>
+              <h6 class="card-subtitle mb-2 text-muted">No. #</h6>
               <p class="currency">{{ allCount }}</p>
             </div>
           </div>
         </div>
-        <div class="info-card col-lg-3 col-md-6 col-sm-12">
+        <!-- <div class="info-card col-lg-3 col-md-6 col-sm-12">
           <div class="card h-100">
             <div class="card-body">
               <h5 class="card-title">Pending</h5>
@@ -24,7 +24,7 @@
               <p class="currency">{{ pendingCount }}</p>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
       
       <br>
@@ -35,8 +35,8 @@
       <div class="container-fluid form-input form-input-filter">
         <div class="row card-shadow ">
           <mat-form-field class="col-12 bg-white table-filter text-dark">
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search (All Lease Requests)">
-            <mat-label><i class="fa fa-search" aria-hidden="true"></i>&nbsp; <b> Search (All Lease Requests)</b></mat-label>
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search (All Tenenats)">
+            <mat-label><i class="fa fa-search" aria-hidden="true"></i>&nbsp; <b> Search (All Tenenats)</b></mat-label>
           </mat-form-field>
         </div>
       </div>

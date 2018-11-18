@@ -22,6 +22,7 @@ export class EditLeaseComponent implements OnInit {
   public amenitiesArray: Object[];
   public leaseID: string;
   public status: string;
+  public buttonDisplay: boolean;
   public leaseRequestStatus: LeaseRequestStatus;
   constructor(private fb: FormBuilder,
               private routeParams: ActivatedRoute,
@@ -33,6 +34,12 @@ export class EditLeaseComponent implements OnInit {
               }
 
   ngOnInit() {
+
+    if (this.router.url.indexOf('/lease') > 0) {
+      this.buttonDisplay = true;
+    } else {
+      this.buttonDisplay = false;
+    }
     this.apartmentForm = this.fb.group({
       aptID: [{value: ''}, [Validators.required]]
     });
@@ -175,7 +182,11 @@ export class EditLeaseComponent implements OnInit {
       this.toastr.success(status, 'Lease Request', {
         timeOut: 2000
       });
-      this.router.navigate(['admin', 'lease']);
+      if (this.buttonDisplay) {
+        this.router.navigate(['admin', 'lease']);
+      } else {
+        this.router.navigate(['admin', 'clients']);
+      }
     } else {
       this.toastr.error('Please Verify all the Fields', 'Update Failed', {
         timeOut: 2000
@@ -184,7 +195,11 @@ export class EditLeaseComponent implements OnInit {
   }
 
   public goBack() {
-    this.router.navigate(['admin', 'lease' ]);
+    if (this.buttonDisplay) {
+      this.router.navigate(['admin', 'lease']);
+    } else {
+      this.router.navigate(['admin', 'clients']);
+    }
   }
 
 }

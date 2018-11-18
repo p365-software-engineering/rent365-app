@@ -5,6 +5,7 @@ import { LeaseRequest, LeaseUserData, LeaseRequestStatus, Tenant } from 'app/mod
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { LeaseWorkflowService } from '../lease-workflow/lease-workflow.service';
+import { IUserData, IUser } from 'app/models/user-model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,14 @@ export class LeaseService {
     this.apartmentsCollection = this.db.collection<Apartment>('Apartments');
     this.amenitiesCollection = this.db.collection<Amenity>('Amenities');
     this.leaseRequestCollection =  this.db.collection<LeaseRequest>('lease-requests');
+  }
+
+  private getUserData(userID: string) {
+    return this.db.collection<IUserData>('User').doc(userID).valueChanges();
+  }
+
+  private updateUserData(data: IUserData) {
+    return this.db.collection<IUserData>('User').doc(data['uid']).set(data);
   }
   // New Lease -[START]
   public setLeaseAptID(aptID: string): void {
@@ -69,6 +78,12 @@ export class LeaseService {
           'uid' : this.leaseInfo['leasee']['uid']
         });
         this.db.collection<Tenant>('tenants').doc(this.leaseInfo['leaseID']).set(Object.assign({}, tf));
+        this.getUserData(this.leaseInfo.leasee['uid']).subscribe(
+          (userInfo: IUserData) => {
+            userInfo['lease_id'] = this.leaseInfo['leaseID'];
+            this.updateUserData(userInfo);
+          }
+        );
        }
      }
      if (status === 'REJECT') {
@@ -131,9 +146,13 @@ export class LeaseService {
                 .delete();
   }
 
+  // Except Accepted
   public getAllLeaseRequests():  Observable<LeaseRequest[]> {
-    return this.db.collection<LeaseRequest>('lease-requests').valueChanges();
+    return this.db.collection<LeaseRequest>('lease-requests', ref => {
+      return ref.where('status', '>', 'ACCEPT');
+    }).valueChanges();
   }
+
 
   public getLeaseRequestById(requestID: string): Observable<any> {
     return this.db.collection<LeaseRequest>('lease-requests').doc(requestID).valueChanges();
@@ -152,8 +171,10 @@ export class LeaseService {
   calulateLeaseRequest(lr: LeaseRequest) {
   }
 
-  getAllTenants() {
-    // this.db.collection<Tenen>
+  getAllTenants():  Observable<LeaseRequest[]>  {
+    return this.db.collection<LeaseRequest>('lease-requests', ref => {
+      return ref.where('status', '==', 'ACCEPT');
+    }).valueChanges();
   }
 
 }

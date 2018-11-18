@@ -30,7 +30,7 @@
         </mat-tab-group>
       </div>
       <br>
-      <div class="float-left">
+      <div class="float-left" *ngIf="buttonDisplay"> 
           <button type="button" (click)="onLeaseSubmit('ACCEPT')" class="btn btn-success btn-lg">APPROVE</button>&nbsp;
           <button type="button" (click)="onLeaseSubmit('REJECT')" class="btn btn-danger btn-lg">REJECT</button>&nbsp;
       </div>

@@ -162,19 +162,23 @@ export class LeaseService {
     this.db.collection<LeaseRequest>('lease-requests').doc(leaseRequest.requestID).valueChanges();
   }
 
-  getLeasePendingRequests(): Observable<LeaseRequest[]> {
+  public getLeasePendingRequests(): Observable<LeaseRequest[]> {
     return this.db.collection<LeaseRequest>('lease-requests', ref => {
       return ref.where('status', '==', 'RECIEVED');
     }).valueChanges();
   }
 
-  calulateLeaseRequest(lr: LeaseRequest) {
+  public calulateLeaseRequest(lr: LeaseRequest) {
   }
 
-  getAllTenants():  Observable<LeaseRequest[]>  {
+  public getAllTenants():  Observable<LeaseRequest[]>  {
     return this.db.collection<LeaseRequest>('lease-requests', ref => {
       return ref.where('status', '==', 'ACCEPT');
     }).valueChanges();
+  }
+
+  public getTenantByLeaseID(leaseID: string) {
+     return this.db.collection('tenants').doc(leaseID).valueChanges();
   }
 
 }

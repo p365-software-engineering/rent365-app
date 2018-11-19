@@ -15,6 +15,7 @@ import { DashboardComponent } from '../client/dashboard/dashboard.component';
 import { SharedModule } from '../shared/shared.module';
 import { AddEventComponent } from 'app/shared/community/add-event/add-event.component';
 import { CommunityComponent } from 'app/shared/community/community-page/community.component';
+import { LeaseComponent } from './lease/lease.component';
 
 
 
@@ -73,6 +74,10 @@ const routes = [
       {
         path: 'profile',
         component: ProfileComponent
+      },
+      {
+        path: 'lease',
+        component: LeaseComponent
       }
     ]
   }
@@ -92,7 +97,8 @@ const routes = [
     PaymentComponent,
     ServiceComponent,
     ServiceHistoryComponent,
-    ProfileComponent],
+    ProfileComponent,
+    LeaseComponent],
   exports: []
 })
 export class ClientModule { }

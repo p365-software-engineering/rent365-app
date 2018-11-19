@@ -29,9 +29,7 @@ export class EditLeaseComponent implements OnInit {
               private router: Router,
               private toastr: ToastrService,
               private authX: AuthXService,
-              private ls: LeaseService) {
-                console.log(LeaseRequestStatus['ACCEPT']);
-              }
+              private ls: LeaseService) { }
 
   ngOnInit() {
 

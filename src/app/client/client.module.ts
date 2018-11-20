@@ -16,6 +16,9 @@ import { SharedModule } from '../shared/shared.module';
 import { AddEventComponent } from 'app/shared/community/add-event/add-event.component';
 import { CommunityComponent } from 'app/shared/community/community-page/community.component';
 import { LeaseComponent } from './lease/lease.component';
+import { ApartmentEditComponent } from './lease/apartment/apartment.component';
+import { AmenitiesLeaseComponent } from './lease/amenities/amenities.component';
+import { LeaseInfoComponent } from './lease/lease-info/lease-info.component';
 
 
 
@@ -91,6 +94,9 @@ const routes = [
     RouterModule.forChild(routes),
   ],
   declarations: [SidenavComponent,
+    ApartmentEditComponent,
+    AmenitiesLeaseComponent,
+    LeaseInfoComponent,
     DashboardComponent,
     WelcomeComponent,
     StatementComponent,

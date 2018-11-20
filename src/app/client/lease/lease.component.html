@@ -11,29 +11,28 @@
             <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon">home</mat-icon>
             </ng-template>
-            <!-- <app-lease-apartment [apartmentForm]= "apartmentForm"></app-lease-apartment> -->
+
+            <div *ngIf="isDataAvailable">
+              <app-lease-apartment [apartmentForm]= "apartmentForm"></app-lease-apartment>
+            </div>
           </mat-tab>
         
           <mat-tab>
             <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon">offline_bolt</mat-icon>
             </ng-template>
-            <!-- <app-lease-amenities [amenitiesForm]= "amenitiesForm" [amenitiesArray]="amenitiesArray" [amenities]="amenities"></app-lease-amenities> -->
+            <app-lease-amenities [amenitiesForm]= "amenitiesForm" [amenitiesArray]="amenitiesArray" [amenities]="amenities"></app-lease-amenities>
           </mat-tab>
         
           <mat-tab>
             <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon">supervised_user_circle</mat-icon>
             </ng-template>
-            <!-- <app-lease-info [leaseDetailsForm]= "leaseDetailsForm"></app-lease-info> -->
+            <app-lease-info [leaseDetailsForm]= "leaseDetailsForm"></app-lease-info>
           </mat-tab>
         </mat-tab-group>
       </div>
       <br>
-      <div class="float-left" *ngIf="buttonDisplay"> 
-          <button type="button" (click)="onLeaseSubmit('ACCEPT')" class="btn btn-success btn-lg">APPROVE</button>&nbsp;
-          <button type="button" (click)="onLeaseSubmit('REJECT')" class="btn btn-danger btn-lg">REJECT</button>&nbsp;
-      </div>
       <div class="float-right">
         <button type="button" (click)="onLeaseSubmit(status)" class="btn btn-primary btn-lg">UPDATE</button>&nbsp;
         <button type="button" (click)="goBack()"  class="btn btn-warning btn-lg">CANCEL</button>

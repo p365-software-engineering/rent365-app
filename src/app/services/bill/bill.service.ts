@@ -18,6 +18,18 @@ export class BillService {
     this.billCollection = afs.collection<Bill>('bills');
   }
 
+  private createNextBillID(): string {
+    const billID = this.afs.createId();
+    return billID;
+  }
+
+  private calculateNextBillDate(oldBillDateString) {
+      const oldBillDate = new Date(oldBillDateString);
+      const nextBillMonth = oldBillDate.getMonth() + 1;
+      oldBillDate.setMonth(nextBillMonth);
+      return new Date(oldBillDate);
+  }
+
   createNewBill(data: any): Promise<void> {
       const billID = this.afs.createId();
       data.billID = billID;
@@ -25,6 +37,21 @@ export class BillService {
         .doc(billID)
         .set(data);
   }
+
+  getBillRef(billID: string) {
+    return this.billCollection
+      .doc(billID)
+      .ref;
+  }
+
+  createNextBill(nextBill: any) {
+      const billID = this.createNextBillID();
+      nextBill.billID = billID;
+      const nextBillDate = this.calculateNextBillDate(nextBill.dateDue); 
+      nextBill.dateDue = nextBillDate;
+      return nextBill;
+  }
+
 
   getAllBills(): Observable<Bill[]> {
     return this.billCollection

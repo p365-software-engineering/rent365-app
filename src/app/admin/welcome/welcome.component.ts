@@ -11,27 +11,30 @@ import { map } from 'rxjs/operators';
 })
 export class WelcomeComponent implements OnInit {
 
+  /** Chat Data */
   private _messages: Observable<ChatMessage[]>;
   private _chatThreads: Observable<ChatThread[]>;
   private _chatThreadIDs: string[];
   private isUserTyping: boolean;
   private activeThread: Observable<ChatThread>;
 
-  constructor(private _chatService: ChatService) {
-    this._chatThreadIDs = [];
-  }
+  /** Dashboard Box Statiscis */
+  private numOfTenants: number;
 
+  constructor(private _chatService: ChatService) {
+  }
+  
   ngOnInit() {
-    this._chatThreads = this._chatService.getActiveChatThreads()
-    .pipe(
-      map(chatThreads => {
-        // console.log(chatThreads);
-        return chatThreads;
-      })
-    );
-    // this._chatService.getActiveChatThreads().subscribe(chatThreads => {
-    //   console.log(chatThreads);
-    // })
+    this._chatThreads = this._chatService.getActiveChatThreads();
+    // TODO: this is meant to be used to pipe and fill over the dropdown
+    // that doesnt work in Daemonite
+    // this._chatThreadIDs = [];
+    // .pipe(
+    //   map(chatThreads => {
+    //     return chatThreads;
+    //   })
+    // );
+    this.numOfTenants = 7; // TODO:
 
   }
 

@@ -40,29 +40,33 @@ export class PaymentOrchestratorService {
   }
 
   excutePaymentWithCron(secretKey: string, paymentObj: any, bill: any): Promise<string> {
+    console.log(paymentObj);
+    console.log(bill);
     const { amount } = paymentObj;
     const _secretKey = secretKey || sessionStorage.getItem('seed_key');
     if (!_secretKey) { return Promise.reject('Please enter secret key'); }
-    const pubKey = sessionStorage.getItem('public_key');
-    console.log(pubKey);
-    if (!pubKey || pubKey !== this._stellarService.getPublicKey(_secretKey)) {
+    const pubKey = this._stellarService.getPublicKey(_secretKey);
+    if (!pubKey || pubKey === undefined || pubKey === null) {
       return Promise.reject('Your public key doesn\'t match your secret key');
     }
+    const { userID } = bill; // to be deleted
     return this._stellarService.validateNewBalance(pubKey, amount)
       .then((validBalance: boolean) => {
         if (validBalance) {
-          const batch = this.afs.firestore.batch();
-          const oldBillId = bill.billID; // to be deleted
-          const nextBill = this._billService.createNextBill(bill); // to be added
-          batch.delete(this._billService.getBillRef(oldBillId)); // to be added
-          batch.set(this._billService.getBillRef(nextBill.billID), nextBill);
           const createPmtPromise = this._paymentService.createNewPayment(paymentObj);
           const sendStellarPmt = this._stellarService.sendPayment(amount, 'TODO: memo');
+          const updateStatementPromise = this._billService.moveBillToUserStatements(userID, bill);
           return Promise.all([
               createPmtPromise,
               sendStellarPmt,
-              batch.commit()
+              updateStatementPromise
           ])
+          .then(() => {
+              const nextBill = this._billService.createNextBill(bill);
+              return this._billService.getBillRef(userID)
+                .update({dateDue: nextBill.dateDue})
+                .then(() => 'success')
+          })
           .then(res => 'EUREUKA!!!!!');
         } else {
           Promise.reject('invalid balance');

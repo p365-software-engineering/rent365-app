@@ -24,13 +24,15 @@ export class BillService {
   }
 
   private calculateNextBillDate(oldBillDateString) {
+      console.log(oldBillDateString);
       const oldBillDate = new Date(oldBillDateString);
       const nextBillMonth = oldBillDate.getMonth() + 1;
       oldBillDate.setMonth(nextBillMonth);
-      return new Date(oldBillDate);
+      return new Date(oldBillDate).toLocaleDateString("en-US");
   }
 
   createNewBill(data: any): Promise<void> {
+      console.log(data);
       const billID = this.afs.createId();
       data.billID = billID;
       return this.billCollection
@@ -39,6 +41,7 @@ export class BillService {
   }
 
   getBillRef(billID: string) {
+    console.log(billID, ' getBillRef');
     return this.billCollection
       .doc(billID)
       .ref;
@@ -47,11 +50,10 @@ export class BillService {
   createNextBill(nextBill: any) {
       const billID = this.createNextBillID();
       nextBill.billID = billID;
-      const nextBillDate = this.calculateNextBillDate(nextBill.dateDue); 
+      const nextBillDate = this.calculateNextBillDate(nextBill.dateDue);
       nextBill.dateDue = nextBillDate;
       return nextBill;
   }
-
 
   getAllBills(): Observable<Bill[]> {
     return this.billCollection
@@ -84,20 +86,14 @@ export class BillService {
   }
 
   moveBillToUserStatements(userId: string, bill: any) {
-    const batch = this.afs.firestore.batch();
-    batch.delete(this.billCollection
-      .doc(userId)
-      .ref
-    );
+    // const batch = this.afs.firestore.batch();
     const newID = this.afs.createId();
     bill.id = newID;
-    batch.set(this.afs.collection('statements')
+    return this.afs.collection('statements')
       .doc(userId)
       .collection('userStatements')
       .doc(newID)
-      .ref, bill
-    );
-    return batch.commit();
+      .set(bill);
   }
 
 }

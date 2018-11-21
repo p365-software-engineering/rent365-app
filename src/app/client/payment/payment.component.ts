@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BillService, AuthXService, EventService } from 'app/services/service-export';
 import { IUserData } from 'app/models/user-model';
-import { Observable } from 'rxjs';
 import { Bill } from 'app/models/bill';
 import { PaymentOrchestratorService } from 'app/services/payment-orchestrator/payment-orchestrator.service';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/internal/operators/map';
 
 @Component({
   selector: 'app-payment',
@@ -13,6 +14,7 @@ import { PaymentOrchestratorService } from 'app/services/payment-orchestrator/pa
 export class PaymentComponent implements OnInit {
 
   // !# TODO: Delete SAV6VEIM2477EYBVOM2SXY3JG6JFKL734KKQRICCAQVMV57PC2KUMYH7 --> Testing only
+  public _bill: Observable<Bill>;
   public bill: Bill;
   private user: IUserData;
 
@@ -37,18 +39,12 @@ export class PaymentComponent implements OnInit {
         amount: this.bill.amount,
         datePaid: Date.now()
       };
-      this._pmtOrchService.excutePayment(_secretKey, pmtObj)
-        .then(() => this._billService.moveBillToUserStatements(this.user.uid, pmtObj))
+      this._pmtOrchService.excutePaymentWithCron(_secretKey, pmtObj, this.bill)
         .then(() => {
           alert('Payment Success');
-          this.paymentSuccess();
           return;
         })
         .catch(err => alert(err));
-    }
-
-    private paymentSuccess() {
-      this.bill = null;
     }
 
 }

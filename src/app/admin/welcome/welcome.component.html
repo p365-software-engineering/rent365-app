@@ -25,10 +25,12 @@
           <div class="info-card col-lg-3 col-md-6 col-sm-12">
             <div class="card h-100">
               <div class="card-body">
-                <h5 class="card-title">My Statement</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Current Balance</h6>
-                <p class="currency">{{2000 | currency}}</p>
-                <button type="button" routerLink= "pay" name="quickpay" id="quickpay" class="btn btn-info btn-sm">QUICK PAY</button>
+                <h5 class="card-title">Active Tenants</h5>
+                <h6 class="card-subtitle mb-2 text-muted">(*Hero Families)</h6>
+                <p class="currency">{{ numOfTenants }}</p>
+                <button type="button" routerLink="tenants" name="tenants" id="quickpaytenants" class="btn btn-info btn-sm">
+                  View Tenants
+                </button>
               </div>
             </div>
           </div>
@@ -49,8 +51,10 @@
               <div class="card-body">
                 <h5 class="card-title">Service Requests</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Open Requests</h6>
-                  <p class="currency">1</p>
-                <button type="button" routerLink="request" name="service-req" id="service-req" class="btn btn-info btn-sm">NEW SERVICE REQUEST</button>
+                  <p class="currency"> {{ serviceRequests }} </p>
+                <button type="button" routerLink="request" name="service-req" id="service-req" class="btn btn-info btn-sm">
+                  Service History
+                </button>
               </div>
             </div>
           </div>

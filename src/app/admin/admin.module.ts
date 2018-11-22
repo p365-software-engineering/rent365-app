@@ -25,6 +25,7 @@ import { CommunityComponent } from 'app/shared/community/community-page/communit
 import { AddEventComponent } from 'app/shared/community/add-event/add-event.component';
 import { TenantsComponent } from './tenants/tenants.component';
 import { ManageComponent } from './manage/manage.component';
+import { BillHistoryComponent } from './bill-history/bill-history.component';
 
 @NgModule({
   imports: [
@@ -121,6 +122,7 @@ import { ManageComponent } from './manage/manage.component';
       AmenitiesLeaseComponent,
       LeaseInfoComponent,
       EditLeaseComponent,
+      BillHistoryComponent,
       TenantsComponent,
       ManageComponent]
 })

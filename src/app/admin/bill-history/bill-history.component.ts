@@ -13,17 +13,17 @@ import { map } from 'rxjs/operators';
 export class BillHistoryComponent implements OnInit {
 
   public _bills: Observable<Bill[]>;
-  private billTotal: number;
+  public billTotal: number;
 
   constructor(private _billService: BillService) { }
 
   ngOnInit() {
     this._bills = this._billService.getAllBills().pipe(
       map(bills => {
-        this.billTotal = bills.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue.amount), 0)
+        this.billTotal = bills.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue.amount, 10), 0);
         return bills;
       })
-    )
+    );
   }
 
 }

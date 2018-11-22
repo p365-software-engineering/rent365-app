@@ -19,11 +19,12 @@ export class WelcomeComponent implements OnInit {
   private activeThread: Observable<ChatThread>;
 
   /** Dashboard Box Statiscis */
-  private numOfTenants: number;
+  public numOfTenants: number;
+  public serviceRequests: number;
 
   constructor(private _chatService: ChatService) {
   }
-  
+
   ngOnInit() {
     this._chatThreads = this._chatService.getActiveChatThreads();
     // TODO: this is meant to be used to pipe and fill over the dropdown

@@ -8,7 +8,7 @@ export class Apartment {
     baths: string;
     beds: string;
 
-    constructor(){
+    constructor() {
         this.aptID = null;
         this.title = null;
         this.sub_title = null;

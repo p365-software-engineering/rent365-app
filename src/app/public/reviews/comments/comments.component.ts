@@ -10,53 +10,53 @@ import { Review } from 'app/models/review';
 })
 export class CommentsComponent implements OnInit {
 
-  @Input() aptID: string; 
+  @Input() aptID: string;
   public reviewPost: FormGroup;
   public reviews: Review[];
   public currentRating: number;
   public isClient: boolean;
-  
-  constructor(public fb: FormBuilder, public rs: ReviewService,public authX: AuthXService) {}
+
+  constructor(public fb: FormBuilder, public rs: ReviewService, public authX: AuthXService) {}
 
   ngOnInit() {
-    this.isClient = this.authX.isLoggedIn()
+    this.isClient = this.authX.isLoggedIn();
     console.log(this.isClient);
     this.reviewPost = this.fb.group({
       aptID: this.aptID,
-      post : ['',[Validators.required,Validators.maxLength(500)]],
+      post : ['', [Validators.required, Validators.maxLength(500)]],
       timestamp : new Date(),
-      rating: ['5',[Validators.max(5),Validators.min(1)]]
-    })
+      rating: ['5', [Validators.max(5), Validators.min(1)]]
+    });
 
     this.currentRating = 5;
 
     this.rs.getAllReviewsByAptID(this.aptID).subscribe(
-      (reviews)=>{
+      (reviews) => {
         console.log(reviews);
         this.reviews = reviews;
       }
-    )
+    );
   }
 
-  public dateFix(timestamp: any){
+  public dateFix(timestamp: any) {
     // console.log(timestamp);
-    var d = new Date(0);
-    d.setUTCSeconds(parseInt(timestamp['seconds']));
+    const d = new Date(0);
+    d.setUTCSeconds(parseInt(timestamp['seconds'], 10));
     return d;
   }
 
-  public onSubmit(){
-    if(this.reviewPost.valid){
+  public onSubmit() {
+    if (this.reviewPost.valid) {
       this.reviewPost.get('rating').patchValue(this.currentRating);
       this.rs.createNewReview(this.reviewPost.value).then(
-        ()=> {
+        () => {
           this.reviewPost.get('post').patchValue('');
           this.reviewPost.get('rating').patchValue('5');
         });
     }
   }
 
-  onRatingChanged(rating){
+  onRatingChanged(rating) {
     console.log(rating);
     this.currentRating = rating;
   }

@@ -65,7 +65,7 @@ export class PaymentOrchestratorService {
               const nextBill = this._billService.createNextBill(bill);
               return this._billService.getBillRef(userID)
                 .update({dateDue: nextBill.dateDue})
-                .then(() => 'success')
+                .then(() => 'success');
           })
           .then(res => 'EUREUKA!!!!!');
         } else {

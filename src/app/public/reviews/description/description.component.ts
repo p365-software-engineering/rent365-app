@@ -11,16 +11,16 @@ export class DescriptionComponent implements OnInit {
 
   @Input() aptID: string;
   public apartmentInfo: Apartment;
-  constructor(private ls: LeaseService) { 
+  constructor(private ls: LeaseService) {
     this.apartmentInfo = new Apartment();
   }
 
   ngOnInit() {
     this.ls.getApartmentbyID(this.aptID).subscribe(
-      (apartmentInfo)=> {
+      (apartmentInfo) => {
         this.apartmentInfo = apartmentInfo;
       }
-    )
+    );
   }
 
 }

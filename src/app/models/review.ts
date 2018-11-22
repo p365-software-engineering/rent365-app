@@ -13,7 +13,7 @@ export class Review {
         this.aptID          = obj.aptID || '';
         this.reviewText     = obj.reviewText || '';
         this.rating         = obj.rating || '';
-        this.timestamp      = obj.timestamp || '';   
+        this.timestamp      = obj.timestamp || '';
     }
 
 }

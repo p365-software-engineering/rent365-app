@@ -18,7 +18,7 @@ export class LeaseService {
   public amenitiesCollection: AngularFirestoreCollection<Amenity>;
   public leaseRequestCollection: AngularFirestoreCollection<LeaseRequest>;
   // New Lease
-  private leaseInfo: LeaseRequest = new LeaseRequest();
+  public leaseInfo: LeaseRequest = new LeaseRequest();
 
   constructor(private db: AngularFirestore, private wf: LeaseWorkflowService) {
     this.apartmentsCollection = this.db.collection<Apartment>('Apartments');

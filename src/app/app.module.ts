@@ -27,6 +27,9 @@ import { ReviewsComponent } from './public/reviews/reviews.component';
 import { DescriptionComponent } from './public/reviews/description/description.component';
 import { CommentsComponent } from './public/reviews/comments/comments.component';
 import { StarRatingComponent } from './public/star-rating/star-rating.component';
+import { HttpClientModule } from '@angular/common/http';
+import { MailService } from './services/mail/mail.service';
+import { AppointmentComponent } from './public/appointment/appointment.component';
 
 
 @NgModule({
@@ -45,7 +48,8 @@ import { StarRatingComponent } from './public/star-rating/star-rating.component'
     ReviewsComponent,
     DescriptionComponent,
     CommentsComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    AppointmentComponent
   ],
   imports: [
     SharedModule,
@@ -57,9 +61,10 @@ import { StarRatingComponent } from './public/star-rating/star-rating.component'
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot(appRoutes),
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [AuthXService, AuthXGuardClientService],
+  providers: [AuthXService, AuthXGuardClientService, MailService],
   bootstrap: [AppComponent]
 })
 

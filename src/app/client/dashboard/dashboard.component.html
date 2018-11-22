@@ -2,12 +2,8 @@
 
 <!-- Page Content  -->
 <div id="content" [ngClass]="{'active': !showNav }">
-    <nav class="navbar  navbar-light bg-dark justify-content-between">
-        <span class="navbar-toggler-icon" (click)="display()"></span>
-        <!-- <form class="form-inline">
-            <span class=" chip text-bold text-center"><i class="chip-icon">A</i><span class=" d-none d-md-block">Arun Nekkalapudi</span></span>
-        </form> -->
-      </nav>
+
+      <div class="navbar-toggler-icon text-light bg-dark mini-nav" (click)="display()"></div>
 
       <router-outlet ></router-outlet>
 

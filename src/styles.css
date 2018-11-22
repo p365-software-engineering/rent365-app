@@ -53,3 +53,12 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
     padding-left: 0px;
     width: 100%;
 }
+
+.card-title {
+    font-weight: 600;
+}
+
+.info-card .card-title {
+    font-weight: 400;
+}
+

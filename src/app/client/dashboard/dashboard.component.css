@@ -109,7 +109,7 @@ a.article:hover {
 
 #content {
     width: calc(100% - 250px);
-    padding: 15px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
     min-height: 100vh;
     transition: all 0.3s;
     position: absolute;
@@ -158,4 +158,17 @@ span.navbar-toggler-icon {
     border-radius: 2px;
     margin-bottom: 1.5rem;
     box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.14), 0 3px 4px 0 rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+.mini-nav {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius:2px;
+    background: #1A2980;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #1A2980, #1A2980);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to left, #1A2980, #1A2980); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    cursor: pointer;
+}
+
+h4 {
+    font-weight: 800;
 }

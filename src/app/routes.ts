@@ -9,6 +9,7 @@ import { EnquiryComponent } from './public/enquiry/enquiry.component';
 import { ForgotXComponent } from './public/forgot-x/forgot-x.component';
 import { ReviewsComponent} from './public/reviews/reviews.component';
 import { ReviewGaurdService } from './services/review/review-gaurd.service';
+import { AppointmentComponent } from './public/appointment/appointment.component';
 
 
 
@@ -53,6 +54,9 @@ export const appRoutes: Routes = [
         path: 'reviews/:aptID',
         component: ReviewsComponent,
         canActivate: [ReviewGaurdService]
-
+    },
+    {
+        path: 'appointment',
+        component: AppointmentComponent,
     }
 ];

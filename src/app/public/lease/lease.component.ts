@@ -6,6 +6,7 @@ import { Amenity } from 'app/models/amenity';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LeaseRequestStatus } from 'app/models/lease-request';
+import { MailService } from 'app/services/mail/mail.service';
 
 @Component({
   selector: 'app-lease',
@@ -25,7 +26,8 @@ export class LeaseComponent implements OnInit {
               private fb: FormBuilder,
               private ls: LeaseService,
               private router: Router,
-              private toastr: ToastrService) {
+              private toastr: ToastrService,
+              private mail: MailService) {
    }
 
   ngOnInit() {
@@ -91,6 +93,7 @@ export class LeaseComponent implements OnInit {
       this.ls.setUserDetails(this.leaseDetailsForm.value);
       // Always at the end call this - Refactoring required
       this.ls.pushRequest(LeaseRequestStatus.RECIEVED);
+      this.mail.newLeaseRequestMail(this.ls.leaseInfo);
       this.toastr.success('Submitted', 'Lease Request', {
         timeOut: 2000
       });

@@ -19,9 +19,8 @@ export class ReviewsComponent implements OnInit {
   ngOnInit() {
     // this._reviews = this._reviewService.getAllReviewsByAptID(this.apartmentID);
     this.parameter.params.subscribe(
-      (param) =>{
+      (param) => {
         this.aptID = param['aptID'];
-
       }
     );
   }

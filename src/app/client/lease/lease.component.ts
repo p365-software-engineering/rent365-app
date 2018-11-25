@@ -25,7 +25,7 @@ export class LeaseComponent implements OnInit {
   public amenitiesArray: Object[];
   public isDataAvailable = false;
   public status: string;
-
+  public totalAmount: number;
   constructor(public authx: AuthXService, public ls: LeaseService,
     public fb: FormBuilder,
     public router: Router,
@@ -69,16 +69,31 @@ export class LeaseComponent implements OnInit {
           (tenant: Tenant) => {
             this.ls.getLeaseRequestById(tenant['requestID']).subscribe(
               (leaseRequest: LeaseRequest) => {
-                console.log(leaseRequest);
+                // console.log(leaseRequest);
                 this.leasee = leaseRequest;
                 this.apartmentID = leaseRequest['aptID'];
-                console.log(leaseRequest['aptID']);
+                // console.log(leaseRequest['aptID']);
                 this.isDataAvailable = true;
                 this.updateLease();
+                this.leaseAmount(leaseRequest['requestID']);
+
+                if (leaseRequest['status'] === 'ACCEPT' ) {
+                  this.status = 'ACTIVE';
+                } else {
+                  this.status = 'IN-ACTIVE';
+                }
               }
             );
           }
         );
+      }
+    );
+  }
+
+  private leaseAmount(leaseID: string) {
+    this.ls.calulateLeaseAmount(leaseID).subscribe(
+      (value) => {
+        this.totalAmount = value;
       }
     );
   }
@@ -97,10 +112,10 @@ export class LeaseComponent implements OnInit {
 
 
   private updateLease(): void {
-    console.log(this.leasee['leaseID']);
+    // console.log(this.leasee['leaseID']);
     this.ls.getLeaseRequestById(this.leasee['requestID']).subscribe(
       (next: LeaseRequest) => {
-        console.log(next);
+        // console.log(next);
         this.apartmentForm.patchValue({
           aptID: next['aptID'] || ''
         });
@@ -114,7 +129,7 @@ export class LeaseComponent implements OnInit {
           }
         );
 
-        console.log(next.leaseInfo['startDate']['seconds']);
+        // console.log(next.leaseInfo['startDate']['seconds']);
         const date = new Date(0);
         date.setUTCSeconds(next.leaseInfo['startDate']['seconds']);
         this.leaseDetailsForm.patchValue({

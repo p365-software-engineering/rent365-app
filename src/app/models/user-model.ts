@@ -16,6 +16,7 @@ export interface IUserData {
     role?: string;
     about_me?: string;
     lease_id?: string;
+    request_id?: string;
 }
 
 export interface IRegister {

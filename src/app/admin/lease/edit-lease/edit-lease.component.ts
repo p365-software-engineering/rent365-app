@@ -24,6 +24,7 @@ export class EditLeaseComponent implements OnInit {
   public status: string;
   public buttonDisplay: boolean;
   public leaseRequestStatus: LeaseRequestStatus;
+  public totalAmount: number;
   constructor(private fb: FormBuilder,
               private routeParams: ActivatedRoute,
               private router: Router,
@@ -74,14 +75,29 @@ export class EditLeaseComponent implements OnInit {
           console.log(params['id']);
           this.leaseID = params['id'];
           this.updateLease();
+          this.leaseAmount(params['id']);
         }
       });
+  }
+
+  private leaseAmount(leaseID: string) {
+    this.ls.calulateLeaseAmount(leaseID).subscribe(
+      (value) => {
+        this.totalAmount = value;
+      }
+    );
   }
 
   private updateLease(): void {
     this.ls.getLeaseRequestById(this.leaseID).subscribe(
       (next: LeaseRequest) => {
-        this.status = next['status'];
+
+        if (next['status'] === 'ACCEPT' ) {
+          this.status = 'ACTIVE';
+        } else {
+          this.status = next['status'];
+        }
+        // this.status = next['status'];
         this.apartmentForm.patchValue({
           aptID: next['aptID'] || ''
         });
@@ -110,7 +126,7 @@ export class EditLeaseComponent implements OnInit {
           otherLeasee: []
         });
 
-        const hello = next.leasee['otherLeasee'].map(
+        next.leasee['otherLeasee'].map(
           (value, index) => {
             // console.log(JSON.stringify(value) + ' ' + index);
             return (<FormArray>this.leaseDetailsForm.get('otherLeasee')).push(this.fb.group({

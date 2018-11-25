@@ -4,6 +4,8 @@ import { IUserData } from '../../models/user-model';
 import { Bill } from '../../models/bill';
 import { Event } from '../../models/event';
 import { Router } from '@angular/router';
+import { LeaseService } from 'app/services/lease/lease.service';
+import { LeaseRequest } from 'app/models/lease-request';
 
 @Component({
   selector: 'app-welcome',
@@ -15,6 +17,8 @@ export class WelcomeComponent implements OnInit {
   public pendingRequest: number;
   public bill: Bill;
   public event: Event;
+  public expiryDate: Date;
+  public totalAmount: number;
   // TODO: SEE BELOW
   // private _serviceCount: number;
 
@@ -23,7 +27,8 @@ export class WelcomeComponent implements OnInit {
               private _billService: BillService,
               private _serviceTicketService: ServiceTicketService,
               private _eventService: EventService,
-              private _router: Router) { }
+              private _router: Router,
+              private ls: LeaseService) { }
 
   ngOnInit() {
     // TODO: DECIDE IF THIS IS BETTER based on DB Structure
@@ -36,6 +41,17 @@ export class WelcomeComponent implements OnInit {
     );
 
     this.authx.getCurrentUser().subscribe((user: IUserData) => {
+      this.leaseAmount(user['request_id']);
+      if (user['request_id'] !== 'undefined') {
+        this.ls.getLeaseRequestById(user['request_id']).subscribe(
+          (leaseDetails: LeaseRequest) => {
+            this.expiryDate  = new Date(0);
+            this.expiryDate.setUTCSeconds(parseInt(leaseDetails['leaseInfo']['endDate']['seconds'], 10));
+          }
+        );
+      } else {
+        // this.expiryDate = "In-Active";
+      }
       this._billService.getBillByUserID(user.uid)
         .subscribe(bill => this.bill = bill);
     });
@@ -48,5 +64,15 @@ export class WelcomeComponent implements OnInit {
   goToEvents() {
     this._router.navigate(['client/community']);
   }
+
+  private leaseAmount(leaseID: string) {
+    this.ls.calulateLeaseAmount(leaseID).subscribe(
+      (value) => {
+        this.totalAmount = value;
+        console.log(this.totalAmount);
+      }
+    );
+  }
+
 
 }

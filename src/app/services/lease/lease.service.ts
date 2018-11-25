@@ -6,6 +6,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { LeaseWorkflowService } from '../lease-workflow/lease-workflow.service';
 import { IUserData, IUser } from 'app/models/user-model';
+import { MutationObserverFactory } from '@angular/cdk/observers';
 
 @Injectable({
   providedIn: 'root'
@@ -81,6 +82,7 @@ export class LeaseService {
         this.getUserData(this.leaseInfo.leasee['uid']).subscribe(
           (userInfo: IUserData) => {
             userInfo['lease_id'] = this.leaseInfo['leaseID'];
+            userInfo['request_id'] = this.leaseInfo['requestID'];
             this.updateUserData(userInfo);
           }
         );
@@ -168,7 +170,37 @@ export class LeaseService {
     }).valueChanges();
   }
 
-  public calulateLeaseRequest(lr: LeaseRequest) {
+  public calulateLeaseAmount(requestID: string) {
+    let price = 0;
+    return Observable.create(
+      (observer) => {
+        this.getLeaseRequestById(requestID).subscribe(
+          (leasee: LeaseRequest) => {
+            const amenities = leasee['amenities'];
+            const apartment = leasee['aptID'];
+
+            for ( const amenity of amenities) {
+              if (amenity) {
+                this.getAmenitybyID(amenity).subscribe(
+                  (amen: Amenity) => {
+                    price  += parseInt(amen['price'], 10);
+                    observer.next(price);
+                  }
+                );
+              }
+            }
+
+            this.getApartmentbyID(apartment).subscribe(
+              (apart) => {
+                price += parseInt(apart['price'], 10);
+                observer.next(price);
+                console.log(price);
+              }
+            );
+          }
+        );
+      }
+    );
   }
 
   public getAllTenants():  Observable<LeaseRequest[]>  {

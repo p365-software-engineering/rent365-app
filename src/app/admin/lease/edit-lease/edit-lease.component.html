@@ -5,6 +5,28 @@
       <h4 class="card-title">VIEW LEASE REQUEST</h4>
       <hr class="my-2 bg-dark-1">
       <br>
+      <div class="row">
+        <div class="info-card col-lg-3 col-md-6 col-sm-12">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Lease Value</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Amount($)</h6>
+              <p class="currency">{{totalAmount | currency}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="info-card col-lg-3 col-md-6 col-sm-12">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">Status</h5>
+              <h6 class="card-subtitle mb-2 text-muted">Current</h6>
+              <p class="currency">{{status}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      
       <div class=" card container-fluid form-input">
         <mat-tab-group>
           <mat-tab>

@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="card text-dark-2 bg-light-1">
       
-    <img class="card-img-top" src="https://hdqwalls.com/wallpapers/avengers-stark-tower-5k-ck.jpg"
+    <img class="card-img-top" src="https://hdqwalls.com/wallpapers/outside-city-zi.jpg"
       alt="">
 
       <div class="card-img-overlay">
@@ -27,9 +27,12 @@
               <div class="card-body">
                 <h5 class="card-title">Current Bill</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Current Balance</h6>
-                <p class="currency">{{ (bill) ? (bill?.amount | currency) : 'You have no balance at this time'}}</p>
+                <p class="currency">{{ (bill) ? (bill?.amount | currency) : ('0.00' | currency)}}</p>
+              </div>
+              <div class="card-footer float-right">
                 <button type="button" routerLink= "pay" name="quickpay" id="quickpay" class="btn btn-info btn-sm">QUICK PAY</button>
               </div>
+
             </div>
           </div>
       
@@ -38,8 +41,10 @@
               <div class="card-body">
                 <h5 class="card-title">My Lease</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Expiration Date</h6>
-                  <p class="currency"> {{ "12/31/2018" | date }}</p>
-                <button type="button" routerLink="lease" id="lease" class="btn btn-info btn-sm">EXTEND YOUR LEASE</button>
+                  <p class="currency"> {{ expiryDate | date }}</p>
+              </div>
+              <div class="card-footer float-right">
+                <button type="button" routerLink="lease" id="lease" class="btn btn-info btn-sm">LEASE INFO</button>
               </div>
             </div>
           </div>
@@ -50,6 +55,8 @@
                 <h5 class="card-title">Service Requests</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Open Requests</h6>
                   <p class="currency">{{pendingRequest}}</p>
+              </div>
+              <div class="card-footer float-right">
                 <button type="button" routerLink="request" name="service-req" id="service-req" class="btn btn-info btn-sm">NEW SERVICE REQUEST</button>
               </div>
             </div>
@@ -58,12 +65,14 @@
           <div class="info-card col-lg-3 col-md-6 col-sm-12">
             <div class="card h-100">
               <div class="card-body">
-                <h5 class="card-title">Upcoming Events</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ event?.eventTitle }}</h6>
-                  <p class="currency">{{ event?.date | date }}</p>
-                  <p class="currency">{{ event?.eventDescription }}</p>
+                <h5 class="card-title">Events</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Upcoming</h6>
+                  <p class="card-title">{{ event?.eventTitle }}</p>
+                  <p class="card-subtitle font-italic">{{ event?.date | date }}</p>
+              </div>
+              <div class="card-footer">
                 <button type="button" routerLink="community" class="btn btn-info btn-sm" (click)="goToEvents()"> 
-                  Go to Events!
+                  Go to Events
                 </button>
               </div>
             </div>

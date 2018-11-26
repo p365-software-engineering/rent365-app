@@ -33,7 +33,7 @@ export class ServiceComponent implements OnInit {
     this.serviceRequest = this.fb.group({
       serviceTicketID: this.stid,
       userID: this.authX._currentUser.uid,
-      apartmentID: '',
+      leaseID: '',
       subject: ['', Validators.required],
       ticketDescription: ['', Validators.required],
       permission: ['', Validators.required],
@@ -41,8 +41,12 @@ export class ServiceComponent implements OnInit {
       security: ['', Validators.required],
       dateCreated: this.date
     });
-    this.ticket.getProgressServiceticketsByUserID(this.authX._currentUser.uid).subscribe(
-      next => this.count = next.length,
+
+    // Need to Update based on lease id
+    this.ticket.getProgressServiceticketsByAptID(this.authX._currentUser.uid).subscribe(
+      next => {
+        this.count = next.length;
+      },
       error => console.log(error)
     );
   }

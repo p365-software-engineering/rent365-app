@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthXService } from 'app/services/login/auth-x.service';
+import { IUserData } from 'app/models/user-model';
 
 @Component({
   selector: 'app-sidenav',
@@ -8,10 +9,21 @@ import { AuthXService } from 'app/services/login/auth-x.service';
 })
 export class SidenavComponent implements OnInit {
 
-  constructor(public authX: AuthXService) { }
+  public hideContent: boolean;
+  constructor(
+    public authX: AuthXService) { }
   @Input() showNav: boolean;
 
   ngOnInit() {
+    this.authX.getCurrentUser().subscribe(
+      (user: IUserData) => {
+        if ((user['lease_id'] !== 'na')) {
+          this.hideContent = true;
+        } else {
+          this.hideContent = false;
+        }
+      }
+    );
   }
 
 }

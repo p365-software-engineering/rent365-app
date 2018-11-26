@@ -5,6 +5,7 @@ import { AuthXService } from '../login/auth-x.service';
 import { Observable } from 'rxjs';
 import { take, map, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { IUserData } from 'app/models/user-model';
 
 
 
@@ -34,6 +35,13 @@ export class AuthXGuardClientService implements CanActivate, CanActivateChild, C
     return this.firebaseAuth.authState.pipe(
       map(auth => {
         if ((auth)) {
+          this.AuthX.getCurrentUser().subscribe(
+            (user: IUserData) => {
+              if (typeof user['request_id'] === 'undefined') {
+                this.router.navigateByUrl('lease');
+              }
+            }
+          );
           return true;
         } else {
           return false;

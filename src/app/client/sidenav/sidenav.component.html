@@ -16,7 +16,7 @@
         <li>
             <a routerLink='/client'>DASHBOARD</a>
         </li>
-        <li>
+        <li *ngIf="hideContent">
             <a routerLink='community'>MY COMMUNITY</a>
         </li>
         <li class="active">
@@ -44,7 +44,7 @@
               </li> -->
           </ul>
       </li>
-      <li>
+      <li *ngIf="hideContent">
             <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">SERVICE REQUEST</a>
             <ul class="collapse list-unstyled" id="pageSubmenu">
                 <li>

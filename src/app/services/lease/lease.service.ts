@@ -91,8 +91,18 @@ export class LeaseService {
      if (status === 'REJECT') {
       if (this.leaseInfo['leaseID'] !== undefined) {
         this.db.collection<Tenant>('tenants').doc(this.leaseInfo['leaseID']).delete();
-        this.leaseInfo['leaseID'] = '';
+        this.leaseInfo['leaseID'] = 'na';
       }
+     }
+     if (status === 'RECIEVED') {
+        this.getUserData(this.leaseInfo.leasee['uid']).subscribe(
+          (userInfo: IUserData) => {
+            userInfo['lease_id'] = this.leaseInfo['leaseID'] || 'na';
+            userInfo['request_id'] = this.leaseInfo['requestID'];
+            this.updateUserData(userInfo);
+        }
+      );
+
      }
     //  console.log(this.leaseInfo);
     this.leaseRequestCollection.doc(this.leaseInfo['requestID']).set(Object.assign({}, this.leaseInfo));

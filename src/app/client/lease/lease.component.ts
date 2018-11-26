@@ -65,27 +65,41 @@ export class LeaseComponent implements OnInit {
     this.authx.getCurrentUser().subscribe(
       (user: IUserData) => {
         this.userInfo = user;
-        this.ls.getTenantByLeaseID(user['lease_id']).subscribe(
-          (tenant: Tenant) => {
-            this.ls.getLeaseRequestById(tenant['requestID']).subscribe(
-              (leaseRequest: LeaseRequest) => {
-                // console.log(leaseRequest);
-                this.leasee = leaseRequest;
-                this.apartmentID = leaseRequest['aptID'];
-                // console.log(leaseRequest['aptID']);
-                this.isDataAvailable = true;
-                this.updateLease();
-                this.leaseAmount(leaseRequest['requestID']);
-
-                if (leaseRequest['status'] === 'ACCEPT' ) {
-                  this.status = 'ACTIVE';
-                } else {
-                  this.status = 'IN-ACTIVE';
+        console.log(user['lease_id']);
+        if (user['lease_id'] !== 'na') {
+          this.ls.getTenantByLeaseID(user['lease_id']).subscribe(
+            (tenant: Tenant) => {
+              this.ls.getLeaseRequestById(tenant['requestID']).subscribe(
+                (leaseRequest: LeaseRequest) => {
+                  // console.log(leaseRequest);
+                  this.leasee = leaseRequest;
+                  this.apartmentID = leaseRequest['aptID'];
+                  // console.log(leaseRequest['aptID']);
+                  this.isDataAvailable = true;
+                  this.updateLease();
+                  this.leaseAmount(leaseRequest['requestID']);
+                  if (leaseRequest['status'] === 'ACCEPT' ) {
+                    this.status = 'ACTIVE';
+                  } else {
+                    this.status = 'IN-ACTIVE';
+                  }
                 }
-              }
-            );
-          }
-        );
+              );
+            }
+          );
+        } else {
+          this.ls.getLeaseRequestById(user['request_id']).subscribe(
+            (leaseRequest: LeaseRequest) => {
+              this.leasee = leaseRequest;
+                  this.apartmentID = leaseRequest['aptID'];
+                  // console.log(leaseRequest['aptID']);
+                  this.isDataAvailable = true;
+                  this.updateLease();
+                  this.leaseAmount(leaseRequest['requestID']);
+                  this.status = 'RECIEVED';
+            }
+          );
+        }
       }
     );
   }
@@ -109,7 +123,6 @@ export class LeaseComponent implements OnInit {
 
      return <FormArray>this.amenitiesForm.get('amntID').value;
   }
-
 
   private updateLease(): void {
     // console.log(this.leasee['leaseID']);

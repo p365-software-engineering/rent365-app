@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LeaseRequestStatus } from 'app/models/lease-request';
 import { MailService } from 'app/services/mail/mail.service';
+import { IUserData } from 'app/models/user-model';
 
 @Component({
   selector: 'app-lease',
@@ -31,6 +32,13 @@ export class LeaseComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.authX.getCurrentUser().subscribe(
+      (user: IUserData) => {
+        if (user['request_id']) {
+          this.router.navigate(['client']);
+        }
+      }
+    );
     this.apartmentForm = this.fb.group({
       aptID: ['', [Validators.required]]
     });
@@ -97,7 +105,7 @@ export class LeaseComponent implements OnInit {
       this.toastr.success('Submitted', 'Lease Request', {
         timeOut: 2000
       });
-      this.router.navigate(['']);
+      this.router.navigate(['client']);
     } else {
       this.toastr.error('Please Verify all the Fields', 'Lease Request', {
         timeOut: 2000

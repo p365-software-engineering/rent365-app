@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { take, map, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { async } from 'rxjs/internal/scheduler/async';
+import { IUserData } from 'app/models/user-model';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,15 @@ export class AuthXGuardAdminService implements CanActivate, CanActivateChild, Ca
      return this.firebaseAuth.authState.pipe(
       map(auth => {
         if ((auth)) {
+          this.AuthX.getCurrentUser().subscribe(
+            (user: IUserData) => {
+              if ( user['role'] === 'admin') {
+                return true;
+              } else {
+                this.router.navigate([user['role']]);
+              }
+            }
+          );
           return true;
         } else {
           return false;

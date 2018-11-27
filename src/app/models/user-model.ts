@@ -19,6 +19,10 @@ export interface IUserData {
     request_id?: string;
 }
 
+export interface IRole {
+    role?: string;
+}
+
 export interface IRegister {
     guid: string;
     first_name: string;

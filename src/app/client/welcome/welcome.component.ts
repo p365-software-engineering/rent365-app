@@ -41,12 +41,12 @@ export class WelcomeComponent implements OnInit {
     );
 
     this.authx.getCurrentUser().subscribe((user: IUserData) => {
-      this.leaseAmount(user['request_id']);
-      if (user['request_id'] !== 'undefined') {
+      if (user['request_id'] !== '') {
         this.ls.getLeaseRequestById(user['request_id']).subscribe(
           (leaseDetails: LeaseRequest) => {
             this.expiryDate  = new Date(0);
             this.expiryDate.setUTCSeconds(parseInt(leaseDetails['leaseInfo']['endDate']['seconds'], 10));
+            this.leaseAmount(user['request_id']);
           }
         );
       } else {

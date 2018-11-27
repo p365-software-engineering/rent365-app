@@ -26,15 +26,14 @@ export class AuthXGuardAdminService implements CanActivate, CanActivateChild, Ca
         if ((auth)) {
           this.AuthX.getCurrentUser().subscribe(
             (user: IUserData) => {
-              if ( user['role'] === 'admin') {
-                return true;
-              } else {
+              if ( user['role'] !== 'admin') {
                 this.router.navigate([user['role']]);
               }
             }
           );
           return true;
         } else {
+          this.router.navigateByUrl('login');
           return false;
         }
       })

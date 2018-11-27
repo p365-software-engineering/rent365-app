@@ -37,13 +37,14 @@ export class AuthXGuardClientService implements CanActivate, CanActivateChild, C
         if ((auth)) {
           this.AuthX.getCurrentUser().subscribe(
             (user: IUserData) => {
-              if (typeof user['request_id'] === 'undefined') {
+              if (!user['request_id']) {
                 this.router.navigateByUrl('lease');
               }
             }
           );
           return true;
         } else {
+          this.router.navigateByUrl('login');
           return false;
         }
       })

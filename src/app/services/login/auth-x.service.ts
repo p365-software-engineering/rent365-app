@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IUser, IUserData } from '../../models/user-model';
+import { IUser, IUserData, IRole } from '../../models/user-model';
 import { Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
@@ -40,21 +40,71 @@ export class AuthXService {
 
   public updateUserData(user: any) {
       const userRef = this.afs.collection<IUserData>('User').doc(user.uid).ref;
-      this.afs.collection('Role').doc(user.uid).valueChanges().subscribe((roleDoc: any) => {
-          const role: string = (roleDoc) ? roleDoc.role : 'client';
-          const data: IUserData = {
+      const roleRef = this.afs.collection<IRole>('Role').doc(user.uid).ref;
+      // For Role
+      roleRef.get().then(
+        (snapShot) => {
+          if (!snapShot.exists) {
+            const data: IRole = {
+              role:  user.role || 'client'
+          };
+            roleRef.set(data);
+          }
+        }
+      );
+      // For User
+      userRef.get().then(
+        (snapShot) => {
+          if (!snapShot.exists) {
+            const data: IUserData = {
               uid: user.uid,
               email: user.email,
               first_name: user.displayName || user.first_name,
               last_name: user.displayName || user.last_name,
               middle_name: user.displayName || user.middle_name || '',
-              gender: '' || user.gender,
+              gender: user.gender || '',
+              about_me: user.about_me || '',
+              password: 'na',
+              role: user.role || 'client',
+              lease_id: 'na',
+              request_id: ''
+            };
+            userRef.set(data).then(
+              () => {
+                this.router.navigate([data['role']]);
+              }
+            );
+          } else {
+            const data: IUserData = {
+              uid: user.uid,
+              email: user.email,
+              first_name: user.displayName || user.first_name,
+              last_name: user.displayName || user.last_name,
+              middle_name: user.displayName || user.middle_name || '',
+              gender: user.gender || '',
               about_me: user.about_me || '',
               password: 'na',
               role: user.role || 'client'
             };
-          return userRef.set(data);
-      });
+            userRef.update(data);
+          }
+        }
+      );
+      // this.afs.collection('Role').doc(user.uid).valueChanges().subscribe((roleDoc: any) => {
+      //     const role: string = (roleDoc) ? roleDoc.role : 'client';
+      //     const data: IUserData = {
+      //         uid: user.uid,
+      //         email: user.email,
+      //         first_name: user.displayName || user.first_name,
+      //         last_name: user.displayName || user.last_name,
+      //         middle_name: user.displayName || user.middle_name || '',
+      //         gender: '' || user.gender,
+      //         about_me: user.about_me || '',
+      //         password: 'na',
+      //         role: user.role || 'client'
+      //       };
+      //     return userRef.set(data);
+      // });
   }
 
   public register(formData: IUserData): any {
@@ -91,11 +141,11 @@ export class AuthXService {
     });
   }
 
-  public navigateUser(user: Observable<any>) {
-    user.subscribe(
+  public navigateUser() {
+    this.getCurrentUser().subscribe(
       (data) => {
-        if (data.role !== undefined) {
-          this.router.navigate([data.role]);
+        if (data['role'] !== undefined) {
+          this.router.navigate(['admin']);
         }
       }
     );
@@ -104,16 +154,20 @@ export class AuthXService {
   public loginGoogle() {
     this.firebaseAuth.auth.signInWithPopup(new auth.GoogleAuthProvider()).then((credential) => {
       const user = this.afs.collection<IUserData>('User').doc(credential.user.uid);
+      this._currentUser = credential.user;
       user.ref.get().then(
         (userSnapshot) => {
           if (!userSnapshot.exists) {
             console.log('Profile Updated');
             this.updateUserData(credential.user);
           }
-          this.navigateUser(user.valueChanges());
         }
       );
-    }).catch((error) => {
+    }).then(
+      () => {
+        this.navigateUser();
+      }
+    ).catch((error) => {
       console.log(error);
     });
   }
@@ -121,13 +175,14 @@ export class AuthXService {
   public loginFacebook() {
     this.firebaseAuth.auth.signInWithPopup(new auth.FacebookAuthProvider()).then((credential) => {
       const user = this.afs.collection<IUserData>('User').doc(credential.user.uid);
+      this._currentUser = credential.user;
       user.ref.get().then(
         (userSnapshot) => {
           if (!userSnapshot.exists) {
             console.log('Profile Updated');
             this.updateUserData(credential.user);
           }
-          this.navigateUser(user.valueChanges());
+          this.navigateUser();
         }
       );
     }).catch((error) => {
@@ -139,6 +194,7 @@ export class AuthXService {
     return this.firebaseAuth.auth.signInWithEmailAndPassword(formData['email'], formData['password'])
     .then((credential) => {
       const user = this.afs.collection<IUserData>('User').doc(credential.user.uid);
+      this._currentUser = credential.user;
       if (!credential.user.emailVerified) {
         this.logout();
         console.log('Verify your email');
@@ -146,7 +202,7 @@ export class AuthXService {
       } else {
         user.ref.get().then(
           (userSnapshot) => {
-            this.navigateUser(user.valueChanges());
+            this.navigateUser();
           }
         );
       }

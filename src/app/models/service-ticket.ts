@@ -17,8 +17,10 @@ export class ServiceTicket {
     dateCreated: string;
     dateResolved: string | null;
     ticketStatus: ServiceTicketStatus;
+    requestID: string;
 
     constructor(obj?: any) {
+        this.requestID          = obj.requestID;
         this.leaseID            = obj.leaseID || '';
         this.serviceTicketID    = obj.serviceTicketID || '';
         this.userID             = obj.userID;

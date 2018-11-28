@@ -204,7 +204,7 @@ export class LeaseService {
               (apart) => {
                 price += parseInt(apart['price'], 10);
                 observer.next(price);
-                console.log(price);
+                // console.log(price);
               }
             );
           }

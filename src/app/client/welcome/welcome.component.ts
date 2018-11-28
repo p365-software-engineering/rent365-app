@@ -69,7 +69,7 @@ export class WelcomeComponent implements OnInit {
     this.ls.calulateLeaseAmount(leaseID).subscribe(
       (value) => {
         this.totalAmount = value;
-        console.log(this.totalAmount);
+        // console.log(this.totalAmount);
       }
     );
   }

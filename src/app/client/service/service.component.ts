@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AuthXService, ServiceTicketService } from 'app/services/service-export';
 import { Router } from '@angular/router';
-import { ServiceTicket } from 'app/models/model-export';
+import { ServiceTicket, IUserData } from 'app/models/model-export';
 import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
@@ -30,17 +30,23 @@ export class ServiceComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.serviceRequest = this.fb.group({
-      serviceTicketID: this.stid,
-      userID: this.authX._currentUser.uid,
-      leaseID: '',
-      subject: ['', Validators.required],
-      ticketDescription: ['', Validators.required],
-      permission: ['', Validators.required],
-      pets: ['', Validators.required],
-      security: ['', Validators.required],
-      dateCreated: this.date
-    });
+
+    this.authX.getCurrentUser().subscribe(
+      (user: IUserData) => {
+        this.serviceRequest = this.fb.group({
+          request_id: user['request_id'],
+          serviceTicketID: this.stid,
+          userID: user['uid'],
+          lease_id: user['lease_id'],
+          subject: ['', Validators.required],
+          ticketDescription: ['', Validators.required],
+          permission: ['', Validators.required],
+          pets: ['', Validators.required],
+          security: ['', Validators.required],
+          dateCreated: this.date
+        });
+      }
+    );
 
     // Need to Update based on lease id
     this.ticket.getProgressServiceticketsByAptID(this.authX._currentUser.uid).subscribe(
@@ -57,7 +63,7 @@ export class ServiceComponent implements OnInit {
         timeOut: 2000
       });
       const ticket: ServiceTicket = new ServiceTicket(this.serviceRequest.value);
-      console.log(JSON.stringify(ticket));
+      // console.log(JSON.stringify(ticket));
       this.ticket.createNewServiceTicket(ticket);
       this.router.navigate(['client', 'history']);
     } else {

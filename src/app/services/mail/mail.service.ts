@@ -19,7 +19,30 @@ export class MailService {
       sendersName:  leaseRequest['leasee']['firstName'],
       text:  '',
       name:  leaseRequest['leasee']['firstName'],
-      data:  'Thanks for joining the super Rental family.',
+      data:  'Thanks for joining the Super Rental family.',
+      mailtype: 'newLeaseRequest'
+    });
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    this.http.post<Mail>(this.urlLeaseRequest, mail, httpOptions).subscribe(
+      (result) => {
+        console.log(result);
+      }
+    );
+  }
+
+  public newLServiceRequestMail(leaseRequest: LeaseRequest) {
+    const mail = new Mail({
+      toAddress: leaseRequest['leasee']['email'],
+      html:  '',
+      sendersName:  leaseRequest['leasee']['firstName'],
+      text:  '',
+      name:  leaseRequest['leasee']['firstName'],
+      data:  'Thanks for joining the Super Rental family.',
+      mailtype: 'newServiceTicket'
     });
     const httpOptions = {
       headers: new HttpHeaders({

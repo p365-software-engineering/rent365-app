@@ -30,6 +30,7 @@ import { StarRatingComponent } from './public/star-rating/star-rating.component'
 import { HttpClientModule } from '@angular/common/http';
 import { MailService } from './services/mail/mail.service';
 import { AppointmentComponent } from './public/appointment/appointment.component';
+import { AppointmentTimeComponent } from './public/appointment/appointment-time/appointment-time.component';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { AppointmentComponent } from './public/appointment/appointment.component
     DescriptionComponent,
     CommentsComponent,
     StarRatingComponent,
-    AppointmentComponent
+    AppointmentComponent,
+    AppointmentTimeComponent
   ],
   imports: [
     SharedModule,

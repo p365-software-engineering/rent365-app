@@ -26,6 +26,7 @@ import { AddEventComponent } from 'app/shared/community/add-event/add-event.comp
 import { TenantsComponent } from './tenants/tenants.component';
 import { ManageComponent } from './manage/manage.component';
 import { BillHistoryComponent } from './bill-history/bill-history.component';
+import { AppointmentComponent } from './appointment/appointment.component';
 
 @NgModule({
   imports: [
@@ -100,6 +101,10 @@ import { BillHistoryComponent } from './bill-history/bill-history.component';
           {
             path: 'clients/:id',
             component: EditLeaseComponent
+          },
+          {
+            path: 'tours',
+            component: AppointmentComponent
           }
         ]
       }
@@ -124,7 +129,8 @@ import { BillHistoryComponent } from './bill-history/bill-history.component';
       EditLeaseComponent,
       BillHistoryComponent,
       TenantsComponent,
-      ManageComponent]
+      ManageComponent,
+      AppointmentComponent]
 })
 
 export class AdminModule { }

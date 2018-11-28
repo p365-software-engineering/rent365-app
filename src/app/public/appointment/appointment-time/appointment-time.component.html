@@ -2,7 +2,7 @@
 
   <h4 class="card-title aptmnt-title">AVAILABLE TIME SLOTS</h4>
   <hr class="my-2 bg-dark-1">
-  <p>Date: {{appointmentDate |date:shortdate}}</p>
+  <p>Date: {{appointmentDate |date:'shortDate'}}</p>
   <div class="card-group" *ngIf="timeSlots.length !== 0">
         <div class="info-card" *ngFor="let timeSlot of timeSlots">
             <label class="form-check-label">

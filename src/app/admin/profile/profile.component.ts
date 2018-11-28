@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthXService } from 'app/services/login/auth-x.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { IUserData } from 'app/models/user-model';
 
 @Component({
   selector: 'app-profile',
@@ -32,13 +33,14 @@ export class ProfileComponent implements OnInit {
   private getProfile() {
     if (this.authX._currentUser) {
       this.authX.getCurrentUser().subscribe(
-        (user) => {
+        (user: IUserData) => {
           this.profile.patchValue({
             first_name: user.first_name,
             last_name: user.last_name,
             middle_name: user.middle_name,
             gender: user.gender,
-            about_me: user.about_me
+            about_me: user.about_me,
+            role: user['role']
           });
         }
       );

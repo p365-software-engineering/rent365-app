@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestoreCollection, AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Appointment } from 'app/models/appointment';
 import { AngularFireStorageReference } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class AppointmentService {
       return this.appointmentCollection
         .doc(data.start_time.toString())
         .set(data);
+  }
+
+  public getAllAppointments(): Observable<Appointment[]> {
+    return this.appointmentCollection.valueChanges();
   }
 
   public getAppointmentCollectionRef(docID: string): firebase.firestore.DocumentReference {

@@ -17,7 +17,7 @@ interface TimeSlot {
 
 export class AppointmentTimeComponent implements OnInit, OnChanges {
 
-  private timeSlots: number[];
+  public timeSlots: number[];
   private startTime: number;
   private endTime: number;
   public appointmentForm: FormGroup;

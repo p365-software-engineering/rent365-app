@@ -31,33 +31,49 @@ export class ServiceComponent implements OnInit {
 
   ngOnInit() {
 
+    this.serviceRequest = this.fb.group({
+      request_id: '',
+      serviceTicketID: this.stid,
+      userID: '',
+      lease_id: '',
+      subject: ['', Validators.required],
+      ticketDescription: ['', Validators.required],
+      permission: ['', Validators.required],
+      pets: ['', Validators.required],
+      security: ['', Validators.required],
+      dateCreated: this.date,
+      ticketStatus: 'PROGRESS'
+    });
+
+
     this.authX.getCurrentUser().subscribe(
       (user: IUserData) => {
         this.serviceRequest = this.fb.group({
-          request_id: user['request_id'],
+          apartmentID: user[''],
+          requestID: user['request_id'],
           serviceTicketID: this.stid,
           userID: user['uid'],
-          lease_id: user['lease_id'],
+          leaseID: user['lease_id'],
           subject: ['', Validators.required],
           ticketDescription: ['', Validators.required],
           permission: ['', Validators.required],
           pets: ['', Validators.required],
           security: ['', Validators.required],
-          dateCreated: this.date
+          dateCreated: this.date,
+          ticketStatus: 'PROGRESS'
         });
+        this.ticket.getProgressServiceticketsByLeaseID(user['lease_id']).subscribe(
+          next => {
+            this.count = next.length;
+          },
+          error => console.log(error)
+        );
       }
-    );
-
-    // Need to Update based on lease id
-    this.ticket.getProgressServiceticketsByAptID(this.authX._currentUser.uid).subscribe(
-      next => {
-        this.count = next.length;
-      },
-      error => console.log(error)
     );
   }
 
   public onSubmitRequest(): void {
+    console.log(this.serviceRequest.value);
     if (this.serviceRequest && this.serviceRequest.valid) {
       this.toastr.success('Service Request ', 'Submitted', {
         timeOut: 2000

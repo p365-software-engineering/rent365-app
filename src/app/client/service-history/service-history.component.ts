@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ServiceTicketService, AuthXService } from 'app/services/service-export';
-import { ServiceTicket } from 'app/models/model-export';
+import { ServiceTicket, IUserData } from 'app/models/model-export';
 import { Observable } from 'rxjs';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 
@@ -24,29 +24,33 @@ export class ServiceHistoryComponent implements OnInit {
     private authX: AuthXService) { }
 
   ngOnInit() {
-    this.ticket.getServiceticketsByAptID(this.authX._currentUser.uid).subscribe(
-      next => {
-        this.allRequests = next;
-        this.dataTable = new MatTableDataSource(next);
-        this.dataTable.sort = this.sort;
-        this.dataTable.paginator = this.paginator;
-        this.allCount = next.length;
-      },
-      error => console.log(error)
-    );
 
-    this.ticket.getProgressServiceticketsByAptID(this.authX._currentUser.uid).subscribe(
-      next => {
-        this.pendingCount = next.length;
-      },
-      error => console.log(error)
-    );
 
-    this.ticket.getCompletedServiceticketsByAptID(this.authX._currentUser.uid).subscribe(
-      next => {
-        this.completedCount = next.length;
-      },
-      error => console.log(error)
+    this.authX.getCurrentUser().subscribe(
+      (user: IUserData) => {
+        this.ticket.getCompletedServiceticketsByLeaseID(user['lease_id']).subscribe(
+          (next) => {
+            this.completedCount = next.length;
+          }
+        );
+
+        this.ticket.getProgressServiceticketsByLeaseID(user['lease_id']).subscribe(
+          (next) => {
+            this.pendingCount = next.length;
+          }
+        );
+
+        this.ticket.getServiceticketsByLeaseID(user['lease_id']).subscribe(
+          next => {
+            this.allRequests = next;
+            this.dataTable = new MatTableDataSource(next);
+            this.dataTable.sort = this.sort;
+            this.dataTable.paginator = this.paginator;
+            this.allCount = next.length;
+          },
+          error => console.log(error)
+        );
+      }
     );
   }
 

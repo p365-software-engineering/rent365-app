@@ -62,19 +62,19 @@ export class ServiceTicketService {
   // By leaseID - replace with [apartmentID] when apartmentID is available
   getProgressServiceticketsByLeaseID(lease_id: string): Observable<ServiceTicket[]> {
       return this.afs.collection<ServiceTicket>('service-ticket', ref => {
-        return ref.where('ticketStatus', '==', 'PROGRESS').where('lease_id', '==', lease_id);
+        return ref.where('ticketStatus', '==', 'PROGRESS').where('leaseID', '==', lease_id);
       }).valueChanges();
   }
 
   getCompletedServiceticketsByLeaseID(lease_id: string): Observable<ServiceTicket[]> {
       return this.afs.collection<ServiceTicket>('service-ticket', ref => {
-        return ref.where('ticketStatus', '==', 'COMPLETED').where('lease_id', '==', lease_id);
+        return ref.where('ticketStatus', '==', 'COMPLETED').where('leaseID', '==', lease_id);
       }).valueChanges();
   }
 
   getServiceticketsByLeaseID(lease_id: string): Observable<ServiceTicket[]> {
     return this.afs.collection<ServiceTicket>('service-ticket', ref => {
-      return ref.where('lease_id', '==', lease_id).orderBy('dateCreated', 'desc');
+      return ref.where('leaseID', '==', lease_id).orderBy('dateCreated', 'desc');
     }).valueChanges();
   }
 

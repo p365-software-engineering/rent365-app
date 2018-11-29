@@ -69,7 +69,7 @@ export class AppointmentComponent implements OnInit {
     for (let i = 0; i < appointments.length; i++) {
       const d = new Date(0);
       d.setUTCMilliseconds(parseInt(appointments[i].start_time, 10));
-      if((currentDate.getFullYear() === d.getFullYear()) &&
+      if ((currentDate.getFullYear() === d.getFullYear()) &&
         (currentDate.getDate() === d.getDate()) &&
         (currentDate.getMonth() === d.getMonth())) {
           this.todayCount += 1;

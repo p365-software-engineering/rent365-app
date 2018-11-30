@@ -21,7 +21,7 @@ export class PaymentComponent implements OnInit {
 
   constructor(private _billService: BillService,
               private authX: AuthXService,
-              private _pmtOrchService: PaymentOrchestratorService) { 
+              private _pmtOrchService: PaymentOrchestratorService) {
                 this.dueDate = 0;
               }
 

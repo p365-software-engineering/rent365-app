@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Mail } from 'app/models/mail';
 import { LeaseRequest } from 'app/models/lease-request';
+import { ServiceTicket } from 'app/models/model-export';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class MailService {
       text:  '',
       name:  leaseRequest['leasee']['firstName'],
       data:  'Thanks for joining the Super Rental family.',
-      mailtype: 'newLeaseRequest'
+      mailtype: 'newlease'
     });
     const httpOptions = {
       headers: new HttpHeaders({
@@ -34,15 +35,15 @@ export class MailService {
     );
   }
 
-  public newLServiceRequestMail(leaseRequest: LeaseRequest) {
+  public newLServiceRequestMail(leaseRequest: LeaseRequest, serviceTicket: ServiceTicket) {
     const mail = new Mail({
       toAddress: leaseRequest['leasee']['email'],
       html:  '',
       sendersName:  leaseRequest['leasee']['firstName'],
       text:  '',
       name:  leaseRequest['leasee']['firstName'],
-      data:  'Thanks for joining the Super Rental family.',
-      mailtype: 'newServiceTicket'
+      data:  serviceTicket['serviceTicketID'].substr(serviceTicket['serviceTicketID'].length - 8) ,
+      mailtype: 'newticket'
     });
     const httpOptions = {
       headers: new HttpHeaders({

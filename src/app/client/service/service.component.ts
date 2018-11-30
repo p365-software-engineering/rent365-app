@@ -49,7 +49,7 @@ export class ServiceComponent implements OnInit {
     this.authX.getCurrentUser().subscribe(
       (user: IUserData) => {
         this.serviceRequest = this.fb.group({
-          apartmentID: user[''],
+          apartmentID: user['apt_id'] || 'na',
           requestID: user['request_id'],
           serviceTicketID: this.stid,
           userID: user['uid'],

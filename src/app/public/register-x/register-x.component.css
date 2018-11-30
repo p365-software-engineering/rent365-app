@@ -8,7 +8,10 @@
 }
 
 .backgroundimage{
-    height:40em; background-size:cover; width:auto;
+    height: 100rem; 
+    background-size:cover; width:auto;
+    overflow: hidden;
+    overflow-y: hidden;
     background-image:url('https://hdqwalls.com/wallpapers/milky-way-mount-fuji-7z.jpg');
     background-position:50% 50%;
   }

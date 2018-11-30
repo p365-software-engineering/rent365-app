@@ -3,7 +3,8 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { ServiceTicket } from '../../models/service-ticket';
 import { refCount } from 'rxjs/operators';
-import { LeaseRequest } from 'app/models/lease-request';
+import { LeaseService } from '../lease/lease.service';
+import { MailService } from '../mail/mail.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,14 +13,22 @@ export class ServiceTicketService {
 
   private serviceTicketCollection: AngularFirestoreCollection<ServiceTicket>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private ls: LeaseService, private mail: MailService) {
     this.serviceTicketCollection = afs.collection<ServiceTicket>('service-ticket');
   }
 
   createNewServiceTicket(serviceTicket: ServiceTicket): Promise<void> {
       return this.serviceTicketCollection
         .doc(serviceTicket.serviceTicketID)
-        .set(Object.assign({}, serviceTicket));
+        .set(Object.assign({}, serviceTicket)).then(
+          () => {
+            this.ls.getLeaseRequestById(serviceTicket['requestID']).subscribe(
+              (lr) => {
+                this.mail.newLServiceRequestMail(lr, serviceTicket);
+              }
+            );
+          }
+        );
   }
 
   // By UserID

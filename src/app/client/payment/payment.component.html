@@ -19,9 +19,9 @@
         <div class="info-card col-lg-4 col-md-6 col-sm-12">
           <div class="card h-100">
             <div class="card-body">
-              <h5 class="card-title">My Lease</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Expiration Date</h6>
-              <p class="currency"> {{ bill?.dateDue | date }}</p>
+              <h5 class="card-title">Due Date</h5>
+              <h6 class="card-subtitle mb-2 text-muted">To pay</h6>
+              <p class="currency"> {{ getTime(dueDate) | date }}</p>
             </div>
           </div>
         </div>

@@ -6,6 +6,7 @@ export class Mail {
     text:  string;
     name:  string;
     data:  string;
+    mailtype: string;
 
     constructor(obj?: any) {
         this.toAddress    = obj.toAddress;
@@ -15,5 +16,6 @@ export class Mail {
         this.text         = obj.text || 'Team Super Rentals';
         this.name         = obj.name || 'Super Rentals';
         this.data         = obj.data || 'Super Rentals';
+        this.mailtype     = obj.mailtype || 'na';
     }
 }

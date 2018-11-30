@@ -31,13 +31,13 @@ export class BillService {
       return new Date(oldBillDate).toLocaleDateString("en-US");
   }
 
-  createNewBill(data: any): Promise<void> {
-      console.log(data);
-      const billID = this.afs.createId();
-      data.billID = billID;
-      return this.billCollection
-        .doc(billID)
-        .set(data);
+  public createNewBill(data: Bill): Promise<void> { 
+    console.log(data);
+    const billID = this.afs.createId();
+    data.billID = billID;
+    return this.billCollection
+      .doc(data['userID'])
+      .set(Object.assign({}, data));
   }
 
   getBillRef(billID: string) {

@@ -12,12 +12,24 @@ import { AuthXService } from 'app/services/service-export';
 export class LeaseInfoComponent implements OnInit {
   @Input() leaseDetailsForm: FormGroup;
   customerForm: FormGroup;
+  minDate: Date;
+  maxDate: Date;
   constructor(private fb: FormBuilder, public router: Router, public authX: AuthXService) {
   }
 
   ngOnInit() {
     // Telescoping the function- instead of replacing the content.
+    this.minDate = new Date();
+    this.minDate.setDate(this.minDate.getDate() + 15);
+    this.maxDate = new Date();
+    this.maxDate.setFullYear(this.maxDate.getFullYear() + 1);
     this.customerForm = this.leaseDetailsForm;
+    this.authX.getCurrentUser().subscribe(
+      (user) => {
+        this.customerForm.get('email').patchValue(user['email']);
+        this.customerForm.get('emailDisable').patchValue(user['email']);
+      }
+    );
   }
 
   public getOtherLease(): FormArray {

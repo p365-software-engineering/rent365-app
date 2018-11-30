@@ -51,7 +51,8 @@ export class LeaseComponent implements OnInit {
       uid: this.authX._currentUser.uid ,
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [ Validators.email]],
+      emailDisable: [{value: '', disabled: true}, [Validators.email]],
       leaseInfo: this.fb.group({
         'startDate': ['', [Validators.required]],
         'period': ['', Validators.required],

@@ -17,6 +17,7 @@ export interface IUserData {
     about_me?: string;
     lease_id?: string;
     request_id?: string;
+    apt_id?: string;
 }
 
 export interface IRole {

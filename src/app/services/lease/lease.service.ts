@@ -6,8 +6,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Observable } from 'rxjs';
 import { LeaseWorkflowService } from '../lease-workflow/lease-workflow.service';
 import { IUserData, IUser } from 'app/models/user-model';
-import { MutationObserverFactory } from '@angular/cdk/observers';
-
+import { BillService } from '../bill/bill.service';
+import { Bill } from 'app/models/bill';
+import { timeout } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,8 +21,9 @@ export class LeaseService {
   public leaseRequestCollection: AngularFirestoreCollection<LeaseRequest>;
   // New Lease
   public leaseInfo: LeaseRequest = new LeaseRequest();
+  public leaseValue: number;
 
-  constructor(private db: AngularFirestore, private wf: LeaseWorkflowService) {
+  constructor(private db: AngularFirestore, private wf: LeaseWorkflowService, private bill: BillService) {
     this.apartmentsCollection = this.db.collection<Apartment>('Apartments');
     this.amenitiesCollection = this.db.collection<Amenity>('Amenities');
     this.leaseRequestCollection =  this.db.collection<LeaseRequest>('lease-requests');
@@ -81,12 +83,40 @@ export class LeaseService {
         this.db.collection<Tenant>('tenants').doc(this.leaseInfo['leaseID']).set(Object.assign({}, tf));
         this.getUserData(this.leaseInfo.leasee['uid']).subscribe(
           (userInfo: IUserData) => {
+            userInfo['apt_id'] = this.leaseInfo['aptID'];
             userInfo['lease_id'] = this.leaseInfo['leaseID'];
             userInfo['request_id'] = this.leaseInfo['requestID'];
             this.updateUserData(userInfo);
+            this.calulateLeaseAmount(this.leaseInfo['requestID']).pipe(timeout(300)).subscribe(
+              (value) => {
+                // console.log(value);
+                this.leaseValue = value;
+              },
+              err => {
+                if (err['name'] === 'TimeoutError') {
+                  console.log('Hello');
+                  const dueDate = new Date();
+                  dueDate.setDate(dueDate.getDate() + 10);
+                  this.bill.createNewBill(new Bill({
+                    billID: '',
+                    userID: this.leaseInfo['leasee']['uid'],
+                    leaseID: this.leaseInfo['leaseID'],
+                    requestID: this.leaseInfo['requestID'],
+                    apartmentID: this.leaseInfo['aptID'],
+                    amount: this.leaseValue,
+                    dateDue: dueDate,
+                    datePaid: 'na'
+                  }));
+                }
+              },
+              () => {
+                console.log('hello');
+              }
+            );
           }
         );
        }
+
      }
      if (status === 'REJECT') {
       if (this.leaseInfo['leaseID'] !== undefined) {
@@ -99,6 +129,8 @@ export class LeaseService {
           (userInfo: IUserData) => {
             userInfo['lease_id'] = this.leaseInfo['leaseID'] || 'na';
             userInfo['request_id'] = this.leaseInfo['requestID'];
+            userInfo['first_name'] = this.leaseInfo['leasee']['firstName'];
+            userInfo['last_name'] = this.leaseInfo['leasee']['lastName'];
             this.updateUserData(userInfo);
         }
       );
@@ -180,32 +212,33 @@ export class LeaseService {
     }).valueChanges();
   }
 
-  public calulateLeaseAmount(requestID: string) {
+  public calulateLeaseAmount(requestID: string): Observable<any> {
     let price = 0;
     return Observable.create(
       (observer) => {
-        this.getLeaseRequestById(requestID).subscribe(
+        this.getLeaseRequestById(requestID).pipe().subscribe(
           (leasee: LeaseRequest) => {
             const amenities = leasee['amenities'];
             const apartment = leasee['aptID'];
 
-            for ( const amenity of amenities) {
-              if (amenity) {
-                this.getAmenitybyID(amenity).subscribe(
-                  (amen: Amenity) => {
-                    price  += parseInt(amen['price'], 10);
-                    observer.next(price);
-                  }
-                );
-              }
-            }
-
             this.getApartmentbyID(apartment).subscribe(
               (apart) => {
                 price += parseInt(apart['price'], 10);
-                observer.next(price);
-                // console.log(price);
-              }
+                for ( const amenity of amenities) {
+                  if (amenity) {
+                    this.getAmenitybyID(amenity).subscribe(
+                      (amen: Amenity) => {
+                        price  += parseInt(amen['price'], 10);
+                        observer.next(price);
+                      },
+                      (error) => console.log(error),
+                      () => console.log('amenities done')
+                    );
+                  }
+                }
+              },
+              (error) => console.log(error),
+              () => console.log('apartments done')
             );
           }
         );

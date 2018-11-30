@@ -17,16 +17,22 @@ export class PaymentComponent implements OnInit {
   public _bill: Observable<Bill>;
   public bill: Bill;
   private user: IUserData;
+  public dueDate: any;
 
   constructor(private _billService: BillService,
               private authX: AuthXService,
-              private _pmtOrchService: PaymentOrchestratorService) { }
+              private _pmtOrchService: PaymentOrchestratorService) { 
+                this.dueDate = 0;
+              }
 
     ngOnInit() {
       this.authX.getCurrentUser().subscribe((user: IUserData) => {
         this.user = user;
         this._billService.getBillByUserID(user.uid)
-          .subscribe(bill => this.bill = bill);
+          .subscribe(bill => {
+            console.log(bill);
+            this.bill = bill;
+            this.dueDate = bill['dateDue']; });
       });
     }
 
@@ -45,6 +51,12 @@ export class PaymentComponent implements OnInit {
           return;
         })
         .catch(err => alert(err));
+    }
+
+    getTime (timestamp: any) {
+      const date = new Date(0);
+      date.setUTCSeconds(parseInt(timestamp['seconds'] || 0, 10));
+      return date;
     }
 
 }

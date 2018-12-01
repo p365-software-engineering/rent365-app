@@ -32,7 +32,6 @@ import { MailService } from './services/mail/mail.service';
 import { AppointmentComponent } from './public/appointment/appointment.component';
 import { AppointmentTimeComponent } from './public/appointment/appointment-time/appointment-time.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -12,7 +12,6 @@ import { ReviewGaurdService } from './services/review/review-gaurd.service';
 import { AppointmentComponent } from './public/appointment/appointment.component';
 
 
-
 export const appRoutes: Routes = [
     {
         path : '',

@@ -24,11 +24,11 @@ select {
     border: solid 1px gray;
 }
 
-.card-img-top{
+/* .card-img-top{
     display: block;
     object-fit: cover;
     height:23rem;
-}
+} */
 
 .info {
     font-size: 1rem;
@@ -61,8 +61,8 @@ select {
     }
 
     .container-fluid {
-        margin-right: auto;
-        margin-left: auto;
+       /*  margin-right: auto;
+        margin-left: auto; */
         padding-right: 5px;
         padding-left: 5px;
         width: 100%;

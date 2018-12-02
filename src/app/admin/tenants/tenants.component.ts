@@ -11,5 +11,4 @@ export class TenantsComponent implements OnInit {
 
   ngOnInit() {
   }
-
 }

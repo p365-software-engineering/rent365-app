@@ -94,7 +94,6 @@ export class LeaseService {
               },
               err => {
                 if (err['name'] === 'TimeoutError') {
-                  console.log('Hello');
                   const dueDate = new Date();
                   dueDate.setDate(dueDate.getDate() + 10);
                   this.bill.createNewBill(new Bill({
@@ -110,7 +109,7 @@ export class LeaseService {
                 }
               },
               () => {
-                console.log('hello');
+                console.log('Activity Completed');
               }
             );
           }

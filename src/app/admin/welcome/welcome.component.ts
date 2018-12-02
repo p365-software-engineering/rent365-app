@@ -3,6 +3,9 @@ import { Observable } from 'rxjs';
 import { ChatMessage, ChatThread } from 'app/models/chat';
 import { ChatService } from 'app/services/chat/chat.service';
 import { map } from 'rxjs/operators';
+import { BillService, ServiceTicketService, EventService, EnquiryService, PaymentService } from '../../services/service-export';
+import { AppointmentService } from '../../services/appointment/appointment.service';
+import { LeaseService } from '../../services/lease/lease.service';
 
 @Component({
   selector: 'app-welcome',
@@ -20,10 +23,23 @@ export class WelcomeComponent implements OnInit {
 
   /** Dashboard Box Statiscis */
   public numOfTenants: number;
-  public serviceRequests: number;
+  public serviceRequestsOpen: number;
+  public serviceRequestsClosed: number;
+  public numberOfEvents: number;
+  public enquiriesOpen: number;
+  public enquiriesClosed: number;
+  public totalPmtAmtRecevied: number;
+  public upcomingAppointments: number;
 
-  constructor(private _chatService: ChatService) {
-  }
+
+  constructor(private _chatService: ChatService,
+    private _billService: BillService,
+    private _serviceTicketService: ServiceTicketService,
+    private _appointmentService: AppointmentService,
+    private _enquiryService: EnquiryService,
+    private _paymentService: PaymentService,
+    private _leaseService: LeaseService,
+    private _eventService: EventService) { }
 
   ngOnInit() {
     this._chatThreads = this._chatService.getActiveChatThreads();
@@ -35,11 +51,40 @@ export class WelcomeComponent implements OnInit {
     //     return chatThreads;
     //   })
     // );
-    this.numOfTenants = 7; // TODO:
+    this._serviceTicketService.getAllServiceTickets().subscribe(tickets => {
 
+      let openTickets = 0, closedTickets = 0;
+      tickets.forEach(ticket => {
+        if (ticket.ticketStatus === 'COMPLETED') {
+          closedTickets++;
+        } else {
+          openTickets++;
+        }
+      });
+      this.serviceRequestsOpen = openTickets;
+      this.serviceRequestsClosed = closedTickets;
+    });
+    this._leaseService.getAllTenants().subscribe(tenants => this.numOfTenants = tenants.length);
+    this._eventService.getAllEvents().subscribe(events => this.numberOfEvents = events.length);
+    this._appointmentService.getAllAppointments()
+      .subscribe(upcomingAppointments => this.upcomingAppointments = upcomingAppointments.length);
+    this._enquiryService.getAllEnquirys().subscribe(enquiries => {
+      let openEnquiries = 0, closedEnquiries = 0;
+      enquiries.forEach(ticket => {
+        if (ticket.status === 'COMPLETED') {
+          closedEnquiries++;
+        } else {
+          openEnquiries++;
+        }
+      });
+      this.enquiriesOpen = openEnquiries;
+      this.enquiriesClosed = closedEnquiries;
+    });
+
+    this._paymentService.getAllPayments().subscribe(payments => {
+      this.totalPmtAmtRecevied = payments.reduce((acc, nextPayment) => {
+        return acc + parseInt(nextPayment.amount, 10);
+      }, 0);
+    });
   }
-
-
-
-
 }

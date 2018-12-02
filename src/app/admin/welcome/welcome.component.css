@@ -15,10 +15,14 @@
 .info .currency {
     font-size: 1rem;
 }
+
 .info-card .card-title{
     color: #000;
 }
 
+.info-card {
+    margin-bottom: 1rem;
+}
 .form-group label {
     font-size: 1.2rem;
     color: #000;

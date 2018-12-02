@@ -40,22 +40,9 @@
           <div class="info-card col-lg-3 col-md-6 col-sm-12">
             <div class="card h-100">
               <div class="card-body">
-                <h5 class="card-title">My Lease</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Expiration Date</h6>
-                  <p class="currency"> {{ "12/31/2018" | date }}</p>
-              </div>
-              <div class="card-footer">
-                  <button type="button" routerLink="lease" id="lease" class="btn btn-info btn-sm">EXTEND YOUR LEASE</button>
-              </div>
-            </div>
-          </div>
-      
-          <div class="info-card col-lg-3 col-md-6 col-sm-12">
-            <div class="card h-100">
-              <div class="card-body">
                 <h5 class="card-title">Service Requests</h5>
                 <h6 class="card-subtitle mb-2 text-muted">Open Requests</h6>
-                  <p class="currency"> {{ serviceRequests }} </p>
+                  <p class="currency"> {{ serviceRequestsOpen }} </p>
               </div>
               <div class="card-footer">
                   <button type="button" routerLink="request" name="service-req" id="service-req" class="btn btn-info btn-sm">
@@ -64,16 +51,95 @@
               </div>
             </div>
           </div>
-      
+
           <div class="info-card col-lg-3 col-md-6 col-sm-12">
             <div class="card h-100">
               <div class="card-body">
-                <h5 class="card-title">Upcoming Events</h5>
-                <h6 class="card-subtitle mb-2 text-muted">News</h6>
-                  <p class="currency">{{ "12/31/2018" | date }}</p>
+                <h5 class="card-title">Service Requests</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Closed Requests</h6>
+                  <p class="currency"> {{ serviceRequestsClosed }} </p>
               </div>
               <div class="card-footer">
-                  <button type="button" routerLink="community" name="quickpay" id="quickpay" class="btn btn-info btn-sm">MORE INFO</button>
+                  <button type="button" routerLink="request" name="service-req" id="service-req" class="btn btn-info btn-sm">
+                      Service History
+                    </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card col-lg-3 col-md-6 col-sm-12">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Enquires</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Open Enquires</h6>
+                  <p class="currency"> {{ enquiriesOpen }} </p>
+              </div>
+              <!-- <div class="card-footer">
+                  <button type="button" routerLink="request" name="service-req" id="service-req" class="btn btn-info btn-sm">
+                      Service History
+                    </button>
+              </div> -->
+            </div>
+          </div>
+
+          <div class="info-card col-lg-3 col-md-6 col-sm-12">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Enquires</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Closed Enquires</h6>
+                  <p class="currency"> {{ enquiriesClosed }} </p>
+              </div>
+              <!-- <div class="card-footer">
+                  <button type="button" routerLink="request" name="service-req" id="service-req" class="btn btn-info btn-sm">
+                      Service History
+                    </button>
+              </div> -->
+            </div>
+          </div>
+
+
+          <div class="info-card col-lg-3 col-md-6 col-sm-12">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Appointments</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Upcoming Appointments</h6>
+                  <p class="currency"> {{ upcomingAppointments }} </p>
+              </div>
+              <!-- <div class="card-footer">
+                  <button type="button" routerLink="request" name="service-req" id="service-req" class="btn btn-info btn-sm">
+                      Service History
+                    </button>
+              </div> -->
+            </div>
+          </div>
+
+          
+          <div class="info-card col-lg-3 col-md-6 col-sm-12">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Payments</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Total Received</h6>
+                  <p class="currency"> ${{ totalPmtAmtRecevied }} </p>
+              </div>
+              <!-- <div class="card-footer">
+                  <button type="button" routerLink="request" name="service-req" id="service-req" class="btn btn-info btn-sm">
+                      Service History
+                    </button>
+              </div> -->
+            </div>
+          </div>
+
+
+      <br />
+          <div class="info-card col-lg-3 col-md-6 col-sm-12">
+            <div class="card h-100">
+              <div class="card-body">
+                <h5 class="card-title">Community</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Upcoming Events</h6>
+                  <p class="currency">{{ numberOfEvents }}</p>
+              </div>
+              <div class="card-footer">
+                  <button type="button" routerLink="community" name="quickpay" id="quickpay" class="btn btn-info btn-sm">ALL EVENTS</button>
               </div>
             </div>
           </div>

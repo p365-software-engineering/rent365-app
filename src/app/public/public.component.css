@@ -90,3 +90,86 @@ section {
     height: 10%;
     z-index: 20;
 }
+
+footer {
+    color: white;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+.display-hide{
+    opacity: 0;
+}
+
+.currency {
+    font-size: 2rem;
+    color: #000;
+}
+
+.card {
+    width: 100%;
+}
+
+input:checked + .card {
+    border: 0.20rem solid #ff4081;
+    border-radius: 4px 4px 4px 4px !important;
+}
+
+input + .card {
+    border: 0.20rem solid #ccc;
+    border-radius: 4px 4px 4px 4px !important;
+}
+
+.info-card{
+    margin: 1rem;
+}
+
+
+.info-list {
+    font-size: 1.1rem;
+    list-style: none;
+    padding-left: 0rem;
+    
+}
+.info-list li {
+    text-align: center;
+    font-weight: 600;
+    font-style: italic;
+}
+
+
+.card-body {
+    padding: 0.5rem;
+}
+
+.nav-brand {
+    font-family: 'Bangers', cursive;
+    letter-spacing: 0.02em;
+    font-size: 3rem;
+}
+
+#amenities {
+    background-color: #DCDCDC;
+}
+
+#base-locations {
+    background: #2BC0E4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #EAECC6, #2BC0E4);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #EAECC6, #2BC0E4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#gallery {
+    background-color: #DCDCDC;
+}
+
+#cta-contact {
+    background: #2BC0E4;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #EAECC6, #2BC0E4);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #EAECC6, #2BC0E4); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#chat {
+    padding: 0rem;
+}

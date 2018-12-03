@@ -90,3 +90,11 @@ section {
     height: 10%;
     z-index: 20;
 }
+
+footer {
+    color: white;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}

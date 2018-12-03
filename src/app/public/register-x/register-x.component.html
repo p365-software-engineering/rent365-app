@@ -8,7 +8,7 @@
       <div class="card-body">
         <div class="card-body">
             <div class="alert alert-success text-center text-bold" *ngIf="false" role="alert">
-                Welcome to Super Rental Family ! <br> Verify your email id before you login.
+                Welcome to the Super Rental Family!<br> You'll need to verify your email address before you can log in.
             </div>
           <form #register="ngForm" (ngSubmit)="onSubmit(register)" autocomplete="off">
             <div class="form-row">
@@ -33,11 +33,11 @@
               <label for="confirmPassword">Confirm Password</label>
               <input type="password" ngModel name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm password ">
             </div>
-            <button type="submit" [disabled]="successMessage" class="btn btn-primary">Register</button>
+            <button type="submit" [disabled]="successMessage" class="btn btn-primary btn-block">Register</button>
           </form>
         </div>
         <div class="card-footer">
-          <p class=text-center>Already have an account?<a [routerLink]="['../login']"> Login </a>here</p>
+          <p class=text-center>Already have an account? <a [routerLink]="['../login']">Login!</a></p>
         </div>
     </div>
   </div>

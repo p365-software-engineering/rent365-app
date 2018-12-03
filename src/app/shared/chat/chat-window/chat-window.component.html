@@ -16,7 +16,7 @@
             <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordionExample">
                 <div class="card-body">
                     <div *ngIf="!(anonUser)">
-                        <button type="button" class="btn btn-secondary">Select Chat Thread</button>
+                        <button type="button" class="btn btn-secondary btn-block mb-2">Select Chat Thread</button>
                         <ul class="list-group" *ngFor="let thread of _chatThreads | async">
                             <button type="button" class="list-group-item list-group-item-action" (click)="setActiveThread(thread.chatThreadID)">
                                 {{ thread.chatThreadID }}

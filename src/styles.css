@@ -62,3 +62,7 @@ td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
     font-weight: 400;
 }
 
+body {
+    background: #ccc;
+}
+

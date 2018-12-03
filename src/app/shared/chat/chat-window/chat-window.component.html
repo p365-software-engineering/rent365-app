@@ -7,9 +7,10 @@
                         aria-expanded="false" aria-controls="collapseOne" (click)="toggleAccordion()">
                         {{ this.accordionOpened ? 'Close chat box' : 'Chat with interested tenants'}}
                     </button>
-                    <button *ngIf="anonUser" class="btn btn-link alert alert-danger" role="alert" type="button" data-toggle="collapse" data-target="#collapseOne"
+                    <button *ngIf="anonUser" class="btn btn-link alert alert-danger display-4" role="alert" type="button" data-toggle="collapse" data-target="#collapseOne"
                         aria-expanded="false" aria-controls="collapseOne" (click)="toggleAccordion()">
-                        {{ this.accordionOpened ? 'Close chat box' : 'Chat with a Realtor'}}
+                        
+                        <i class="fa fa-comments-o" aria-hidden="true"></i>&nbsp;&nbsp;{{ this.accordionOpened ? 'Close chat box' : 'Chat'}}
                     </button>
                 </h5>
             </div>

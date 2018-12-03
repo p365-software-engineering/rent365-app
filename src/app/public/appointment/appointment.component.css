@@ -108,3 +108,12 @@
 .custom-mat-fab.active {
     border-color: #ff4081;
 }
+
+.backgroundimage{
+    height:100%;
+    background-image:url('https://hdqwalls.com/wallpapers/milky-way-mount-fuji-7z.jpg');
+    background-position: 50% 50%;
+    margin-bottom: 2rem;
+}
+
+

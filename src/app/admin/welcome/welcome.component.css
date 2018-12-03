@@ -7,7 +7,6 @@
 .currency {
     font-size: 2rem;
     color: #000;
-    text-align: center;
 }
 .info {
     font-size: 1rem;
@@ -86,8 +85,4 @@
     display: block;
     max-width: 300px;
     margin: auto;
-}
-
-.card-footer {
-    text-align: center;
 }

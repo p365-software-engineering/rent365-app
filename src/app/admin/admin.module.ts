@@ -109,10 +109,6 @@ import { AppointmentComponent } from './appointment/appointment.component';
           {
             path: 'request',
             component: ServiceHistoryComponent
-          },
-          {
-            path: 'tenants',
-            component: TenantsComponent
           }
         ]
       }

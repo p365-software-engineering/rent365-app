@@ -1,10 +1,5 @@
 .navbar-default  {
     transition: 0.2s ease;
-    background: darkorange;
-    opacity: 0.8;
-}
-
-.navbar-default.scrolled {
     background: #232323;
 }
 
@@ -20,8 +15,6 @@
     color: #fcfcfc;
     opacity: 1;
 }
-
-
 
 /* .user-name {
     position: relative;

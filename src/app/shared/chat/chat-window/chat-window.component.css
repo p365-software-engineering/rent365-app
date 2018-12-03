@@ -5,3 +5,7 @@
 .receiver { 
     float: left;
 };
+
+#headingOne {
+    background: black;
+}

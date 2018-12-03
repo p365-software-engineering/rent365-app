@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ChatService } from '../services/service-export';
 import { Observable } from 'rxjs';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-public',

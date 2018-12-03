@@ -23,7 +23,6 @@ import { AmenitiesLeaseComponent } from './lease/edit-lease/amenities/amenities.
 import { LeaseInfoComponent } from './lease/edit-lease/lease-info/lease-info.component';
 import { CommunityComponent } from 'app/shared/community/community-page/community.component';
 import { AddEventComponent } from 'app/shared/community/add-event/add-event.component';
-import { TenantsComponent } from './tenants/tenants.component';
 import { ManageComponent } from './manage/manage.component';
 import { BillHistoryComponent } from './bill-history/bill-history.component';
 import { AppointmentComponent } from './appointment/appointment.component';
@@ -128,7 +127,6 @@ import { AppointmentComponent } from './appointment/appointment.component';
       LeaseInfoComponent,
       EditLeaseComponent,
       BillHistoryComponent,
-      TenantsComponent,
       ManageComponent,
       AppointmentComponent]
 })

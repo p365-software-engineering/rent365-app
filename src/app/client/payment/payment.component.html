@@ -21,7 +21,8 @@
             <div class="card-body">
               <h5 class="card-title">Due Date</h5>
               <h6 class="card-subtitle mb-2 text-muted">To pay</h6>
-              <p class="currency"> {{ getTime(dueDate) | date }}</p>
+              <!-- <p class="currency"> {{ getTime(dueDate) | date }}</p> -->
+              <p class="currency"> {{ bill?.dateDue | date }}</p>
             </div>
           </div>
         </div>

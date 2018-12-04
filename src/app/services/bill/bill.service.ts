@@ -26,9 +26,18 @@ export class BillService {
   private calculateNextBillDate(oldBillDateString) {
       console.log(oldBillDateString);
       const oldBillDate = new Date(oldBillDateString);
-      const nextBillMonth = oldBillDate.getMonth() + 1;
-      oldBillDate.setMonth(nextBillMonth);
-      return new Date(oldBillDate).toLocaleDateString("en-US");
+      
+      // var now = new Date();
+      // let current = 0;
+      // if (now.getMonth() == 11) {
+      //     current = new Date(now.getFullYear() + 1, 0, 1).getUTCMilliseconds();
+      // } else {
+      //     current = new Date(now.getFullYear(), now.getMonth() + 1, 1).getUTCMilliseconds();
+      // }
+      // const nextBillMonth = (oldBillDate.getMonth() + 1);
+      oldBillDate.setMonth((oldBillDate.getMonth() + 1));
+      // return new Date(current).toLocaleDateString("en-US");
+      return oldBillDate.getTime()
   }
 
   public createNewBill(data: Bill): Promise<void> { 

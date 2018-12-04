@@ -103,7 +103,7 @@ export class LeaseService {
                     requestID: this.leaseInfo['requestID'],
                     apartmentID: this.leaseInfo['aptID'],
                     amount: this.leaseValue,
-                    dateDue: dueDate,
+                    dateDue: Date.now(),
                     datePaid: 'na'
                   }));
                 }

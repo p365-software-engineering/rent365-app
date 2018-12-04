@@ -6,7 +6,7 @@ export class Bill {
     requestID: string;
     apartmentID: string;
     amount: string;
-    dateDue: Date;
+    dateDue: number;
     datePaid: Date | null;
 
     constructor(obj?: any) {

@@ -32,8 +32,9 @@ export class PaymentComponent implements OnInit {
           .subscribe(bill => {
             console.log(bill);
             this.bill = bill;
-            this.dueDate = bill['dateDue']; });
+            this.dueDate = bill.dateDue; });
       });
+      console.log(Date.now());
     }
 
     makePayment(_secretKey: string) {
@@ -43,7 +44,8 @@ export class PaymentComponent implements OnInit {
         userID: this.user.uid,
         apartmentID: this.bill.apartmentID,
         amount: this.bill.amount,
-        datePaid: Date.now()
+        datePaid: Date.now(),
+        dateDue:  this.bill.dateDue || ''
       };
       this._pmtOrchService.excutePaymentWithCron(_secretKey, pmtObj, this.bill)
         .then(() => {

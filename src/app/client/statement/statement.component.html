@@ -19,11 +19,9 @@
           </div>
         </div>
       </div> -->
-      <br>
-      <div class="container-fluid bg-white form-input card-shadow">
+      <div class="container-fluid bg-white card-shadow">
         <div class="row">
-          <div class="table-responsive">
-            <br>
+          <div class="table-responsive form-input">
               <table class="table table-hover ">
                   <thead class="thead-light">
                     <tr>
@@ -35,9 +33,9 @@
                   </thead>
                   <tbody *ngFor="let statement of _statements | async">
                     <tr>
-                      <td> {{ statement.id }} </td>
-                      <td> {{ statement.datePaid | date }} </td>
-                      <td> {{ statement.apartmentID }} </td>
+                      <td> {{ statement.id | slice:-8 }} </td>
+                      <td> {{ statement.datePaid }} </td>
+                      <td> {{ statement.apartmentID | slice:-8}} </td>
                       <td> {{ statement.amount }} </td>
                     </tr>
                   </tbody>

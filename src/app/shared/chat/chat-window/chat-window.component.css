@@ -9,3 +9,29 @@
 #headingOne {
     background: black;
 }
+
+.chat-header {
+    font-size: 1.25rem;
+    text-decoration: none;
+}
+
+.chat-thread-client {
+    margin-top: 0.45rem;
+    color: black;
+}
+
+.card {
+    margin-top: 0.25rem;
+}
+
+.card-body {
+    height: auto;
+    max-height: 40rem;
+    overflow: scroll;
+    overflow-x: hidden;
+    padding: 6px;
+}
+
+.card-header {
+    padding: 0rem;
+}

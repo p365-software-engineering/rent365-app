@@ -6,11 +6,13 @@
             *ngFor="let message of _messages" data-offset="0" data-target="#chatThread">
             <app-chat-message class="text-info" [message]="message" [anonUser]="anonUser"
                 style="clear: both;"
-                [style.float]="message.sender=='admin' ? 'left' : 'right'">
+                [style.float]="message.sender=='admin' ? 'left' : 'right'" >
             </app-chat-message>
         </div>
+        <br>
+        <br>
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="message" name="messageBox" id="messageBox" 
+            <input type="text" class="form-control" placeholder="Message" name="messageBox" id="messageBox" 
                     #messageBox (keyup)="messageText$.next($event)">
             <div class="input-group-append">
                 <button class="btn btn-secondary btn-lg" type="button" 

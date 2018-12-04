@@ -1,6 +1,6 @@
 <!-- [style.float]="right" style="float: right;" class="float-right" -->
 <div>
-    <p>
+    <p [ngClass]="message.sender=='admin' ? 'admin-message' : 'client-message'">
         <span>{{ message.sender == 'admin' ? 'Admin' :  'Hero #'+ (message.sender | slice:-3)  }} :</span>
         {{ message.messageText }}
         <i>

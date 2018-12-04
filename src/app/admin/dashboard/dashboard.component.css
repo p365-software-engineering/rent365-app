@@ -173,3 +173,11 @@ span.navbar-toggler-icon {
 h4 {
     font-weight: 800;
 }
+
+.chat-box {
+    float:right; 
+    width: 18%;
+    position: fixed; 
+    bottom: 0.45rem;
+    right: 10px;
+}

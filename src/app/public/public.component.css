@@ -172,4 +172,5 @@ input + .card {
 
 #chat {
     padding: 0rem;
+    z-index: 100000;
 }

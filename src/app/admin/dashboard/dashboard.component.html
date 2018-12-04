@@ -2,14 +2,14 @@
 
 <!-- Page Content  -->
 <div id="content" [ngClass]="{'active': !showNav }">
-    <div class="navbar-toggler-icon text-light bg-dark mini-nav" (click)="display()"></div>
-      <router-outlet ></router-outlet>
-      <div class="float-right" style="float:right; width: 20%">
-        <app-chat-window></app-chat-window>
-    </div>
+  <div class="navbar-toggler-icon text-light bg-dark mini-nav" (click)="display()"></div>
+  <router-outlet></router-outlet>
+  <div class="chat-box float-right">
+    <app-chat-window></app-chat-window>
+  </div>
+  <br>
+  <br>
 </div>
 <!-- Futere Scope -->
-<div id="overlay" >
+<div id="overlay">
 </div>
-
-

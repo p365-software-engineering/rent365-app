@@ -1,0 +1,18 @@
+.admin-message {
+    background: rgb(212, 20, 20);
+    margin-bottom: 0.35rem;
+    padding: 0.25rem 0.45rem 0.25rem 0.45rem;
+    color: white;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.client-message {
+    background: #3d4e7e;
+    margin-bottom: 0.45rem;
+    padding: 0.25rem 0.45rem 0.25rem 0.45rem;
+    color: white;
+    border-radius: 2px;
+    font-size: 0.8rem;
+}

@@ -27,3 +27,7 @@
     letter-spacing: 0.02em;
     font-size: 2.5rem;
 }
+
+.sticky-top {
+    z-index:0;
+}

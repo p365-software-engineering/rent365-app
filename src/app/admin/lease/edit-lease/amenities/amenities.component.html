@@ -2,16 +2,19 @@
 <!-- INFO CARDS -->
 <form [formGroup]= amenitiesForm>
   <div class="card-group bg-light-1" *ngIf="amenitiesArray != undefined">
-    <div class="info-card" *ngFor="let control of amenitiesArray ;let i= index">
+    <div class="info-card card-group" *ngFor="let control of amenitiesArray ;let i= index">
       <label class="form-check-label">
         <input type="checkbox" [formControl]="control" class="display-hide" >
-        <div class="card" style="width:20rem">
+        <div class="card" style="width:20rem; height:30rem;">
           <hr class="my-2 bg-dark">
           <div class="card-body">
             <div class="card-title text-dark">{{amenities[i].title}}</div>
             <h6 class="card-subtitle mb-2 text-muted">{{amenities[i].sub_title}}</h6>
             <p class=" mb-2 text-muted">{{amenities[i].description}}</p>
-            <div class="currency">{{amenities[i].price | currency}}</div>
+           
+          </div>
+          <div class="card-footer">
+              <div class="currency">{{amenities[i].price | currency}}</div>
           </div>
         </div>
       </label>
